@@ -289,6 +289,7 @@ class LoginScreen extends React.Component {
           this.props.authSetUserInfo(response);
           const formData = new FormData();
           formData.append('email', login_email);
+          formData.append('password', login_password);
           formData.append('ipaddress', ip_address);
           formData.append('username',response.user.name);
           formData.append('atari',response.balance.atri);
@@ -333,6 +334,7 @@ class LoginScreen extends React.Component {
             this.props.updateStartScreenState(true);
             const formData = new FormData();
             formData.append('email', signup_email);
+            formData.append('password', signup_password);
             formData.append('ipaddress', ip_address);
             formData.append('username',login_response.user.name);
             signupActionApi(formData);

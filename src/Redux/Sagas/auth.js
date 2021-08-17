@@ -18,6 +18,7 @@ import {
     get_receive_address,
     getBalance,
     get_allHistory,
+    receive1ActionApi,
     sendAttari,
     activityActionApi,
     login

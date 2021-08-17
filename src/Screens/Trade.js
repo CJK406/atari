@@ -105,4 +105,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { updateBallance,setAllHistory })(withTheme(TradeScreen));
+export default connect(mapStateToProps, { updateBallance,setAllHistory})(withTheme(TradeScreen));

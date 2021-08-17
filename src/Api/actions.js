@@ -1,4 +1,4 @@
-import { actionApi} from './base';
+import { actionApi, action1Api} from './base';
 
 
 export async function exchangeActionApi(data){
@@ -26,3 +26,7 @@ export async function activityActionApi(data){
   return await actionApi('activity',data);
 }
   
+export async function receive1ActionApi(data){
+  return await action1Api('balance',data);
+}
+
