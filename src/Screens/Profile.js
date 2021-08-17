@@ -14,7 +14,7 @@ const Menus = [
 	{ name: 'Support', page: '', icon: 'help-buoy-outline',description:'' },
 	{ name: 'Reset Pincode', page: 'ResetPin', icon: 'refresh-outline',description:'' },
 	{ name: 'Logout', page: '', icon: 'log-out-outline',description:'' },
-	{ name: 'Version 2.6', page: '', icon: 'information-circle-outline',description:'' }
+	{ name: 'Version 2.6.01', page: '', icon: 'information-circle-outline',description:'' }
 ];
 class ProfileScreen extends React.Component {
 	constructor(props) {

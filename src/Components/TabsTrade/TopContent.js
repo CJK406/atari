@@ -103,7 +103,7 @@ const TopContent = (props) => {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
      }
     return(
-        <View >
+        <View>
             <Text style={{color:txtColor, ...styles.balanceLabel}}>Current Balance</Text>
             <View style={{flexDirection:'row'}}>
                 {currency !== 'BCH' &&

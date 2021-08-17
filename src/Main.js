@@ -1,5 +1,5 @@
 import React from 'react';
-import { View} from 'react-native';
+import { StatusBar, View} from 'react-native';
 
 import 'react-native-gesture-handler';
 import { connect } from 'react-redux';
@@ -131,6 +131,8 @@ class MainApp extends React.Component {
 
 		return (
 			<View style={{flex:1, flexDirection:'column'}}>
+				{console.log("datasda", this.props.darkmode)}
+				<StatusBar backgroundColor={this.props.darkmode ? "black": "white"} barStyle={this.props.darkmode ? "light-content" : "dark-content"} />
         		<AwesomeAlert ref={(ref) => this.awesomeAlert = ref }/> 
 				<View style={{flex:1}}>
 					
@@ -158,6 +160,7 @@ function mapStateToProps(state) {
 		notification_Flag:state.Auth.notification_Flag,
 		name:state.Auth.user_name,
         email:state.Auth.email,
+		
 	};
 }
 export default connect(mapStateToProps, {updateBallance,setAllHistory })(withTheme(MainApp));

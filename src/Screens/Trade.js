@@ -73,12 +73,15 @@ class TradeScreen extends React.Component {
 			);
     return (
       <SafeAreaView style={{...CustomStyles.container, backgroundColor: themeBG }}>
-          <PTRView onRefresh={()=>this.refresh()} >
+          {/* <PTRView onRefresh={()=>this.refresh()} > */}
 			<FlatList
-                data={[1]}
+                data={[{id: 1}]}
                 renderItem={renderItem}
+				refreshing={this.state.triggerRefresh}
+				// keyExtractor={item => item?.id}
+				onRefresh={() => this.refresh()}
             />
-		</PTRView>
+		{/* </PTRView> */}
 	  </SafeAreaView>
     );
   }
@@ -88,10 +91,10 @@ class TradeScreen extends React.Component {
 
 
 function mapStateToProps(state) {
-	console.log("balance-=-=-=--=-==--==-=-=-=-",state.Auth.balance)
-	console.log("price-=-=-=--=-==--==-=-=-=-",state.Auth.price)
-	console.log("all_history-=-=-=--=-==--==-=-=-=-",state.Auth.all_history)
-	console.log("notification_Flag-=-=-=--=-==--==-=-=-=-",state.Auth.notification_Flag)
+	// console.log("balance-=-=-=--=-==--==-=-=-=-",state.Auth.balance)
+	// console.log("price-=-=-=--=-==--==-=-=-=-",state.Auth.price)
+	// console.log("all_history-=-=-=--=-==--==-=-=-=-",state.Auth.all_history)
+	// console.log("notification_Flag-=-=-=--=-==--==-=-=-=-",state.Auth.notification_Flag)
 
 	
   return {

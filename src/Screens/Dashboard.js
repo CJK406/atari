@@ -22,6 +22,7 @@ class DashboardScreen extends React.Component {
         history:{body:{obj:{ATARI:[],ETH:[],USDT:[],BTC:[],BNB:[],LTC:[]}, arr:[]}},
         get_address:{atri:"",btc:"",eth:"",ltc:"",bch:"",flag:false},
         interval:null,
+        triggerRefresh : false,
 	}
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -90,12 +91,14 @@ class DashboardScreen extends React.Component {
         this.setState({
             history:{},
             history_finish:false,
+            triggerRefresh:true,
 		}, () => {
             if(this.state.notification_Flag){
                 this.getHistory();
                 this.props.updateBallance();
             }
              this.setState({
+                triggerRefresh:false,
                 history_finish:true,
             });
 		});
@@ -214,7 +217,7 @@ class DashboardScreen extends React.Component {
     
           );
     return (
-        <PTRView onRefresh={() => this.refresh()} style={{ backgroundColor: themeBG}}>
+        <View style={{ backgroundColor: themeBG}}>
             {/* <ImageBackground style={{alignItems: 'center', flex: 1,}} source={darkmode ? Images.dashboard_background : null} > */}
             {darkmode && 
                 <Image 
@@ -232,11 +235,16 @@ class DashboardScreen extends React.Component {
                 source={Images.dashboard_background}/>
             }
             <FlatList
-                data={[1]}
+                data={[{id: 1}]}
                 renderItem={renderItem}
+                keyExtractor={item => item?.id}
+                refreshing={this.state.triggerRefresh}
+				// keyExtractor={item => item?.id}
+				onRefresh={() => this.refresh()}
             />
             {/* </ImageBackground> */}
-        </PTRView>);
+            </View>
+        );
   }
 }
 

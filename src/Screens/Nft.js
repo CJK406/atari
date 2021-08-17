@@ -13,10 +13,24 @@ import PTRView from 'react-native-pull-to-refresh';
 class NftScreen extends React.Component {
     state = {
         darkmode:true,
+        triggerRefresh: false
 
 	}
 	componentDidMount() {
     }
+
+    refresh(){
+		this.setState({
+			triggerRefresh:true,
+			
+		},() => {
+
+				this.setState({
+					triggerRefresh:false,
+					
+				})
+		})
+	}
     
 
   static getDerivedStateFromProps(props, state) {
@@ -43,7 +57,8 @@ class NftScreen extends React.Component {
     
           );
     return (
-        <PTRView onRefresh={() => {}} style={{ backgroundColor: themeBG}}>
+        <View style={{ backgroundColor: themeBG}}>
+       
             {/* <ImageBackground style={{alignItems: 'center', flex: 1,}} source={darkmode ? Images.dashboard_background : null} > */}
             {darkmode && 
                 <Image 
@@ -61,11 +76,16 @@ class NftScreen extends React.Component {
                 source={Images.nft_image}/>
             }
             <FlatList
-                data={[1]}
+                data={[{id: 1}]}
                 renderItem={renderItem}
+                keyExtractor={item => item?.id}
+                refreshing={this.state.triggerRefresh}
+                onRefresh={() => this.refresh()}
             />
             {/* </ImageBackground> */}
-        </PTRView>);
+       
+            </View>
+        );
   }
 }
 
