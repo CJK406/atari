@@ -56,12 +56,12 @@ const INITIAL = {
     all_history: {body:{obj:{ATARI:[],ETH:[],USDT:[],BTC:[],BNB:[],LTC:[]}, arr:[]}},
     get_address: {atri: "", btc: "", eth: "", ltc: "", bch: "",ftm:"",bnb:"", flag: false},
     price: {
-        ethPrice: 3225.3276441506,
-        btcPrice: 46306.911944865,
-        ltcPrice: 172.59040460829,
-        usdtPrice: 1.00048388259,
-        atariPrice: 0.047669689201542,
-        bnbPrice: 396.8088516554
+        eth: 3225.3276441506,
+        btc: 46306.911944865,
+        ltc: 172.59040460829,
+        usdt: 1.00048388259,
+        atari: 0.047669689201542,
+        bnb: 396.8088516554
     },
     start_screen_flag: false,
     menustatus: false,
@@ -125,12 +125,12 @@ export default (state = INITIAL, action) => {
                 all_history: {body:{obj:{ATARI:[],ETH:[],USDT:[],BTC:[],BNB:[],LTC:[]}, arr:[]}},
                 get_address: {atri: "", btc: "", eth: "", ltc: "", bch: "",ftm:"",bnb:"", flag: false},
                 price: {
-                    ethPrice: 3225.3276441506,
-                    btcPrice: 46306.911944865,
-                    ltcPrice: 172.59040460829,
-                    usdtPrice: 1.00048388259,
-                    atariPrice: 0.047669689201542,
-                    bnbPrice: 396.8088516554
+                    eth: 3225.3276441506,
+                    btc: 46306.911944865,
+                    ltc: 172.59040460829,
+                    usdt: 1.00048388259,
+                    atari: 0.047669689201542,
+                    bnb: 396.8088516554
                 },
             }
         }

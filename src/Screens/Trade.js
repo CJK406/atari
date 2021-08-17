@@ -78,7 +78,7 @@ class TradeScreen extends React.Component {
                 data={[{id: 1}]}
                 renderItem={renderItem}
 				refreshing={this.state.triggerRefresh}
-				// keyExtractor={item => item?.id}
+				keyExtractor={item => item?.id}
 				onRefresh={() => this.refresh()}
             />
 		{/* </PTRView> */}
