@@ -14,7 +14,7 @@ const Menus = [
 	{ name: 'Support', page: '', icon: 'help-buoy-outline',description:'' },
 	{ name: 'Reset Pincode', page: 'ResetPin', icon: 'refresh-outline',description:'' },
 	{ name: 'Logout', page: '', icon: 'log-out-outline',description:'' },
-	{ name: 'Version 2.6.01', page: '', icon: 'information-circle-outline',description:'' }
+	{ name: 'Version 2.6.03', page: '', icon: 'information-circle-outline',description:'' }
 ];
 class ProfileScreen extends React.Component {
 	constructor(props) {
@@ -106,8 +106,9 @@ class ProfileScreen extends React.Component {
 				<View style={[CustomStyles.container, styles.innerContainer]}>
 					<Header darkmode={themeToggle} />
 					<FlatList
-						data={[1]}
+						data={[{id: 1}]}
 						renderItem={renderItem}
+						keyExtractor={item => item?.id}
 					/>
 				</View>
       </SafeAreaView>

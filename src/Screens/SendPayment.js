@@ -29,7 +29,7 @@ class SendPaymentScreen extends React.Component {
 
 	}
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state.price != nextState.price 
+        return this.state?.price != nextState?.price 
     }
 	componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
@@ -44,7 +44,7 @@ class SendPaymentScreen extends React.Component {
             darkmode:props.darkmode,
             address: props.route.params.address,
             balance:props.balance,
-            price:props.price
+            price:props?.price
         };
       }
 	navigate = (pagename) => {
@@ -122,11 +122,11 @@ class SendPaymentScreen extends React.Component {
     }
     setFullBallance = () =>{
 		const {balance,currency} = this.state;
-        const currency_data1 = [['btc',balance.btc,'#f7931a',balance.btc_usd],
-                                ['atri',balance.atri,'#c42626',balance.atri_usd],
-                                ['eth',balance.eth,'aqua',balance.eth_usd],
-                                ['ltc',balance.ltc,'#345c9c',balance.ltc_usd],
-                                ['bch',balance.bch,'green',balance.bch_usd]];
+        const currency_data1 = [['btc',balance.btc,'#f7931a',balance?.btc_usd],
+                                ['atri',balance.atri,'#c42626',balance?.atri_usd],
+                                ['eth',balance.eth,'aqua',balance?.eth_usd],
+                                ['ltc',balance.ltc,'#345c9c',balance?.ltc_usd],
+                                ['bch',balance.bch,'green',balance?.bch_usd]];
 		let full_balance = currency_data1[currency][1];
 		let send_amount1 = currency_data1[currency][3];
 
@@ -237,9 +237,9 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-        darkmode:state.Auth.darkmode,
-        balance:state.Auth.balance,
-        price:state.Auth.price,
+        darkmode:state?.Auth?.darkmode,
+        balance:state?.Auth?.balance,
+        price:state?.Auth?.price,
   };
 }
 export default connect(mapStateToProps, {})(withTheme(SendPaymentScreen));

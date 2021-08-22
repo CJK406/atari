@@ -1,17 +1,18 @@
 import { getAPI, postAPI,getGraphAPI } from './base';
+import {setIsLoading} from '../Redux/Actions/Auth'
 
 export async function currency_convert(currency,value){
   return await postAPI('currency-convert',{currency:currency,value:value});
 }
 export async function get_allHistory(){
-    return await getAPI('getGroupedTransactionHistoryByUser');
-  }
+  return await getAPI('getGroupedTransactionHistoryByUser');
+}
 
 export async function get_History(currency){
-    return await getAPI('transactions/'+currency);
-  }
+  return await getAPI('transactions/'+currency);
+}
 export async function get_Graph(currency,period){
-  return await getGraphAPI('https://api.coingecko.com/api/v3/coins/'+currency+'/ohlc?vs_currency=usd&days='+period);
+  return await getGraphAPI('https://api.coingecko.com/api/v3/coins/' +currency+ '/ohlc?vs_currency=usd&days=' + period);
 }
 
 export async function get_percent(currency,period){

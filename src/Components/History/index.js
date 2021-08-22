@@ -4,6 +4,7 @@ import styles from './style'
 import HistoryItem from './Item'
 
 const History = (props) => {
+   
     const color = props.darkmode ? 'white':'black'
     return (
         <View style={{...styles.container}}>

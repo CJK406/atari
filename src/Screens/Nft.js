@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-        darkmode:state.Auth.darkmode,
+        darkmode:state?.Auth?.darkmode,
   };
 }
 

@@ -21,30 +21,31 @@ function getHeader() {
   };
 }
 
-
-
-
-
 export function setStore(appStore) {
   store = appStore;
 }
 
 export async function getAPI(url) {
+  console.log("url", url)
+
   try {
     let result = await axios.get(`${API_URL}/${url}`, getHeader());
     result = result && result.data
     return result;
   } catch (error) {
+    console.log("err ", error.response)
     if (error.response) {
+      console.log("err get", error.response)
       return error.response.data;
     }
     throw error;
   }
 }
+
 export async function getGraphAPI(url) {
   try {
     let result = await axios.get(`${url}`);
-    result = result && result.data
+    result = result && result.data;
     return result;
   } catch (error) {
     if (error.response) {
@@ -56,12 +57,15 @@ export async function getGraphAPI(url) {
 
 
 export async function postAPI(url, data) {
+  console.log("post url", url)
+
   try {
     let result = await axios.post(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
     return result;
   } catch (error) {
     if (error.response) {
+      console.log("err post", error.response)
       return error.response.data;
     }
     throw error;
@@ -72,6 +76,7 @@ export async function putAPI(url, data) {
   try {
     let result = await axios.put(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
+    // console.log("resilrrrr", result)
     return result;
   } catch (error) {
     if (error.response) {
@@ -101,7 +106,6 @@ export async function uploadAPI(url, file) {
 export async function actionApi(url, data) {
   try {
     let result = await axios.post(`${ACTION_API_URL}/${url}/index.php`, data);
-    console.log("actionresult",result);
     result = result && result.data;
     return result;
   } catch (error) {

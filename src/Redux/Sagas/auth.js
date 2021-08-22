@@ -7,6 +7,7 @@ import {
     AUTH_SET_PINCODE_SUCCESS, AUTH_SET_PINCODE, AUTH_GET_ALL_ADDRESS, AUTH_GET_ALL_ADDRESS_SUCCESS,
     AUTH_UPDATE_BALLANCE_SUCCESS, AUTH_UPDATE_BALLANCE,
     AUTH_SET_ALL_HISTORY,AUTH_SET_ALL_HISTORY_SUCCESS,
+    AUTH_GET_ALL_ADDRESS_ERROR,
     AUTH_SET_PRICE
 } from '../type';
 import {takeLatest, put, select, call} from 'redux-saga/effects';
@@ -27,6 +28,7 @@ import {
 import DeviceInfo from 'react-native-device-info';
 
 let ip_address="";
+
 DeviceInfo.getIpAddress().then((ip) => {
 	ip_address= ip;
 });
@@ -80,11 +82,23 @@ function* getAllAddress(payload) {
 
         flag: true
     }
+    
     if(result.code==200){
         yield put({type: AUTH_GET_ALL_ADDRESS_SUCCESS, data: result1})
     }
     // yield scheduleUpdateToken();
 }
+
+// function getErrorResponse(result){
+//     let message = "Something went wrong"
+//     if(result.code==500){
+//         message = "Internal server error"
+//     }
+//     let result1 = {
+//         code: result.code,
+//         btc: message
+//     }
+// }
 
 export function* watchgetAllHistory() {
     yield takeLatest(AUTH_SET_ALL_HISTORY, getAllHistory)
@@ -105,9 +119,7 @@ export function* watchgetAllAddress() {
 function* updateBallance(payload) {
 	const auth = yield select(getAuth);
     const login_api_result = yield login({email: auth.email, password: auth.password})
-    console.log("login-api--0-0-0-0-0-0-0-0-0-0-0-0-0-0-",login_api_result)
     yield put({type: AUTH_SET_PRICE, data: login_api_result.price})
-    console.log("asefsaef");
     const update_result = yield getBalance();
     
     yield put({type: AUTH_UPDATE_BALLANCE_SUCCESS, data: update_result.body})
@@ -122,7 +134,7 @@ function* updateBallance(payload) {
     formData.append('ltc',update_result.body.ltc_balance);
     formData.append('usdt',update_result.body.usdt_balance);
     const data = yield activityActionApi(formData);
-    console.log("asefsaefasef",data);
+    // console.log("asefsaefasef",data);
 }
 
 export function* watchUpdateBallance() {

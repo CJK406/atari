@@ -166,7 +166,6 @@ export default (state = INITIAL, action) => {
 
         case AUTH_SET_PRICE:{
             const price = action.data;
-            console.log("price-=-=-===---==-=-=-=-",price)
             return {
                 ...state,
                 price: price,
@@ -195,21 +194,21 @@ export default (state = INITIAL, action) => {
 
         case AUTH_UPDATE_BALLANCE_SUCCESS: {
             const {price} = state;
-            let atri_usd = action.data.atari_balance*price.atri;
-            let btc_usd  = action.data.btc_balance*price.btc;
-            let eth_usd  = action.data.eth_balance*price.eth;
-            let ltc_usd  = action.data.ltc_balance*price.ltc;
-            let usdt_usd = action.data.usdt_balance*price.usdt;
+            let atri_usd = action?.data?.atari_balance * price?.atri;
+            let btc_usd  = action?.data?.btc_balance * price?.btc;
+            let eth_usd  = action?.data?.eth_balance * price?.eth;
+            let ltc_usd  = action?.data?.ltc_balance * price?.ltc;
+            let usdt_usd = action?.data?.usdt_balance * price?.usdt;
             let ftm_usd = 0;
             let bnb_usd = 0;
 
             let sum = atri_usd+btc_usd+eth_usd+ltc_usd+usdt_usd+ftm_usd+bnb_usd;
 
-            let balance = {atri:action.data.atari_balance,
-                           btc:action.data.btc_balance,
-                           eth:action.data.eth_balance,
-                           ltc:action.data.ltc_balance,
-                           usdt:action.data.usdt_balance,
+            let balance = {atri:action?.data?.atari_balance,
+                           btc:action?.data?.btc_balance,
+                           eth:action?.data?.eth_balance,
+                           ltc:action?.data?.ltc_balance,
+                           usdt:action?.data?.usdt_balance,
                            ftm:0,
                            bnb:0,
 
@@ -243,7 +242,7 @@ export default (state = INITIAL, action) => {
             return {...state, notification_Flag: action.data};
         }
         case AUTH_SET_ALL_HISTORY_SUCCESS: {
-            return {...state, all_history: action.data}
+            return {...state, all_history: action.data, loading: false}
         }
         case AUTH_GET_ALL_ADDRESS_SUCCESS: {
             return {...state, get_address: action.data}

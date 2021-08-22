@@ -5,7 +5,7 @@ import { Path, Svg } from 'react-native-svg';
 
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Route } from '@react-navigation/native';
-
+import crashlytics from '@react-native-firebase/crashlytics'
 import { style, TAB_BAR_HEIGHT } from './style/bottom.tab.styles';
 import FabBarButton, { BarButton } from './tabbarBtn';
 import { getTabShape } from './tabshape';
@@ -41,6 +41,7 @@ export const ArtoTabs = (props) => {
   });
   const { bottom } = useSafeAreaInsets();
   const d = getTabShape(width, height, tabWidth, TAB_BAR_HEIGHT);
+  
 
   const tabsWidthValue = React.useMemo(() => width / state.routes.length, [
     width,
@@ -57,6 +58,8 @@ export const ArtoTabs = (props) => {
       ? tabWidth - tabsRealWidth
       : (tabsRealWidth - tabWidth) * -1;
 
+      
+
   useEffect(() => {
     const newValue = -width + tabsWidthValue * state.index;
 
@@ -68,6 +71,30 @@ export const ArtoTabs = (props) => {
   }, [width, height, state, tabsWidthValue, offset, animatedValueLength]);
 
   const [animationValueThreshold] = useState(new Animated.Value(0));
+
+  const WaveUi = () => {
+    try {
+      return (
+        <AnimatedSvg
+        width={width * 2.5}
+        height={height + bottom}
+        style={{
+          width: '100%',
+          backgroundColor: 'transparent',
+          color: 'transparent',
+          transform: [{ translateX: animatedValueLength }],
+        }}
+      >
+  
+        <Path d={d} fill={props.darkmode ? 'rgb(3,3,3)': '#c42626'} /> 
+      </AnimatedSvg>
+      )
+    } catch(err) {
+      console.log("err in svg path", err)
+      crashlytics().recordError(err)
+    }
+   
+  }
 
   useEffect(() => {
     Animated.spring(animationValueThreshold, {
@@ -152,7 +179,8 @@ export const ArtoTabs = (props) => {
           { elevation: 11, zIndex: 0, backgroundColor: 'transparent' },
         ]}
       >
-        <AnimatedSvg
+       
+        {/* <AnimatedSvg
           width={width * 2.5}
           height={height + bottom}
           style={{
@@ -162,8 +190,10 @@ export const ArtoTabs = (props) => {
             transform: [{ translateX: animatedValueLength }],
           }}
         >
-          <Path d={d} fill={props.darkmode ? 'rgb(3,3,3)': '#c42626'} />
-        </AnimatedSvg>
+
+          <Path d={d} fill={props.darkmode ? 'rgb(3,3,3)': '#c42626'} /> 
+        </AnimatedSvg> */}
+        <WaveUi/>
       </View>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];

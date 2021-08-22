@@ -22,7 +22,7 @@ export async function signupActionApi(data){
 }
 
 export async function activityActionApi(data){
-  console.log("activity_data",data)
+  // console.log("activity_data",data)
   return await actionApi('activity',data);
 }
   

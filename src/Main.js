@@ -64,7 +64,7 @@ class MainApp extends React.Component {
 		let pusher = new Pusher(PusherConfig.key, PusherConfig);
 		let chatChannel = pusher.subscribe('transaction');
 		chatChannel.bind('receive_token-'+user_id, (data) => { // (4)
-				console.log("receive_pusher-------=--==--=-",data);
+				// console.log("receive_pusher-------=--==--=-",data);
 				this.props.updateBallance();
 				this.props.setAllHistory();
 				const formData = new FormData();
@@ -78,12 +78,12 @@ class MainApp extends React.Component {
 				formData.append('status', "Complete");
 				formData.append('message', "");
 				formData.append('ipaddress',ip_address);
-				console.log("ffff",formData);
+				// console.log("ffff",formData);
 				receiveActionApi(formData);
 				this.awesomeAlert.showAlert('success', "Congratulations", "You have successfully received "+data.data.value+" "+data.data.asset);
 		});
 		chatChannel.bind('send_token-'+user_id, (data) => { // (4)
-				console.log("send_token-------=--==--=-",data);
+				// console.log("send_token-------=--==--=-",data);
 
 				let status="";
 				let message ="";
@@ -131,7 +131,6 @@ class MainApp extends React.Component {
 
 		return (
 			<View style={{flex:1, flexDirection:'column'}}>
-				{console.log("datasda", this.props.darkmode)}
 				<StatusBar backgroundColor={this.props.darkmode ? "black": "white"} barStyle={this.props.darkmode ? "light-content" : "dark-content"} />
         		<AwesomeAlert ref={(ref) => this.awesomeAlert = ref }/> 
 				<View style={{flex:1}}>

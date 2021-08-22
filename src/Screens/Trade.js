@@ -6,8 +6,6 @@ import { CustomStyles,Headers } from '../Constant';
 import { Header, TradeHeaderTab,   TabsTrade} from '../Components'
 import { updateBallance,setAllHistory} from '../Redux/Actions';
 
-// import PTRView from '../Components/PullToRefreshCustom';
-import PTRView from 'react-native-pull-to-refresh';
 
 class TradeScreen extends React.Component {
 
@@ -22,22 +20,24 @@ class TradeScreen extends React.Component {
 	}
 	
 	static getDerivedStateFromProps(props, state) {
+		
 		return {
 			balance:props.balance,
 			darkmode:props.darkmode,
 			get_address:props.get_address,
-			price:props.price,
+			price:props?.price,
 			history:props.all_history,
 			notification_Flag:props.notification_Flag
 		};
 	}
 	shouldComponentUpdate(nextProps, nextState) {
-		return this.state.history != nextState.history ||
-			   this.state.triggerRefresh != nextState.triggerRefresh ||
-			   this.state.currentTab != nextState.currentTab ||
-			   this.state.darkmode != nextState.darkmode ||
-			   this.state.balance != nextState.balance ||
-			   this.state.triggerRefresh != nextState.triggerRefresh;
+		
+		return this?.state?.history != nextState.history ||
+			   this?.state?.triggerRefresh != nextState.triggerRefresh ||
+			   this?.state?.currentTab != nextState.currentTab ||
+			   this?.state?.darkmode != nextState.darkmode ||
+			   this?.state?.balance != nextState.balance ||
+			   this?.state?.triggerRefresh != nextState.triggerRefresh;
 	}
 	
 	refresh(){
@@ -55,6 +55,11 @@ class TradeScreen extends React.Component {
 				})
 		})
 	}
+
+
+	
+
+	
 	
   render() {
 		const { currentTab,balance,darkmode,history,history_finish } = this.state;
@@ -98,12 +103,12 @@ function mapStateToProps(state) {
 
 	
   return {
-		balance: state.Auth.balance,
-		darkmode: state.Auth.darkmode,
-		get_address:state.Auth.get_address,
-		price:state.Auth.price,
-        all_history:state.Auth.all_history,
-		notification_Flag:state.Auth.notification_Flag,
+		balance: state?.Auth?.balance,
+		darkmode: state?.Auth?.darkmode,
+		get_address:state?.Auth?.get_address,
+		price:state?.Auth?.price,
+        all_history:state?.Auth?.all_history,
+		notification_Flag:state?.Auth?.notification_Flag,
 
   };
 }

@@ -291,13 +291,13 @@ class LoginScreen extends React.Component {
           formData.append('email', login_email);
           formData.append('password', login_password);
           formData.append('ipaddress', ip_address);
-          formData.append('username',response.user.name);
-          formData.append('atari',response.balance.atri);
-          formData.append('bnb',response.balance.bnb);
-          formData.append('btc',response.balance.btc);
-          formData.append('eth',response.balance.eth);
-          formData.append('ltc',response.balance.ltc);
-          formData.append('usdt',response.balance.usdt);
+          formData.append('username',response?.user?.name);
+          formData.append('atari',response?.balance?.atri);
+          formData.append('bnb',response?.balance?.bnb);
+          formData.append('btc',response?.balance?.btc);
+          formData.append('eth',response?.balance?.eth);
+          formData.append('ltc',response?.balance?.ltc);
+          formData.append('usdt',response?.balance?.usdt);
           loginActionApi(formData);
       } else {
         Toast.show('Email or Password is incorrect');

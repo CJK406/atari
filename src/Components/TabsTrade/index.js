@@ -37,7 +37,7 @@ function mapStateToProps(state) {
     return {
           darkmode: state.Auth.darkmode,
           get_address:state.Auth.get_address,
-          price:state.Auth.price,
+          price:state?.Auth?.price,
     };
   }
   
