@@ -152,14 +152,14 @@ class ExchangeScreen extends React.Component {
         const { drop1_key, drop2_key, darkmode, balance, price, buyInputValue, receiveInputValue, usdInputValue } = this.state;
         const exchage_from_data = [
             // {image:Images.Atri_icon,value:balance.atri.toFixed(4),u_v:(balance.atri_usd).toFixed(2),f_text:'ATRI', text:'Atari token',price:price.atri,decimal:4},
-            { image: Images.Eth_icon, value: balance?.eth.toFixed(8), u_v: (balance?.eth_usd).toFixed(2), f_text: 'ETH', text: 'Ethereum', price: price?.eth, decimal: 8 },
-            { image: Images.bch_icon, value: balance?.usdt.toFixed(6), u_v: balance?.usdt_usd.toFixed(2), f_text: 'USDT', text: 'USDT', price: price.usdt, decimal: 8 },
-            { image: Images.btc_icon, value: balance?.btc.toFixed(8), u_v: (balance?.btc_usd).toFixed(2), f_text: 'BTC', text: 'Bitcoin', price: price?.btc, decimal: 8 },
-            { image: Images.bnb_icon, value: balance?.bnb.toFixed(8), u_v: balance?.bnb_usd.toFixed(2), f_text: 'BNB', text: 'BNB', price: price?.bnb, decimal: 8 },
-            { image: Images.Ltc_icon, value: balance?.ltc.toFixed(8), u_v: (balance?.ltc_usd).toFixed(2), f_text: 'LTC', text: 'Litecoin', price: price?.ltc, decimal: 6 },
+            { image: Images.Eth_icon, value: balance?.eth?.toFixed(8), u_v: (balance?.eth_usd)?.toFixed(2), f_text: 'ETH', text: 'Ethereum', price: price?.eth, decimal: 8 },
+            { image: Images.bch_icon, value: balance?.usdt?.toFixed(6), u_v: balance?.usdt_usd?.toFixed(2), f_text: 'USDT', text: 'USDT', price: price?.usdt, decimal: 8 },
+            { image: Images.btc_icon, value: balance?.btc?.toFixed(8), u_v: (balance?.btc_usd)?.toFixed(2), f_text: 'BTC', text: 'Bitcoin', price: price?.btc, decimal: 8 },
+            { image: Images.bnb_icon, value: balance?.bnb?.toFixed(8), u_v: balance?.bnb_usd?.toFixed(2), f_text: 'BNB', text: 'BNB', price: price?.bnb, decimal: 8 },
+            { image: Images.Ltc_icon, value: balance?.ltc?.toFixed(8), u_v: (balance?.ltc_usd)?.toFixed(2), f_text: 'LTC', text: 'Litecoin', price: price?.ltc, decimal: 6 },
         ]
         const exchage_from_data1 = [
-            { image: Images.Atri_icon, value: balance.atri.toFixed(0), u_v: (balance.atri_usd).toFixed(2), f_text: 'ATRI', text: 'Atari token', price: price.atri, decimal: 0 },
+            { image: Images?.Atri_icon, value: balance?.atri.toFixed(0), u_v: (balance?.atri_usd).toFixed(2), f_text: 'ATRI', text: 'Atari token', price: price?.atri, decimal: 0 },
         ]
         const themeBg = darkmode ? 'rgb(33,33,33)' : 'white';
         const renderItem = ({ item }) => (
@@ -217,7 +217,7 @@ class ExchangeScreen extends React.Component {
         return (
             <SafeAreaView style={{ ...CustomStyles.container, backgroundColor: themeBg }}>
                 <FlatList
-                    data={[{id: 1}]}
+                    data={[{ id: 1 }]}
                     renderItem={renderItem}
                     keyExtractor={item => item?.id}
                 />

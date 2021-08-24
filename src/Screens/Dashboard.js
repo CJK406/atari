@@ -16,7 +16,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import { setAllHistory, getAllAddress, updateBallance, updateStartScreenState, updateMenuStatus } from '../Redux/Actions';
 import PTRView from 'react-native-pull-to-refresh';
 // import PTRView from '../Components/PullToRefreshCustom';
-import {isInternetConnected} from '../Utils/NetworkConnectivity';
+import { isInternetConnected } from '../Utils/NetworkConnectivity';
 import Toast from 'react-native-simple-toast';
 const { height } = Dimensions.get("window");
 const windowWidth = Dimensions.get('window').width;
@@ -48,30 +48,17 @@ class DashboardScreen extends React.Component {
         this.getHistory();
         this.props.updateBallance();
         InteractionManager.runAfterInteractions(() => {
-
-            
-
             this.props.updateMenuStatus(true);
             if (this.props.pincode === null) {
                 this.props.navigation.navigate("SetPincode");
-                console.log("check error 1")
             }
             else {
                 this.props.updateStartScreenState(false);
                 this.get_address();
-                console.log("check error 2")
-                console.log("this.props.all_history", this.props.all_history)
-
-            
-              
-
-                if (this.props.all_history === undefined || this.props.all_history.length == 0)
-                {
-                    console.log("check error 3")
+                if (this.props.all_history === undefined || this.props.all_history.length == 0) {
                     this.getHistory();
                 }
                 else {
-                    console.log("check error 4")
                     setTimeout(() => {
                         if (this.state !== null) {
                             this.state.isLoading = false;
@@ -109,15 +96,16 @@ class DashboardScreen extends React.Component {
         //     }
         // });
 
-              if (isInternetConnected() === true) {
-                this.setState({
-                    isLoading: true
-                });
-                this.setView();
-                this.forceUpdate();
-            } else {
-                this.forceUpdate()
-            }
+        if (isInternetConnected() === true) {
+            this.resetError()
+            this.setState({
+                isLoading: true
+            });
+            this.setView();
+            this.forceUpdate();
+        } else {
+            this.forceUpdate()
+        }
 
     }
 
@@ -127,7 +115,7 @@ class DashboardScreen extends React.Component {
         // isInternetConnected()
         // this.setView()
         if (isInternetConnected() === true) {
-           // console.log("isConnected if", isInternetConnected());
+            // console.log("isConnected if", isInternetConnected());
             this.setView()
         }
 
@@ -160,7 +148,33 @@ class DashboardScreen extends React.Component {
         };
     }
 
+    isErrorMessage() {
+        return (this.props.get_address.code !== undefined
+            && this.props.get_address.code === 900) ||
+            (this.props.all_history.code !== undefined
+                && this.props.all_history.code === 900)
 
+
+    }
+
+    resetError() {
+        if (this.props.get_address.code !== undefined) {
+            this.props.get_address.code = 0
+        }
+
+        if (this.props.all_history.code !== undefined) {
+            this.props.all_history.code = 0
+        }
+    }
+
+    getErrorMessage() {
+        if (this.props.get_address.code !== undefined) {
+            return this.props.get_address.message
+        }
+        else if (this.props.all_history.code !== undefined) {
+            return this.props.all_history.message
+        }
+    }
 
     get_address() {
         this.props.getAllAddress();
@@ -170,11 +184,11 @@ class DashboardScreen extends React.Component {
         this.props.setAllHistory();
     }
     refresh() {
-        if(isInternetConnected()===false){
- this.forceUpdate()
-        return
+        if (isInternetConnected() === false) {
+            this.forceUpdate()
+            return
         }
-       
+
         this.setState({
             history: {},
             history_finish: false,
@@ -195,8 +209,6 @@ class DashboardScreen extends React.Component {
     commafy(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     }
-
-
 
     render() {
         const { balance, darkmode, history_finish, history } = this.state;
@@ -261,7 +273,7 @@ class DashboardScreen extends React.Component {
 
                                 <BalanceList
                                     darkmode={darkmode}
-                                    balance={this.state?.balance?.eth.toFixed(8)}
+                                    balance={this.state?.balance?.eth?.toFixed(8)}
                                     label={'ETH'}
                                     icon={Images.Eth_icon}
                                     iconColor={color_data[2]}
@@ -269,7 +281,7 @@ class DashboardScreen extends React.Component {
 
                                 <BalanceList
                                     darkmode={darkmode}
-                                    balance={this.state?.balance?.usdt.toFixed(6)}
+                                    balance={this.state?.balance?.usdt?.toFixed(6)}
                                     label={'USDT'}
                                     icon={Images.bch_icon}
                                     iconColor={color_data[4]}
@@ -279,7 +291,7 @@ class DashboardScreen extends React.Component {
                             <View style={{ flexDirection: 'column', marginLeft: 16 }}>
                                 <BalanceList
                                     darkmode={darkmode}
-                                    balance={this.state.balance?.btc.toFixed(8)}
+                                    balance={this.state?.balance?.btc?.toFixed(8)}
                                     label={'BTC'}
                                     isIcon
                                     icon="bitcoin"
@@ -294,7 +306,7 @@ class DashboardScreen extends React.Component {
                                 />
                                 <BalanceList
                                     darkmode={darkmode}
-                                    balance={this.state.balance.ltc.toFixed(8)}
+                                    balance={this.state?.balance?.ltc?.toFixed(8)}
                                     label={'LTC'}
                                     icon={Images.Ltc_icon}
                                     iconColor={color_data[3]}
@@ -311,7 +323,8 @@ class DashboardScreen extends React.Component {
         );
         return (
             <View style={{ flex: 1, backgroundColor: themeBG }}>
-                {isInternetConnected()  ? <View style={{ flex: 1 }}>
+                {console.log("isErrorMessage", this.isErrorMessage())}
+                {(isInternetConnected() && !this.isErrorMessage()) ? <View style={{ flex: 1 }}>
 
                     {this.state.isLoading ?
                         <View style={{ flex: 1, }} >
@@ -353,6 +366,7 @@ class DashboardScreen extends React.Component {
                                     }}
                                     source={Images.dashboard_background} />
                             }
+
                             <FlatList
                                 data={[{ id: 1 }]}
                                 renderItem={renderItem}
@@ -380,12 +394,12 @@ class DashboardScreen extends React.Component {
                                     width: '100%',
                                     height: height,
                                 }}
-                                source={Images.dashboard_background} />
+                                source={Images?.dashboard_background} />
 
                         }
                         <Header darkmode={darkmode} />
                         <View style={styles.tryAgainContainer}>
-                            <Text style={styles.internetText}>Please check your internet connection </Text>
+                            <Text style={styles.internetText}>{this.isErrorMessage() ? this.getErrorMessage() : "Please check your internet connection"} </Text>
                             <LinearGradient colors={['#fff', '#000']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ ...styles.inputContainer2, height: 43, borderWidth: 0, paddingLeft: 2 }}>
 
                                 <TouchableOpacity activeOpacity={0.8} style={[styles.inputContainer2, {
@@ -393,8 +407,8 @@ class DashboardScreen extends React.Component {
                                     marginTop: 0
                                 },]}
                                     onPress={() => this.check()}>
-                                    
-                                         <Text style={{ fontWeight: '500', fontSize: 18, color: "white" }}>Try again</Text>
+
+                                    <Text style={{ fontWeight: '500', fontSize: 18, color: "white" }}>Try again</Text>
                                 </TouchableOpacity>
                             </LinearGradient>
                         </View>
@@ -443,11 +457,11 @@ const styles = StyleSheet.create({
         height: 40,
         flexDirection: 'row',
         alignItems: 'center',
-      },
-      internetText:{
-          color: 'white',
-          fontSize: 16
-      }
+    },
+    internetText: {
+        color: 'white',
+        fontSize: 16
+    }
 });
 
 function mapStateToProps(state) {

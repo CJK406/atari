@@ -10,15 +10,15 @@ const History = (props) => {
         <View style={{...styles.container}}>
             <FlatList
                 ListHeaderComponent={() => (
-                    <Text style={{fontSize:16,color:color,marginBottom:10}}>{props.label}</Text>
+                    <Text style={{fontSize:16,color:color,marginBottom:10}}>{props?.label}</Text>
                     )}
                 nestedScrollEnabled 
-                data={props.data}
+                data={props?.data}
                 keyExtractor={(item, index) => index }
-                renderItem={({ item }) => <HistoryItem darkmode={props.darkmode} item={item}/>}
+                renderItem={({ item }) => <HistoryItem darkmode={props?.darkmode} item={item}/>}
                 ListHeaderComponent={() => (
                     <View>
-                        {props.isLoad && 
+                        {props?.isLoad && 
                         <ActivityIndicator size="large" color={color} />}
                     </View>
                 )}

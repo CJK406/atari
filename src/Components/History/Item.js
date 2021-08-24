@@ -12,8 +12,8 @@ class HistoryItem extends React.Component{
     
     convert(date){
         let current_datetime = new Date(date)
-        let year = current_datetime.getFullYear();
-        let month =  (current_datetime.getMonth() + 1) <10 ?  "0"+(current_datetime.getMonth() + 1) :  (current_datetime.getMonth() + 1);
+        let year = current_datetime?.getFullYear();
+        let month =  (current_datetime?.getMonth() + 1) <10 ?  "0"+(current_datetime.getMonth() + 1) :  (current_datetime.getMonth() + 1);
         let day = current_datetime.getDate() < 10 ? "0"+current_datetime.getDate() : current_datetime.getDate() ;
         let hour = current_datetime.getHours() <10 ? "0"+current_datetime.getHours() :current_datetime.getHours();
         let min = current_datetime.getMinutes() <10 ? "0"+current_datetime.getMinutes() :current_datetime.getMinutes();
@@ -24,16 +24,16 @@ class HistoryItem extends React.Component{
     render(){
         const {darkmode, item} = this.props;
       
-        let date = this.convert(item.createdAt);
-        let value = parseFloat(item.value).toFixed(CryptoStyle[item.asset.toLowerCase()]['decimal'])
-        let e_value = parseFloat(item.e_value).toFixed(CryptoStyle[item.asset.toLowerCase()]['decimal'])
+        let date = this.convert(item?.createdAt);
+        let value = parseFloat(item?.value).toFixed(CryptoStyle[item?.asset?.toLowerCase()]['decimal'])
+        let e_value = parseFloat(item?.e_value).toFixed(CryptoStyle[item?.asset.toLowerCase()]['decimal'])
 
-        if(item.value<1 && item.asset.toLowerCase()==="atari")
+        if(item.value<1 && item?.asset?.toLowerCase()==="atari")
             value=1;
-        if(item.e_value<1 && item.asset.toLowerCase()==="atari")
+        if(item?.e_value<1 && item?.asset?.toLowerCase()==="atari")
             e_value=1;
         
-        if(item.transactionType==="exchange" && item.asset.toLowerCase()==="atari")
+        if(item?.transactionType==="exchange" && item?.asset?.toLowerCase()==="atari")
             value=e_value;
         let icon="arrow-up-circle-outline";
         let type="Sent";
@@ -49,7 +49,7 @@ class HistoryItem extends React.Component{
             icon = "shuffle";
             color = "rgb(12,145,255)";
         }
-        if(item.status==="Pending"){
+        if(item?.status==="Pending"){
             type = "Pending";
             icon = "shuffle";
         }
@@ -71,7 +71,9 @@ class HistoryItem extends React.Component{
                         <Text style={[darkmode?CustomStyles.d_text:CustomStyles.w_text,{fontSize:11}]}>{date}</Text>
                     </View>
                     <View style={{width:'35%'}}>
+                        
                         <Text style={{color:color,fontSize:15,textAlign:'right'}}>{value} {item.asset.toUpperCase()}</Text>
+
                         {type==="Exchange" && (
                             <Text style={{color:color,fontSize:15,textAlign:'right'}}>{item.fromAddress.toUpperCase()} to ATRI</Text>
 

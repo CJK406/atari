@@ -90,7 +90,6 @@ export const ArtoTabs = (props) => {
       </AnimatedSvg>
       )
     } catch(err) {
-      console.log("err in svg path", err)
       crashlytics().recordError(err)
     }
    

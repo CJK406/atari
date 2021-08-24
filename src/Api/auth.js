@@ -1,7 +1,6 @@
 import { getAPI, postAPI, putAPI } from './base';
 
 export async function login(data){
-  console.log("request data", data)
   const response =  await postAPI('login', data);
   if (response && response.token) {
       const {user,token,pricePerToken} = response;
@@ -59,7 +58,6 @@ export async function login(data){
 }
 
 export async function signup(data){
-  console.log("user data", data)
   return await postAPI('register',data);
 }
 export async function setPincode(data){

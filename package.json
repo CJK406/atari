@@ -48,6 +48,7 @@
     "react-native-device-info": "^8.1.4",
     "react-native-dotenv": "^0.2.0",
     "react-native-eject": "^0.1.2",
+    "react-native-exception-handler": "^2.10.10",
     "react-native-fontawesome": "^7.0.0",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
