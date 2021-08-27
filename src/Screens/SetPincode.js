@@ -29,11 +29,8 @@ class SetPincodeScreen extends React.Component {
 
     SetPin = () => {
         const {codePin,user_id} =this.state;
-        console.log("codepin",codePin)
         let pincode = codePin;
-            // pincode = parseInt(pincode);
         let data = {pinCode:pincode,id:user_id};
-        console.log(data);
         if(codePin!=="" && codePin.length === 6)
         {
             this.setState({

@@ -96,11 +96,6 @@ class TradeScreen extends React.Component {
 
 
 function mapStateToProps(state) {
-	// console.log("balance-=-=-=--=-==--==-=-=-=-",state.Auth.balance)
-	// console.log("price-=-=-=--=-==--==-=-=-=-",state.Auth.price)
-	// console.log("all_history-=-=-=--=-==--==-=-=-=-",state.Auth.all_history)
-	// console.log("notification_Flag-=-=-=--=-==--==-=-=-=-",state.Auth.notification_Flag)
-
 	
   return {
 		balance: state?.Auth?.balance,

@@ -71,7 +71,6 @@ export async function putAPI(url, data) {
   try {
     let result = await axios.put(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
-    // console.log("resilrrrr", result)
     return result;
   } catch (error) {
     if (error.response) {

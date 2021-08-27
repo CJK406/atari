@@ -45,15 +45,9 @@ export async function login(data){
           usdt:pricePerToken.usdtPrice,
           ftm:0,
           bnb:pricePerToken.bnbPrice,
-    
       }
-
-      
-
-      return {...response, price, balance};
-
+    return {...response, price, balance};
   }
-  
   return response;
 }
 

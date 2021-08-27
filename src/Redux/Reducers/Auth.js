@@ -194,23 +194,24 @@ export default (state = INITIAL, action) => {
 
         case AUTH_UPDATE_BALLANCE_SUCCESS: {
             const {price} = state;
-            let atri_usd = action?.data?.atari_balance * price?.atri;
-            let btc_usd  = action?.data?.btc_balance * price?.btc;
-            let eth_usd  = action?.data?.eth_balance * price?.eth;
-            let ltc_usd  = action?.data?.ltc_balance * price?.ltc;
-            let usdt_usd = action?.data?.usdt_balance * price?.usdt;
+            let atri_usd = action?.data?.body.atari_balance * price?.atri;
+            let btc_usd  = action?.data?.body?.btc_balance * price?.btc;
+            let eth_usd  = action?.data?.body?.eth_balance * price?.eth;
+            let ltc_usd  = action?.data?.body?.ltc_balance * price?.ltc;
+            let usdt_usd = action?.data?.body?.usdt_balance * price?.usdt;
             let ftm_usd = 0;
             let bnb_usd = 0;
 
             let sum = atri_usd+btc_usd+eth_usd+ltc_usd+usdt_usd+ftm_usd+bnb_usd;
 
-            let balance = {atri:action?.data?.atari_balance,
-                           btc:action?.data?.btc_balance,
-                           eth:action?.data?.eth_balance,
-                           ltc:action?.data?.ltc_balance,
-                           usdt:action?.data?.usdt_balance,
+            let balance = {atri:action?.data?.body?.atari_balance,
+                           btc:action?.data?.body?.btc_balance,
+                           eth:action?.data?.body?.eth_balance,
+                           ltc:action?.data?.body?.ltc_balance,
+                           usdt:action?.data?.body?.usdt_balance,
                            ftm:0,
                            bnb:0,
+                           code: action?.data?.code,
 
                            atri_usd:atri_usd,
                            btc_usd:btc_usd,
@@ -222,8 +223,9 @@ export default (state = INITIAL, action) => {
                            sum:sum
             };
 
-            if(action.data.atari_balance===undefined || action.data.atari_balance==="undefined"){
-                return{...state};
+            if(action.data.body?.atari_balance===undefined || action.data.body?.atari_balance==="undefined"){
+               
+                return{...state, balance: action.data};
             }
             else{
                 return {...state, balance:balance};

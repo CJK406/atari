@@ -80,10 +80,11 @@ function* getAllAddress(payload) {
         usdt : result?.body?.address,
         bnb : result?.body?.address,
         ftm : result?.body?.address,
+        code: result?.code,
 
         flag: true
     }
-    if(result.code==200){
+    if(result.code === 200){
         yield put({type: AUTH_GET_ALL_ADDRESS_SUCCESS, data: result1})
     }
     else {
@@ -129,20 +130,24 @@ function* updateBallance(payload) {
     const login_api_result = yield login({email: auth.email, password: auth.password})
     yield put({type: AUTH_SET_PRICE, data: login_api_result.price})
     const update_result = yield getBalance();
-    
-    yield put({type: AUTH_UPDATE_BALLANCE_SUCCESS, data: update_result.body})
-    const formData = new FormData();
-    formData.append('email', auth.email);
-    formData.append('ipaddress', ip_address);
-    formData.append('username',auth.user_name);
-    formData.append('atari',update_result?.body?.atari_balance);
-    formData.append('bnb',update_result?.body?.bnb_balance);
-    formData.append('btc',update_result?.body?.btc_balance);
-    formData.append('eth',update_result?.body?.eth_balance);
-    formData.append('ltc',update_result?.body?.ltc_balance);
-    formData.append('usdt',update_result?.body?.usdt_balance);
-    const data = yield activityActionApi(formData);
-    // console.log("asefsaefasef",data);
+     
+    if(update_result.code===200){
+        yield put({type: AUTH_UPDATE_BALLANCE_SUCCESS, data: update_result})
+        const formData = new FormData();
+        formData.append('email', auth.email);
+        formData.append('ipaddress', ip_address);
+        formData.append('username',auth.user_name);
+        formData.append('atari',update_result?.body?.atari_balance);
+        formData.append('bnb',update_result?.body?.bnb_balance);
+        formData.append('btc',update_result?.body?.btc_balance);
+        formData.append('eth',update_result?.body?.eth_balance);
+        formData.append('ltc',update_result?.body?.ltc_balance);
+        formData.append('usdt',update_result?.body?.usdt_balance);
+        const data = yield activityActionApi(formData);
+    }
+    else{
+        yield put({type: AUTH_UPDATE_BALLANCE_SUCCESS, data: getErrorResponse(update_result)})
+    }
 }
 
 export function* watchUpdateBallance() {

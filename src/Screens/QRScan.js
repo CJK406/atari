@@ -5,18 +5,19 @@ import { withTheme } from 'react-native-material-ui';
 import { CustomStyles } from '../Constant';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
+
 class QRScanScreen extends React.Component {
   constructor(props) {
-		super(props)
-		
+		super(props);
 	}
+
   status = {
 		send_address:"",
   }
+
 	goBack = () => {
 		this.props.navigation.goBack();
   }
-
 
   onSuccess = async e => {
     let address = e.data;
@@ -27,16 +28,16 @@ class QRScanScreen extends React.Component {
 	};
 
   render() {
-    const { primaryColor } = this.props.theme.palette;
+    const { primaryColor } = this?.props?.theme.palette;
     return (
       <SafeAreaView style={{...CustomStyles.container, backgroundColor: primaryColor }}>
-			<QRCodeScanner
+        <QRCodeScanner
           onRead={this.onSuccess}
           topViewStyle={{flex: 0}}
           bottomViewStyle={{flex: 0}}
           cameraStyle={{height: Dimensions.get('window').height}}
           flashMode={RNCamera.Constants.FlashMode.off}
-      />
+        />
       </SafeAreaView>
     );
   }

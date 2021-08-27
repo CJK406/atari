@@ -32,7 +32,7 @@ export const ArtoTabs = (props) => {
         activeTintColor,
         inactiveTintColor,
         springConfig,
-        bottomBarContainerStyle,
+        bottomBarContainerStyle
       } = props;
 
   const [{ width, height }, setDimensions] = useState({
@@ -172,6 +172,7 @@ export const ArtoTabs = (props) => {
           );
         })}
       </View>
+      
       <View
         style={[
           StyleSheet.absoluteFill,
