@@ -1,5 +1,5 @@
 import { all, fork } from 'redux-saga/effects';
-import { watchSetUserInfo,watchSetToken,watchSetPincode,watchgetAllAddress,watchUpdateBallance,watchgetAllHistory} from './auth';
+import { watchSetUserInfo,watchSetToken,watchSetPincode,watchgetAllAddress,watchUpdateBallance,watchgetAllHistory, watchgetAppConfig} from './auth';
 export default function* rootSaga() {
 	yield all([
 		// auth
@@ -9,5 +9,6 @@ export default function* rootSaga() {
 		fork(watchgetAllAddress),
 		fork(watchUpdateBallance),
 		fork(watchgetAllHistory),
+		fork(watchgetAppConfig)
 	]);
 }

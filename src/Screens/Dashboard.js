@@ -13,11 +13,13 @@ import { Header, BalanceList, History } from '../Components';
 import { Images } from '../Assets';
 import { PieChart } from 'react-native-svg-charts';
 import LinearGradient from 'react-native-linear-gradient'
-import { setAllHistory, getAllAddress, updateBallance, updateStartScreenState, updateMenuStatus } from '../Redux/Actions';
+import { setAllHistory, getAllAddress, updateBallance, updateStartScreenState, updateMenuStatus, getAppConfig } from '../Redux/Actions';
 import PTRView from 'react-native-pull-to-refresh';
 // import PTRView from '../Components/PullToRefreshCustom';
 import { isInternetConnected } from '../Utils/NetworkConnectivity';
 import Toast from 'react-native-simple-toast';
+import VersionInfo from 'react-native-version-info';
+import appUtils from '../Utils/AppUtils'
 const { height } = Dimensions.get("window");
 const windowWidth = Dimensions.get('window').width;
 let backPressed = 0;
@@ -111,6 +113,8 @@ class DashboardScreen extends React.Component {
 
 
   componentDidMount() {
+     this.getAppConfigData();
+     appUtils.isAppUpdateRequied(30);
     if (isInternetConnected() === true) {
       this.setView()
     }
@@ -140,7 +144,7 @@ class DashboardScreen extends React.Component {
       pincode: props?.pincode,
       history: props?.all_history,
       get_address: props?.get_address,
-      notification_Flag: props?.notification_Flag
+      notification_Flag: props?.notification_Flag,
     };
   }
 
@@ -190,6 +194,10 @@ class DashboardScreen extends React.Component {
 
   getHistory = async () => {
     this.props.setAllHistory();
+  }
+
+  getAppConfigData = async () => {
+    this.props.getAppConfig();
   }
   refresh() {
     if (isInternetConnected() === false) {
@@ -331,6 +339,7 @@ class DashboardScreen extends React.Component {
     );
     return (
       <View style={{ flex: 1, backgroundColor: themeBG }}>
+        
         {(isInternetConnected() && !this.isErrorMessage()) ? <View style={{ flex: 1 }}>
 
           {this.state.isLoading ?
@@ -479,8 +488,9 @@ function mapStateToProps(state) {
     all_history: state?.Auth?.all_history,
     get_address: state?.Auth?.get_address,
     notification_Flag: state?.Auth?.notification_Flag,
+    app_config_data: state?.Auth?.app_config_data
 
   };
 }
 
-export default connect(mapStateToProps, { setAllHistory, getAllAddress, updateBallance, updateStartScreenState, updateMenuStatus })(withTheme(DashboardScreen));
+export default connect(mapStateToProps, { setAllHistory, getAllAddress, updateBallance, updateStartScreenState, updateMenuStatus, getAppConfig })(withTheme(DashboardScreen));

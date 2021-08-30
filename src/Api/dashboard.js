@@ -37,4 +37,8 @@ export async function exchange(currency, amount){
   return await postAPI('exchangeToAttari',{token:currency,amount:amount});
 }
 
+export async function appConfig(){
+  return await getAPI('app_config');
+}
+
 

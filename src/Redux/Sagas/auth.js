@@ -9,7 +9,9 @@ import {
     AUTH_SET_ALL_HISTORY,AUTH_SET_ALL_HISTORY_SUCCESS,
     AUTH_GET_ALL_ADDRESS_ERROR,
     AUTH_SET_PRICE,
-    INTERNAL_ERROR_CODE
+    INTERNAL_ERROR_CODE,
+    APP_CONFIG_SUCCESS,
+    GET_APP_CONFIG_DATA
 } from '../type';
 import {takeLatest, put, select, call} from 'redux-saga/effects';
 
@@ -23,7 +25,8 @@ import {
     receive1ActionApi,
     sendAttari,
     activityActionApi,
-    login
+    login,
+    appConfig
 } from '../../Api';
 
 import DeviceInfo from 'react-native-device-info';
@@ -154,6 +157,18 @@ export function* watchUpdateBallance() {
     yield takeLatest(AUTH_UPDATE_BALLANCE, updateBallance)
 }
 
+function* getAppConfig() {
+    const result = yield appConfig();
+    if(result.code==200){
+        yield put({type: APP_CONFIG_SUCCESS, data: result})
+    }
+    else {
+        yield put({type: APP_CONFIG_SUCCESS,  data: getErrorResponse(result)})
+    }
+}
 
+export function* watchgetAppConfig() {
+    yield takeLatest(GET_APP_CONFIG_DATA, getAppConfig)
+}
 
 

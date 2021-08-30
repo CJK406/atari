@@ -20,10 +20,11 @@ const TopContent = (props) => {
     const [modalMode, setModalMode] = useState(0)
     const { tabData } = props
     const txtColor = props.darkmode ? 'white' : 'black'
+  
 
-    const currency = tabData?.text
+    const currency = tabData?.text ? tabData?.text : ""
     const curr_key = currency?.toLowerCase()
-    const currPrice = props?.price[curr_key];
+    const currPrice = props?.price ?  props?.price[curr_key] : "0.00";
     const cryptoColor = CryptoStyle[curr_key]['color']
     const { chart_data, balance, price, currentTab } = props
     const { decimal } = CryptoStyle[curr_key]
@@ -154,9 +155,9 @@ const TopContent = (props) => {
 
 function mapStateToProps(state) {
     return {
-        darkmode: state.Auth.darkmode,
-        get_address: state.Auth.get_address,
-        price: state.Auth.price,
+        darkmode: state?.Auth?.darkmode,
+        get_address: state?.Auth?.get_address,
+        price: state?.Auth?.price,
     };
 }
 

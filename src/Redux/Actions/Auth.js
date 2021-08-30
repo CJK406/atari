@@ -12,7 +12,9 @@ import {
   AUTH_UPDATE_MENUSTATUS,
   AUTO_UPDATE_VERIFY_TOKEN,
   AUTH_SET_CLEAR,
-  IS_LOADING
+  IS_LOADING,
+  APP_CONFIG_SUCCESS,
+  GET_APP_CONFIG_DATA
 } from '../type';
 
 export const setIsLoading = (isLoading) => {
@@ -110,6 +112,13 @@ export const getAllAddress = () => {
 export const updateBallance = () => {
   return {
     type: AUTH_UPDATE_BALLANCE,
+    data: {}
+  }
+}
+
+export const getAppConfig = () => {
+  return {
+    type: GET_APP_CONFIG_DATA,
     data: {}
   }
 }

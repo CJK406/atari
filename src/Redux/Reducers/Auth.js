@@ -18,7 +18,8 @@ import {
     AUTO_UPDATE_VERIFY_TOKEN,
     AUTH_SET_ALL_HISTORY_SUCCESS,
     AUTH_SET_PRICE,
-    AUTH_SET_CLEAR
+    AUTH_SET_CLEAR,
+    APP_CONFIG_SUCCESS
 } from '../type';
 
 const INITIAL = {
@@ -249,6 +250,10 @@ export default (state = INITIAL, action) => {
         case AUTH_GET_ALL_ADDRESS_SUCCESS: {
             return {...state, get_address: action.data}
         }
+        case APP_CONFIG_SUCCESS :{
+            return {...state, app_config_data: action.data}
+        }
+        
         default:
             return state;
     }
