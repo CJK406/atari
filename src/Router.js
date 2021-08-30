@@ -67,7 +67,7 @@ const StactTabs = (elprops) => (
             return (
                 <Tab.Screen listeners={{
                     tabPress: e => {
-                        if (elprops?.props?.isErrorMessage && !elprops.props.isInternetConnected && index !== 4 && index !== 0) {
+                        if (elprops?.props?.isErrorMessage && index !== 4 && index !== 0) {
                             e.preventDefault();
                         }
                     },
