@@ -6,7 +6,6 @@ class AppUtils {
  
  
   isAppUpdateRequied = (appConfig) => {
-    console.log("bui;d verrdasa", appConfig)
     if (30 > VersionInfo.buildVersion){
      return true
     }

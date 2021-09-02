@@ -21,6 +21,7 @@ export { default as SetPincodeScreen } from './SetPincode';
 
 export { default as QRScanScreen } from './QRScan';
 export { default as SendPaymentScreen } from './SendPayment';
+export { default as UpdateVersionScreen } from './UpdateVersionScreen';
 
 
 export { default as TestScreen } from './Test';
