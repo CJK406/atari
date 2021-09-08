@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from 'react';
 import {
   BackHandler,
@@ -119,21 +120,6 @@ class DashboardScreen extends React.Component {
   // });
 
   check() {
-    // NetInfo.fetch().then(state => {
-    //     if (state.isConnected === true) {
-    //         this.setState({
-    //             netWorkConnection: true,
-    //             isLoading: true
-    //         });
-    //         this.setView();
-    //         this.forceUpdate();
-
-    //     } else {
-    //         this.state.netWorkConnection = false
-    //         this.forceUpdate()
-    //     }
-    // });
-
     if (isInternetConnected() === true) {
       this.resetError();
       this.setState({
@@ -181,7 +167,6 @@ class DashboardScreen extends React.Component {
         this.setView();
       }
     }
-   
   }
 
   componentWillUnmount() {
@@ -218,22 +203,22 @@ class DashboardScreen extends React.Component {
 
   isErrorMessage() {
     return (
-      (this.props.get_address.code !== undefined &&
-        this.props.get_address.code === 900) ||
-      (this.props.all_history.code !== undefined &&
-        this.props.all_history.code === 900) ||
-      (this.props.balance.code !== undefined && this.props.balance.code === 900)
+      // (this.props.get_address.code !== undefined &&
+      //   this.props.get_address.code === 900) ||
+      // (this.props.all_history.code !== undefined &&
+      //   this.props.all_history.code === 900) ||
+      this.props.balance.code !== undefined && this.props.balance.code === 900
     );
   }
 
   resetError() {
-    if (this.props.get_address.code !== undefined) {
-      this.props.get_address.code = 0;
-    }
+    // if (this.props.get_address.code !== undefined) {
+    //   this.props.get_address.code = 0;
+    // }
 
-    if (this.props.all_history.code !== undefined) {
-      this.props.all_history.code = 0;
-    }
+    // if (this.props.all_history.code !== undefined) {
+    //   this.props.all_history.code = 0;
+    // }
 
     if (this.props.balance.code !== undefined) {
       this.props.balance.code = 0;
@@ -241,17 +226,18 @@ class DashboardScreen extends React.Component {
   }
 
   getErrorMessage() {
+    // if (
+    //   this.props.get_address.code !== undefined &&
+    //   this.props.get_address.code !== 200
+    // ) {
+    //   return this.props.get_address.message;
+    // } else if (
+    //   this.props.all_history.code !== undefined &&
+    //   this.props.all_history.code !== 200
+    // ) {
+    //   return this.props.all_history.message;
+    // } else
     if (
-      this.props.get_address.code !== undefined &&
-      this.props.get_address.code !== 200
-    ) {
-      return this.props.get_address.message;
-    } else if (
-      this.props.all_history.code !== undefined &&
-      this.props.all_history.code !== 200
-    ) {
-      return this.props.all_history.message;
-    } else if (
       this.props.balance.code !== undefined &&
       this.props.balance.code !== 200
     ) {
