@@ -36,6 +36,7 @@ import Toast from 'react-native-simple-toast';
 import VersionInfo from 'react-native-version-info';
 import appUtils from '../Utils/AppUtils';
 import UpdateVersionModal from '../Components/UpdateVersionModal';
+import appNavigation from '../Utils/AppNavigation';
 const {height} = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
 let backPressed = 0;
@@ -132,41 +133,14 @@ class DashboardScreen extends React.Component {
     }
   }
 
-  navigate(routeName, data) {
-    const {navigation} = this.props;
-    navigation.navigate(routeName, data);
-  }
-
   componentDidMount() {
     this.getAppConfigData();
-    appUtils.isAppUpdateRequied(30);
+
     if (isInternetConnected() === true) {
       this.setView();
     }
-    if (
-      VersionInfo.buildVersion >
-      versionUpdateData?.message?.app_update?.app_version_code
-    ) {
-      if (versionUpdateData?.message?.app_update?.force_update === 'true') {
-        // this.props.navigation.reset({
-        //   index: 0,
-        //   routes: [{name: 'UpdateVersion', data: versionUpdateData?.message?.app_update, set: true}],
-        // });
-        this.props.navigation.replace('UpdateVersion', {
-          data: versionUpdateData?.message?.app_update,
-        });
-      } else {
-        return this.navigate('UpdateVersion', {
-          data: versionUpdateData?.message?.app_update,
-        });
-      }
-    } else {
-      this.getAppConfigData();
-      appUtils.isAppUpdateRequied(30);
-      if (isInternetConnected() === true) {
-        this.setView();
-      }
-    }
+
+    appUtils.checkAppUpdate(this.props);
   }
 
   componentWillUnmount() {
@@ -616,6 +590,7 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
+  console.log('state', VersionInfo.buildVersion);
   return {
     balance: state?.Auth?.balance,
     darkmode: state?.Auth?.darkmode,

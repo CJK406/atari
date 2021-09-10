@@ -167,7 +167,20 @@ export function* watchUpdateBallance() {
 function* getAppConfig() {
   const result = yield appConfig();
   if (result.code == 200) {
-    yield put({type: APP_CONFIG_SUCCESS, data: result});
+    yield put({
+      type: APP_CONFIG_SUCCESS,
+      data: {
+        body: [],
+        code: 200,
+        message: {
+          app_update: {
+            app_version_code: 33,
+            force_update: false,
+            message: ' Message which have to show to the user ',
+          },
+        },
+      },
+    });
   } else {
     yield put({type: APP_CONFIG_SUCCESS, data: getErrorResponse(result)});
   }

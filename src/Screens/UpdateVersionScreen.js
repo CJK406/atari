@@ -12,14 +12,15 @@ import {
 import {Header} from '../Components';
 import {Images} from '../Assets';
 import LinearGradient from 'react-native-linear-gradient';
+import appUtils from '../Utils/AppUtils';
 
 const {height} = Dimensions.get('window');
 
 const UpdateVersionScreen = (props) => {
   const goBack = () => {
-    const {navigation} =  props;
-    navigation.goBack()
-  }
+    const {navigation} = props;
+    navigation.goBack();
+  };
   const {data} = props.route;
   const {params} = props.route;
   return (
@@ -62,20 +63,20 @@ const UpdateVersionScreen = (props) => {
                   justifyContent: 'center',
                   marginTop: 0,
                 },
-              ]}
-              
-              >
+              ]}>
               <Text style={{fontWeight: '500', fontSize: 18, color: 'white'}}>
                 Update
               </Text>
             </TouchableOpacity>
           </LinearGradient>
           <View style={{marginTop: 20}}>
-            {params?.data?.force_update === "true" ? (
-              null
-            ) : <TouchableOpacity onPress={() => goBack()} style={styles.btnCancel}>
+            {appUtils.isForceUpdate(params?.data) ? null : (
+              <TouchableOpacity
+                onPress={() => goBack()}
+                style={styles.btnCancel}>
                 <Text style={styles.btnCancelText}>Cancel</Text>
-              </TouchableOpacity>}
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
   btnCancelText: {
     fontSize: 18,
     lineHeight: 22,
-    color: 'white'
+    color: 'white',
   },
   inputContainer2: {
     marginTop: 30,

@@ -14,7 +14,6 @@ const ACTION1_API_URL = 'http://3.17.146.124/api/index.php';
 function getHeader() {
   let state = store.getState();
   const {token} = state.Auth;
-  console.log('auth token', token);
   return {
     headers: {
       'Content-Type': 'application/json',
