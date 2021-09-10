@@ -58,7 +58,7 @@ class SendConfirmScreen extends React.Component {
   }
 
   componentDidMount() {
-    // this.sendOTPCode();
+    this.sendOTPCode();
   }
 
   componentDidUpdate() {

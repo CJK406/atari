@@ -1,4 +1,7 @@
+/* eslint-disable */
+
 import jwtDecode from 'jwt-decode';
+
 import {REHYDRATE} from 'redux-persist';
 
 import {
