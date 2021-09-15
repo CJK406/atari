@@ -37,20 +37,10 @@ import VersionInfo from 'react-native-version-info';
 import appUtils from '../Utils/AppUtils';
 import UpdateVersionModal from '../Components/UpdateVersionModal';
 import appNavigation from '../Utils/AppNavigation';
+import atariLogs from '../Utils/AtariLogs';
 const {height} = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
 let backPressed = 0;
-let versionUpdateData = {
-  body: [],
-  code: 200,
-  message: {
-    app_update: {
-      app_version_code: 27,
-      force_update: 'false',
-      message: ' Message which have to show to the user ',
-    },
-  },
-};
 class DashboardScreen extends React.Component {
   state = {
     balance: null,
@@ -82,13 +72,13 @@ class DashboardScreen extends React.Component {
 
   setView() {
     this.state.isLoading = true;
-    this.getHistory();
-    this.props.updateBallance();
     InteractionManager.runAfterInteractions(() => {
       this.props.updateMenuStatus(true);
       if (this.props.pincode === null) {
         this.props.navigation.navigate('SetPincode');
       } else {
+        this.getHistory();
+        this.props.updateBallance();
         this.props.updateStartScreenState(false);
         this.get_address();
         if (
@@ -134,13 +124,15 @@ class DashboardScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.getAppConfigData();
-
     if (isInternetConnected() === true) {
       this.setView();
+      if (this.props.pincode !== null) {
+        this.getHistory();
+        this.props.updateBallance();
+        this.getAppConfigData();
+        appUtils.checkAppUpdate(this.props);
+      }
     }
-
-    appUtils.checkAppUpdate(this.props);
   }
 
   componentWillUnmount() {
@@ -228,7 +220,7 @@ class DashboardScreen extends React.Component {
   };
 
   getAppConfigData = async () => {
-    this.props.getAppConfig();
+    await this.props.getAppConfig();
   };
   refresh() {
     if (isInternetConnected() === false) {
@@ -590,7 +582,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  console.log('state', VersionInfo.buildVersion);
   return {
     balance: state?.Auth?.balance,
     darkmode: state?.Auth?.darkmode,

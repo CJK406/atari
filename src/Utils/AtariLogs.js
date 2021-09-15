@@ -6,6 +6,11 @@ class AtariLogs {
       console.log(key, value);
     }
   }
+
+  debugLogValue(value) {
+    if (__DEV__) {
+    }
+  }
 }
 
 const atariLogs = new AtariLogs();

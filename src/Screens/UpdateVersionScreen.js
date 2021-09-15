@@ -8,6 +8,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import {Header} from '../Components';
 import {Images} from '../Assets';
@@ -55,6 +56,7 @@ const UpdateVersionScreen = (props) => {
               paddingLeft: 2,
             }}>
             <TouchableOpacity
+              onPress={() => Linking.openURL(`market://details?id=com.atari`)}
               activeOpacity={0.8}
               style={[
                 styles.inputContainer2,

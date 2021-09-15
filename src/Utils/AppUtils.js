@@ -2,17 +2,19 @@
 
 import VersionInfo from 'react-native-version-info';
 import appNavigation from './AppNavigation';
+import atariLogs from './AtariLogs';
 
 class AppUtils {
   isAppUpdateRequired(appUpdate) {
     if (appUpdate?.app_version_code > VersionInfo.buildVersion) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   }
 
   isForceUpdate(appUpdate) {
-    return appUpdate.force_update;
+    return appUpdate?.force_update;
   }
 
   checkAppUpdate(props) {

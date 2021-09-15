@@ -17,12 +17,17 @@ import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
 import {Images} from '../Assets';
 import Toast from 'react-native-simple-toast';
-import {authSetUserInfo, updateStartScreenState} from '../Redux/Actions';
+import {
+  authSetUserInfo,
+  updateStartScreenState,
+  getAppConfig,
+} from '../Redux/Actions';
 import {
   login as loginApi,
   signup as signupApi,
   loginActionApi,
   signupActionApi,
+  appConfig,
 } from '../Api';
 import {InputLogin} from '../Components';
 import LinearGradient from 'react-native-linear-gradient';
@@ -33,6 +38,7 @@ DeviceInfo.getIpAddress().then((ip) => {
   ip_address = ip;
 });
 import Base64 from '../Utils/Base64';
+import appUtils from '../Utils/AppUtils';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -69,6 +75,7 @@ class LoginScreen extends React.Component {
     );
   }
   componentDidMount() {
+    this.getAppConfigData();
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     });
@@ -78,7 +85,13 @@ class LoginScreen extends React.Component {
         this.handleBackButton,
       );
     });
+    console.log('salman saleem', this.props);
+    appUtils.checkAppUpdate(this.props);
   }
+
+  getAppConfigData = async () => {
+    await this.props.getAppConfig();
+  };
 
   login_animation = () => {
     this.setState({showSignup: true});
@@ -98,6 +111,10 @@ class LoginScreen extends React.Component {
       useNativeDriver: false,
     }).start();
   };
+
+  // getAppConfigData = async () => {
+  //   this.props.getAppConfig();
+  // };
 
   render() {
     const headerHeight = this.state.scrollY.interpolate({
@@ -522,9 +539,12 @@ const styles = StyleSheet.create({
   },
 });
 function mapStateToProps(state) {
-  return {};
+  return {
+    app_config_data: state?.Auth?.app_config_data,
+  };
 }
 export default connect(mapStateToProps, {
   authSetUserInfo,
   updateStartScreenState,
+  getAppConfig,
 })(withTheme(LoginScreen));

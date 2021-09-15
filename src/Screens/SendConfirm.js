@@ -160,7 +160,6 @@ class SendConfirmScreen extends React.Component {
           code: input_pincode,
           otpCode: user_otpcode,
         };
-        console.log('atari send', data);
         let result = sendAttari(data);
         result.then((resp) => {
           this.setState({
@@ -285,7 +284,6 @@ class SendConfirmScreen extends React.Component {
                 }}>
                 SUMMARY
               </Text>
-              {console.log('pin code', this.state.pincode)}
               <View
                 style={{
                   flexDirection: 'row',
@@ -581,7 +579,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  console.log('state.Auth.pincode', state.Auth.pincode);
   return {
     darkmode: state.Auth.darkmode,
     user_id: state.Auth.user_id,

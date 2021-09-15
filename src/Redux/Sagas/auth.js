@@ -33,9 +33,11 @@ import {
   activityActionApi,
   login,
   appConfig,
+  userprofile,
 } from '../../Api';
 
 import DeviceInfo from 'react-native-device-info';
+import atariLogs from '../../Utils/AtariLogs';
 
 let ip_address = '';
 
@@ -130,12 +132,11 @@ export function* watchgetAllAddress() {
   yield takeLatest(AUTH_GET_ALL_ADDRESS, getAllAddress);
 }
 
-function* updateBallance(payload) {
+function* updateBallance() {
   const auth = yield select(getAuth);
-  const login_api_result = yield login({
-    email: auth.email,
-    password: auth.password,
-  });
+
+  const login_api_result = yield userprofile();
+
   yield put({type: AUTH_SET_PRICE, data: login_api_result.price});
   const update_result = yield getBalance();
 
@@ -169,17 +170,7 @@ function* getAppConfig() {
   if (result.code == 200) {
     yield put({
       type: APP_CONFIG_SUCCESS,
-      data: {
-        body: [],
-        code: 200,
-        message: {
-          app_update: {
-            app_version_code: 33,
-            force_update: false,
-            message: ' Message which have to show to the user ',
-          },
-        },
-      },
+      data: result,
     });
   } else {
     yield put({type: APP_CONFIG_SUCCESS, data: getErrorResponse(result)});
