@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
@@ -39,6 +41,7 @@ const AuthStackScreens = () => (
     <AuthStack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
     <AuthStack.Screen name="VerifyCode" component={VerifyCodeScreen} />
     <AuthStack.Screen name="ResetPassword" component={ResetPasswordScreen} />
+    <AuthStack.Screen name="UpdateVersion" component={UpdateVersionScreen} />
   </AuthStack.Navigator>
 );
 

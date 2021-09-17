@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import {
   AUTH_LOGOUT,
   AUTH_SET_USER_INFO,
@@ -14,112 +16,108 @@ import {
   AUTH_SET_CLEAR,
   IS_LOADING,
   APP_CONFIG_SUCCESS,
-  GET_APP_CONFIG_DATA
+  GET_APP_CONFIG_DATA,
 } from '../type';
 
 export const setIsLoading = (isLoading) => {
   return {
     type: IS_LOADING,
-    isLoading: isLoading
-  }
-}
+    isLoading: isLoading,
+  };
+};
 
 export const authSetUserInfo = (data) => {
   return {
     type: AUTH_SET_USER_INFO,
-    data: data
-  }
-}
+    data: data,
+  };
+};
 
 export const settingTheme = (data) => {
   return {
     type: SETTING_THEME,
-    data: data
-  }
-}
-
-
+    data: data,
+  };
+};
 
 export const authSetClear = () => {
   return {
     type: AUTH_SET_CLEAR,
-    data: {}
-  }
-}
+    data: {},
+  };
+};
 
 export const authSetToken = (data) => {
   return {
     type: AUTH_SET_TOKEN,
-    data: data
-  }
-}
+    data: data,
+  };
+};
 export const updateStartScreenState = (data) => {
   return {
     type: AUTH_UPDATE_STARTSCREEN,
-    data: data
-  }
-}
+    data: data,
+  };
+};
 
 export const updateMenuStatus = (data) => {
   return {
     type: AUTH_UPDATE_MENUSTATUS,
-    data: data
-  }
-}
+    data: data,
+  };
+};
 
 export const update_verifyToken = (data) => {
   return {
     type: AUTO_UPDATE_VERIFY_TOKEN,
-    data: data
-  }
-}
+    data: data,
+  };
+};
 
 export const authLogout = () => {
   return {
     type: AUTH_LOGOUT,
-    data: {}
-  }
-}
+    data: {},
+  };
+};
 
 export const authSetPincode = (data) => {
   return {
     type: AUTH_SET_PINCODE,
-    data: data
-  }
-}
+    data: data,
+  };
+};
 export const settingNotification = (data) => {
   return {
     type: NOTIFICATIONFLAG,
-    data: data
-  }
-}
+    data: data,
+  };
+};
 
 export const setAllHistory = () => {
   return {
     type: AUTH_SET_ALL_HISTORY,
-    data: {}
-  }
-}
-
+    data: {},
+  };
+};
 
 export const getAllAddress = () => {
   return {
     type: AUTH_GET_ALL_ADDRESS,
-    data: {}
-  }
-}
+    data: {},
+  };
+};
 
 export const updateBallance = () => {
   return {
     type: AUTH_UPDATE_BALLANCE,
-    data: {}
-  }
-}
+    data: {},
+  };
+};
 
 export const getAppConfig = () => {
   return {
     type: GET_APP_CONFIG_DATA,
-    data: {}
-  }
-}
-
+    data: {},
+  };
+};

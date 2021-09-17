@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from 'react';
 import {
   BackHandler,
@@ -35,20 +36,11 @@ import Toast from 'react-native-simple-toast';
 import VersionInfo from 'react-native-version-info';
 import appUtils from '../Utils/AppUtils';
 import UpdateVersionModal from '../Components/UpdateVersionModal';
+import appNavigation from '../Utils/AppNavigation';
+import atariLogs from '../Utils/AtariLogs';
 const {height} = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
 let backPressed = 0;
-let versionUpdateData = {
-  body: [],
-  code: 200,
-  message: {
-    app_update: {
-      app_version_code: 27,
-      force_update: 'false',
-      message: ' Message which have to show to the user ',
-    },
-  },
-};
 class DashboardScreen extends React.Component {
   state = {
     balance: null,
@@ -80,13 +72,13 @@ class DashboardScreen extends React.Component {
 
   setView() {
     this.state.isLoading = true;
-    this.getHistory();
-    this.props.updateBallance();
     InteractionManager.runAfterInteractions(() => {
       this.props.updateMenuStatus(true);
       if (this.props.pincode === null) {
         this.props.navigation.navigate('SetPincode');
       } else {
+        this.getHistory();
+        this.props.updateBallance();
         this.props.updateStartScreenState(false);
         this.get_address();
         if (
@@ -119,21 +111,6 @@ class DashboardScreen extends React.Component {
   // });
 
   check() {
-    // NetInfo.fetch().then(state => {
-    //     if (state.isConnected === true) {
-    //         this.setState({
-    //             netWorkConnection: true,
-    //             isLoading: true
-    //         });
-    //         this.setView();
-    //         this.forceUpdate();
-
-    //     } else {
-    //         this.state.netWorkConnection = false
-    //         this.forceUpdate()
-    //     }
-    // });
-
     if (isInternetConnected() === true) {
       this.resetError();
       this.setState({
@@ -146,42 +123,16 @@ class DashboardScreen extends React.Component {
     }
   }
 
-  navigate(routeName, data) {
-    const {navigation} = this.props;
-    navigation.navigate(routeName, data);
-  }
-
   componentDidMount() {
-    this.getAppConfigData();
-    appUtils.isAppUpdateRequied(30);
     if (isInternetConnected() === true) {
       this.setView();
-    }
-    if (
-      VersionInfo.buildVersion >
-      versionUpdateData?.message?.app_update?.app_version_code
-    ) {
-      if (versionUpdateData?.message?.app_update?.force_update === 'true') {
-        // this.props.navigation.reset({
-        //   index: 0,
-        //   routes: [{name: 'UpdateVersion', data: versionUpdateData?.message?.app_update, set: true}],
-        // });
-        this.props.navigation.replace('UpdateVersion', {
-          data: versionUpdateData?.message?.app_update,
-        });
-      } else {
-        return this.navigate('UpdateVersion', {
-          data: versionUpdateData?.message?.app_update,
-        });
-      }
-    } else {
-      this.getAppConfigData();
-      appUtils.isAppUpdateRequied(30);
-      if (isInternetConnected() === true) {
-        this.setView();
+      if (this.props.pincode !== null) {
+        this.getHistory();
+        this.props.updateBallance();
+        this.getAppConfigData();
+        appUtils.checkAppUpdate(this.props);
       }
     }
-   
   }
 
   componentWillUnmount() {
@@ -218,22 +169,22 @@ class DashboardScreen extends React.Component {
 
   isErrorMessage() {
     return (
-      (this.props.get_address.code !== undefined &&
-        this.props.get_address.code === 900) ||
-      (this.props.all_history.code !== undefined &&
-        this.props.all_history.code === 900) ||
-      (this.props.balance.code !== undefined && this.props.balance.code === 900)
+      // (this.props.get_address.code !== undefined &&
+      //   this.props.get_address.code === 900) ||
+      // (this.props.all_history.code !== undefined &&
+      //   this.props.all_history.code === 900) ||
+      this.props.balance.code !== undefined && this.props.balance.code === 900
     );
   }
 
   resetError() {
-    if (this.props.get_address.code !== undefined) {
-      this.props.get_address.code = 0;
-    }
+    // if (this.props.get_address.code !== undefined) {
+    //   this.props.get_address.code = 0;
+    // }
 
-    if (this.props.all_history.code !== undefined) {
-      this.props.all_history.code = 0;
-    }
+    // if (this.props.all_history.code !== undefined) {
+    //   this.props.all_history.code = 0;
+    // }
 
     if (this.props.balance.code !== undefined) {
       this.props.balance.code = 0;
@@ -241,17 +192,18 @@ class DashboardScreen extends React.Component {
   }
 
   getErrorMessage() {
+    // if (
+    //   this.props.get_address.code !== undefined &&
+    //   this.props.get_address.code !== 200
+    // ) {
+    //   return this.props.get_address.message;
+    // } else if (
+    //   this.props.all_history.code !== undefined &&
+    //   this.props.all_history.code !== 200
+    // ) {
+    //   return this.props.all_history.message;
+    // } else
     if (
-      this.props.get_address.code !== undefined &&
-      this.props.get_address.code !== 200
-    ) {
-      return this.props.get_address.message;
-    } else if (
-      this.props.all_history.code !== undefined &&
-      this.props.all_history.code !== 200
-    ) {
-      return this.props.all_history.message;
-    } else if (
       this.props.balance.code !== undefined &&
       this.props.balance.code !== 200
     ) {
@@ -268,7 +220,7 @@ class DashboardScreen extends React.Component {
   };
 
   getAppConfigData = async () => {
-    this.props.getAppConfig();
+    await this.props.getAppConfig();
   };
   refresh() {
     if (isInternetConnected() === false) {

@@ -1,23 +1,30 @@
+/* eslint-disable */
 import axios from 'axios';
+import atariLogs from '../Utils/AtariLogs';
+import EncryptionUtils from '../Utils/EncryptionUtils';
+
+var CryptoJS = require('crypto-js');
 
 let store;
 
 // const API_URL="https://atari-backend.herokuapp.com/api/users";
-const API_URL="https://www.vub.gla.mybluehost.me/api/users";
+// const API_URL = 'https://www.vub.gla.mybluehost.me/api/users';
+// Todo
+const API_URL = 'https://acstgapi.atarichain.com/users';
 // const API_URL="http://151.106.108.46/api/users";
-const ACTION_API_URL="https://panel.atarichain.com/api"
+const ACTION_API_URL = 'https://panel.atarichain.com/api';
 // const ACTION_API_URL="http://10.0.2.2/atari_admin/api"
 
-const ACTION1_API_URL="http://3.17.146.124/api/index.php"
+const ACTION1_API_URL = 'http://3.17.146.124/api/index.php';
 
 function getHeader() {
-  let state = store.getState()
-  const { token } = state.Auth;
+  let state = store.getState();
+  const {token} = state.Auth;
   return {
     headers: {
       'Content-Type': 'application/json',
-      'auth-token' : `${token}`,
-    }
+      'auth-token': `${token}`,
+    },
   };
 }
 
@@ -26,10 +33,10 @@ export function setStore(appStore) {
 }
 
 export async function getAPI(url) {
-
   try {
     let result = await axios.get(`${API_URL}/${url}`, getHeader());
-    result = result && result.data
+    result = result && result.data;
+    result = EncryptionUtils.getInstance().decrypt(result);
     return result;
   } catch (error) {
     if (error.response) {
@@ -52,12 +59,11 @@ export async function getGraphAPI(url) {
   }
 }
 
-
 export async function postAPI(url, data) {
-
   try {
     let result = await axios.post(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
+    result = EncryptionUtils.getInstance().decrypt(result);
     return result;
   } catch (error) {
     if (error.response) {
@@ -71,6 +77,7 @@ export async function putAPI(url, data) {
   try {
     let result = await axios.put(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
+    result = EncryptionUtils.getInstance().decrypt(result);
     return result;
   } catch (error) {
     if (error.response) {
@@ -81,15 +88,15 @@ export async function putAPI(url, data) {
 }
 
 export async function uploadAPI(url, file) {
-  const header = getHeader()
+  const header = getHeader();
   header.headers['Content-Type'] = 'multipart/form-data';
 
   const formData = new FormData();
-  formData.append('file', file)
+  formData.append('file', file);
   try {
     let result = await axios.post(`${API_URL}/${url}`, formData, header);
-    result = result && result.data
-
+    result = result && result.data;
+    result = EncryptionUtils.getInstance().decrypt(result);
     return result;
   } catch (error) {
     throw error;
@@ -108,7 +115,6 @@ export async function actionApi(url, data) {
     throw error;
   }
 }
-
 
 export async function action1Api(url, data) {
   try {

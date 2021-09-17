@@ -1,0 +1,39 @@
+{
+  "portalInfo": {
+    "_id": "613665bb275deb067fcca20b",
+    "balAtt": 0,
+    "balBNB": 0,
+    "balBtc": 0,
+    "balEth": 0,
+    "balLtc": 0,
+    "balUsdt": 0,
+    "publicAddress": "0x48259f6a0e232f38c2a94467726bd827590da291",
+    "publicAddressBTC": "1KT7z6bKW841EMnStfcTSVaXYs8GgkLnjX",
+    "publicAddressLTC": "LhRBZH4Wd72RWs9kVv2oETQ1tZZaJDvz44",
+    "userId": "613665bb275deb067fcca206"
+  },
+  "pricePerToken": {
+    "atariPrice": "0.067477378262075",
+    "bnbPrice": "419.18119695231",
+    "btcPrice": "46078.883565529",
+    "ethPrice": "3425.9952941706",
+    "ltcPrice": "184.38577566503",
+    "usdtPrice": "1.0015970895779"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTM2NjViYjI3NWRlYjA2N2ZjY2EyMDYiLCJpYXQiOjE2MzE0NjUxOTh9.uDvfdUMjuch4EsMBgIcMFSiTFQzDqCQhT6HCowt3TDg",
+  "user": {
+    "_id": "613665bb275deb067fcca206",
+    "balAtt": 0,
+    "balBNB": 0,
+    "balBtc": 0,
+    "balEth": 0,
+    "balLtc": 0,
+    "balUsdt": 0,
+    "email": "m.azhar.ali@outlook.com",
+    "name": "Azhar Ali",
+    "publicAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
+    "publicAddressBTC": "19no4sTNK6JfhCLTncQhdezTNKUMUAnbGg",
+    "publicAddressLTC": "LMmh7nSKXvpC2a7xoSGggfAAN51e3hHZcV",
+    "role": "user"
+  }
+}
