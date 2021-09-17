@@ -43,7 +43,7 @@ const ExchangeDropdown = (props) => {
             </TouchableOpacity>
             {isOpen &&
             <View style={styles.dropdownContainer}>
-                {items.map((item, index) => <DropdownItem onPress={() => onSelect(index)} item={item}/>)}
+                {items.map((item, index) => <DropdownItem key={item?.image} onPress={() => onSelect(index)} item={item}/>)}
             </View>
             }
         </View>

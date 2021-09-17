@@ -1,43 +1,45 @@
-export { default as LogoBox } from './LogoBox';
+/* eslint-disable */
 
-import _InputLogin from './InputLogin'
-export const InputLogin = _InputLogin
+export {default as LogoBox} from './LogoBox';
 
-import _Header from './Header'
-export const Header = _Header
+import _InputLogin from './InputLogin';
+export const InputLogin = _InputLogin;
 
-import _History from './History'
-export const History = _History
+import _Header from './Header';
+export const Header = _Header;
 
-import _HistoryItem from './History/Item'
-export const HistoryItem = _HistoryItem
+import _History from './History';
+export const History = _History;
 
-import _InputPin from './InputPin'
-export const InputPin = _InputPin
+import _HistoryItem from './History/Item';
+export const HistoryItem = _HistoryItem;
 
-import _BalanceList from './BalanceList'
-export const BalanceList = _BalanceList
+import _InputPin from './InputPin';
+export const InputPin = _InputPin;
 
-import _ArtoTabs from './WaveBottomBar/tabbar'
-export const ArtoTabs = _ArtoTabs 
+import _BalanceList from './BalanceList';
+export const BalanceList = _BalanceList;
 
-import _SideTrade from './SideTrade'
-export const SideTrade = _SideTrade
+import _ArtoTabs from './WaveBottomBar/tabbar';
+export const ArtoTabs = _ArtoTabs;
 
-import _ExcangeInput from './ExchangeInput'
-export const ExchangeInput = _ExcangeInput
+import _SideTrade from './SideTrade';
+export const SideTrade = _SideTrade;
 
-import _ExchangeDropdown from './ExchangeDropdown'
-export const ExchangeDropdown = _ExchangeDropdown
+import _ExcangeInput from './ExchangeInput';
+export const ExchangeInput = _ExcangeInput;
 
-import _SettingMenu from './SettingMenu'
-export const SettingMenu = _SettingMenu
+import _ExchangeDropdown from './ExchangeDropdown';
+export const ExchangeDropdown = _ExchangeDropdown;
 
-import _TabsTrade from './TabsTrade'
-export const TabsTrade = _TabsTrade
+import _SettingMenu from './SettingMenu';
+export const SettingMenu = _SettingMenu;
 
-import _TradeHeaderTab from './TabsTrade/HeaderTab'
-export const TradeHeaderTab = _TradeHeaderTab
+import _TabsTrade from './TabsTrade';
+export const TabsTrade = _TabsTrade;
 
-import _AwesomeAlert from './AwesomeAlert'
-export const AwesomeAlert = _AwesomeAlert
+import _TradeHeaderTab from './TabsTrade/HeaderTab';
+export const TradeHeaderTab = _TradeHeaderTab;
+
+import _AwesomeAlert from './AwesomeAlert';
+export const AwesomeAlert = _AwesomeAlert;

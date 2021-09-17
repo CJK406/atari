@@ -2,11 +2,13 @@
   package="com.atari">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
       android:name=".MainApplication"
       android:label="Atari Wallet"
       android:icon="@mipmap/ic_launcher"
+      
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
         android:usesCleartextTraffic="true"

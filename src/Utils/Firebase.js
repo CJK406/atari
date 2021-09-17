@@ -41,14 +41,14 @@ export async function createChat(myinfo, userinfo) {
     const response = await firestore().collection('rooms').add(createInfo);
     return response.id
   } catch (err) {
-    console.log("ERROR ADDING", err)
+    // console.log("ERROR ADDING", err)
   }
 }
 
 export async function sendMessage(room_id, user_id, message) {
-  console.log("ROOM_ID", room_id)
-  console.log("ROOM_ID", user_id)
-  console.log("ROOM_ID", message)
+  // console.log("ROOM_ID", room_id)
+  // console.log("ROOM_ID", user_id)
+  // console.log("ROOM_ID", message)
   try {
     const roomRef = firestore().collection('rooms').doc(room_id);
     let roomInfo = await roomRef.get();
@@ -60,6 +60,6 @@ export async function sendMessage(room_id, user_id, message) {
     })
     roomRef.update({ messages: messages })
   } catch (err) {
-    console.log("ERROR SENDING MESSAGE: ", err)
+    // console.log("ERROR SENDING MESSAGE: ", err)
   }
 }

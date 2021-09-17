@@ -23,9 +23,6 @@ class LoginScreen extends React.Component {
 		show_modal:false,
 		loading:false,
 	}
-	componentDidMount() {
-	}
-
 	doLogin = async () => {
 		const { email, password } = this.state;
 		if (email.length === 0 || password.length === 0) {
@@ -74,9 +71,9 @@ class LoginScreen extends React.Component {
 	}
 
   	render() {
-		const { primaryColor, secondaryColor, thirdcolor, forthColor, fifthColor } = this.props.theme.palette;
-		const { email, password } = this.state;
-		const parsedIcon = parseIconFromClassName('fa fa-envelope');
+		const { primaryColor } = this.props.theme.palette;
+		// const { email, password } = this.state;
+		// const parsedIcon = parseIconFromClassName('fa fa-envelope');
     return (
       <SafeAreaView style={{backgroundColor: primaryColor }}>
 			<Video

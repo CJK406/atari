@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "996419026228",
+    "project_id": "atari-smart-wallet",
+    "storage_bucket": "atari-smart-wallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996419026228:android:92dac64909408100353961",
+        "android_client_info": {
+          "package_name": "com.atari"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "996419026228-5c93vao45gkj3uf1dgbp11ejsni36s6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyBBb_ZIpUGXsiPDgL6wJnQXU84gr6bic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "996419026228-5c93vao45gkj3uf1dgbp11ejsni36s6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

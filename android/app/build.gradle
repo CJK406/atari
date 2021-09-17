@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
-
+ // apply after this line
+apply plugin: "com.google.firebase.crashlytics"
 import com.android.build.OutputFile
 
 /**
@@ -132,8 +133,8 @@ android {
         applicationId "com.atari"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 25
-        versionName '2.6.01'
+        versionCode 32
+        versionName '2.07.02'
         multiDexEnabled true
         missingDimensionStrategy 'react-native-camera', 'general'
     }
@@ -146,6 +147,12 @@ android {
         }
     }
     signingConfigs {
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        }
        
         debug {
             storeFile file('debug.keystore')
@@ -162,9 +169,16 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             // signingConfig signingConfigs.debug
-            
-            minifyEnabled enableProguardInReleaseBuilds
+            signingConfig signingConfigs.release
+            // minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
+            firebaseCrashlytics {
+                nativeSymbolUploadEnabled true
+                strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'
+                unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
+            }
         }
     }
 
@@ -183,7 +197,6 @@ android {
                 output.versionCodeOverride =
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
-
         }
     }
 }
@@ -194,6 +207,10 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     compile 'com.android.support:support-v4:+'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation "com.google.firebase:firebase-crashlytics-ndk:18.2.1"
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.1'
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+    implementation 'com.google.firebase:firebase-crashlytics-ndk'
 
     implementation 'com.facebook.fresco:animated-gif:2.0.0'
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
@@ -228,3 +245,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
 applyNativeModulesAppBuildGradle(project)
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply plugin: 'com.google.gms.google-services'
