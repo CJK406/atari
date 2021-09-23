@@ -38,6 +38,7 @@ import appUtils from '../Utils/AppUtils';
 import UpdateVersionModal from '../Components/UpdateVersionModal';
 import appNavigation from '../Utils/AppNavigation';
 import atariLogs from '../Utils/AtariLogs';
+import {SALT_MIX_KEY, IV_KEY} from '@env';
 const {height} = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
 let backPressed = 0;
