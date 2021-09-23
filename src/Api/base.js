@@ -8,10 +8,10 @@ var CryptoJS = require('crypto-js');
 let store;
 
 // const API_URL="https://atari-backend.herokuapp.com/api/users";
-// const API_URL = 'https://www.vub.gla.mybluehost.me/api/users';
+const API_URL = 'https://www.vub.gla.mybluehost.me/api/users';
 // Todo
 // const API_URL = 'https://acstgapi.atarichain.com/users';
-const API_URL = 'http://3.16.252.212:5000/users';
+// const API_URL = 'http://3.16.252.212:5000/users';
 // const API_URL="http://151.106.108.46/api/users";
 const ACTION_API_URL = 'https://panel.atarichain.com/api';
 // const ACTION_API_URL="http://10.0.2.2/atari_admin/api"
@@ -38,6 +38,7 @@ export async function getAPI(url) {
     let result = await axios.get(`${API_URL}/${url}`, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
+
     return result;
   } catch (error) {
     if (error.response) {

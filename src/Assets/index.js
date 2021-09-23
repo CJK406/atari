@@ -30,4 +30,5 @@ export const Images = {
   login_background: require('./login_bg.jpg'),
 
   dashboard_background: require('./ATARI_WALLET.png'),
+  white_key: require('./whitekey.png'),
 };

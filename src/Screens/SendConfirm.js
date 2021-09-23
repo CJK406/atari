@@ -58,7 +58,11 @@ class SendConfirmScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.sendOTPCode();
+    if (__DEV__) {
+      console.log('salman');
+    } else {
+      this.sendOTPCode();
+    }
   }
 
   componentDidUpdate() {
@@ -243,6 +247,7 @@ class SendConfirmScreen extends React.Component {
 
     return (
       <KeyboardAwareScrollView
+        showsHorizontalScrollIndicator={false}
         style={{backgroundColor: darkmode ? 'rgb(33,33,33)' : 'white'}}>
         <SafeAreaView
           style={{
@@ -254,15 +259,18 @@ class SendConfirmScreen extends React.Component {
           <View style={[CustomStyles.container, styles.innerContainer]}>
             <View
               style={{
-                height: 70,
+                height: 100,
+                // alignItems: 'spa',
                 alignItems: 'center',
-                justifyContent: 'center',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: 10,
                 position: 'relative',
                 backgroundColor: darkmode ? 'black' : 'white',
                 width: '100%',
               }}>
               <TouchableOpacity
-                style={{position: 'absolute', left: 10}}
+                // style={{position: 'absolute', left: 10}}
                 onPress={this.goBack}>
                 <Ionicons
                   name="arrow-back-outline"
@@ -271,18 +279,36 @@ class SendConfirmScreen extends React.Component {
                 />
               </TouchableOpacity>
               <Image source={Images.Logo} style={{width: 160, height: 50}} />
+              <View>
+                <View style={styles.redKeyImage}></View>
+                <Image
+                  resizeMode="contain"
+                  resizeMethod="auto"
+                  style={styles.keyImage}
+                  source={Images.white_key}
+                />
+              </View>
             </View>
+
             <View style={{padding: 20}}>
-              <Text style={{fontSize: 25, color: darkmode ? 'white' : 'black'}}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  lineHeight: 22,
+                  color: darkmode ? 'white' : 'black',
+                  textAlign: 'center',
+                  fontFamily: 'BwModelica-Medium',
+                }}>
                 Confirm Payment
               </Text>
               <Text
                 style={{
-                  fontSize: 20,
+                  fontSize: 16,
                   color: darkmode ? 'white' : 'black',
-                  marginTop: 20,
+                  textAlign: 'center',
+                  fontFamily: 'BwModelica-Medium',
                 }}>
-                SUMMARY
+                Summary
               </Text>
               <View
                 style={{
@@ -296,9 +322,10 @@ class SendConfirmScreen extends React.Component {
                 <Text
                   style={{
                     width: '50%',
-                    fontSize: 20,
+                    fontSize: 14,
                     letterSpacing: 1,
                     color: darkmode ? 'white' : 'black',
+                    fontFamily: 'BwModelica-Medium',
                   }}>
                   Sending to
                 </Text>
@@ -352,17 +379,20 @@ class SendConfirmScreen extends React.Component {
                   marginTop: 20,
                   borderBottomWidth: 2,
                   borderBottomColor: darkmode ? '#333333' : 'gray',
-                  paddingBottom: 20,
                 }}>
-                <Text
-                  style={{
-                    marginBottom: 20,
-                    fontSize: 20,
-                    letterSpacing: 1,
-                    color: darkmode ? 'white' : 'black',
-                  }}>
-                  Enter your pincode*
-                </Text>
+                <View style={styles.enterContainer}>
+                  <Text
+                    style={{
+                      marginBottom: 10,
+                      fontSize: 12,
+                      letterSpacing: 1,
+                      color: darkmode ? 'white' : 'black',
+                    }}>
+                    Enter your pincode*
+                  </Text>
+                  <View style={styles.enterLine}></View>
+                </View>
+
                 <View
                   style={{
                     flex: 1,
@@ -575,6 +605,30 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 14,
+  },
+  keyImage: {
+    height: 30,
+    width: 30,
+    marginTop: -10,
+  },
+  redKeyImage: {
+    position: 'absolute',
+    top: '-42%',
+    right: '44.5%',
+    height: 30,
+    width: 3,
+    backgroundColor: 'red',
+    zIndex: 2,
+  },
+  enterContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 30,
+  },
+  enterLine: {
+    height: 1,
+    backgroundColor: 'white',
+    width: '53%',
   },
 });
 
