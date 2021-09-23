@@ -3,6 +3,7 @@
 import React from 'react';
 import atariLogs from './AtariLogs';
 var CryptoJS = require('crypto-js');
+import {SALT_MIX_KEY, IV_KEY} from '@env';
 
 export default class EncryptionUtils {
   static instance = null;
@@ -15,15 +16,19 @@ export default class EncryptionUtils {
   }
 
   decrypt = (encryptedValue) => {
+    if (typeof encryptedValue !== 'string') {
+      return encryptedValue;
+    }
+
     let msg = encryptedValue
       .replace(/xMl3Jk/g, '+')
       .replace(/Por21Ld/g, '/')
       .replace(/Ml32/g, '=');
     const cipher = CryptoJS.AES.decrypt(
       msg,
-      CryptoJS.enc.Hex.parse('5be97276402d8fc7c8fce00dce906f68'),
+      CryptoJS.enc.Hex.parse(SALT_MIX_KEY),
       {
-        iv: CryptoJS.enc.Hex.parse('1ac6369b1b75ff777cdc5d3f46c7f189'),
+        iv: CryptoJS.enc.Hex.parse(IV_KEY),
         mode: CryptoJS.mode.CBC,
       },
     );

@@ -6,7 +6,7 @@ export async function login(data) {
   const response = await postAPI('login', data);
   if (response && response.token) {
     const {user, token, pricePerToken} = response;
-    if (pricePerToken.statusCode === 429) {
+    if (pricePerToken?.statusCode === 429) {
       pricePerToken.atariPrice = 0;
       pricePerToken.btcPrice = 0;
       pricePerToken.ethPrice = 0;
@@ -58,7 +58,7 @@ export async function userprofile() {
   const response = await getAPI('userprofile');
   if (response && response.body) {
     const {user, pricePerToken} = response.body;
-    if (pricePerToken.statusCode === 429) {
+    if (pricePerToken?.statusCode === 429) {
       pricePerToken.atariPrice = 0;
       pricePerToken.btcPrice = 0;
       pricePerToken.ethPrice = 0;

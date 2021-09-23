@@ -32,6 +32,7 @@ import {
 import {InputLogin} from '../Components';
 import LinearGradient from 'react-native-linear-gradient';
 import DeviceInfo from 'react-native-device-info';
+import {API_TOKEN, SALT_MIX_KEY, IV_KEY} from '@env';
 
 let ip_address = '';
 DeviceInfo.getIpAddress().then((ip) => {
@@ -85,7 +86,6 @@ class LoginScreen extends React.Component {
         this.handleBackButton,
       );
     });
-    console.log('salman saleem', this.props);
     appUtils.checkAppUpdate(this.props);
   }
 
@@ -140,6 +140,7 @@ class LoginScreen extends React.Component {
     return (
       // <View style={{alignItems: 'center', flex: 1,minHeight:windowHeight}}>
       <SafeAreaView style={{alignItems: 'center', flex: 1}}>
+        {console.log('env', API_TOKEN)}
         {/* <ImageBackground style={{alignItems: 'center', flex: 1}} resizeMode="cover" source={Images.login_background}> */}
         <View style={{flex: 1, alignItems: 'center', minHeight: windowHeight}}>
           <Image
