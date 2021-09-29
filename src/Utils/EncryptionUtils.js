@@ -16,7 +16,6 @@ export default class EncryptionUtils {
   }
 
   decrypt = (encryptedValue) => {
-    console.log('result', encryptedValue);
     if (typeof encryptedValue !== 'string') {
       return encryptedValue;
     }
@@ -34,8 +33,9 @@ export default class EncryptionUtils {
       },
     );
     let result = CryptoJS.enc.Utf8.stringify(cipher).toString();
+
     result = JSON.parse(result);
-    console.log('resulr', result);
+    atariLogs.debugLog('result', result);
     return result;
   };
 }
