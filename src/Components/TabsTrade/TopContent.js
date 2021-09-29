@@ -24,7 +24,8 @@ const TopContent = (props) => {
 
   const currency = tabData?.text ? tabData?.text : '';
   const curr_key = currency?.toLowerCase();
-  const currPrice = props?.price ? props?.price[curr_key] : '0.00';
+  const currPrice =
+    props !== undefined && props?.price ? props?.price[curr_key] : '0.00';
   const cryptoColor = CryptoStyle[curr_key]['color'];
   const {chart_data, balance, price, currentTab} = props;
   const {decimal} = CryptoStyle[curr_key];
