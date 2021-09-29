@@ -28,7 +28,8 @@ export const Images = {
   nft_image: require('./nft.png'),
   start_video: require('./Skype_Video.mp4'),
   login_background: require('./login_bg.jpg'),
-
+  login_background_new: require('./backgroundimage.png'),
   dashboard_background: require('./ATARI_WALLET.png'),
+  btnbackground: require('./btnbackground.png'),
   white_key: require('./whitekey.png'),
 };

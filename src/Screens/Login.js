@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import * as React from 'react';
 import {
   SafeAreaView,
@@ -12,6 +14,7 @@ import {
   BackHandler,
   Image,
   FlatList,
+  ImageBackground,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
@@ -40,6 +43,11 @@ DeviceInfo.getIpAddress().then((ip) => {
 });
 import Base64 from '../Utils/Base64';
 import appUtils from '../Utils/AppUtils';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  RED_BTN_COLOR,
+} from '../Utils/AppContants';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -119,7 +127,7 @@ class LoginScreen extends React.Component {
   render() {
     const headerHeight = this.state.scrollY.interpolate({
       inputRange: [0, HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT],
-      outputRange: [HEADER_MAX_HEIGHT, 40],
+      outputRange: [HEADER_MAX_HEIGHT, 30],
       extrapolate: 'clamp',
     });
     const transp = this.state.scrollY.interpolate({
@@ -140,83 +148,109 @@ class LoginScreen extends React.Component {
     return (
       // <View style={{alignItems: 'center', flex: 1,minHeight:windowHeight}}>
       <SafeAreaView style={{alignItems: 'center', flex: 1}}>
-        {/* <ImageBackground style={{alignItems: 'center', flex: 1}} resizeMode="cover" source={Images.login_background}> */}
-        <View style={{flex: 1, alignItems: 'center', minHeight: windowHeight}}>
-          <Image
-            resizeMode="cover"
-            source={Images.login_background}
-            style={{
-              flex: 1,
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              minHeight: windowHeight,
-              resizeMode: 'cover',
-              width: '100%',
-            }}
-          />
-          {/* START LOGIN FORM */}
-
-          <Animated.View
-            style={[styles.carret, {height: headerHeight, opacity: transp}]}>
-            <TouchableOpacity
-              style={{alignItems: 'center', justifyContent: 'center'}}
-              onPress={this.login_animation}>
-              <View style={{width: 500}}>
-                <Animated.Text
-                  style={{
-                    color: 'white',
-                    fontSize: 30,
-                    fontWeight: 'bold',
-                    padding: padLogin,
-                    width: '100%',
-                    textAlign: 'center',
-                  }}>
-                  LOGIN
-                </Animated.Text>
-              </View>
-            </TouchableOpacity>
-            {/* START LOGIN INPUT */}
-            <InputLogin
-              placeholder="Email"
-              returnKeyType="next"
-              onChangeText={(text) => this.setState({login_email: text})}
-              onSubmitEditing={() => {
-                this.passInput.focus();
-              }}
-              blurOnSubmit={false}
-            />
-
-            <InputLogin
-              placeholder="Password"
-              returnKeyType="next"
-              onSubmitEditing={() => {
-                this.passInput.focus();
-              }}
-              onChangeText={(text) => this.setState({login_password: text})}
-              secureTextEntry={true}
-              inputReff={(ref) => {
-                this.passInput = ref;
-              }}
-            />
-            <LinearGradient
-              colors={['#fff', '#000']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 1}}
+        <ImageBackground
+          style={{alignItems: 'center', flex: 1}}
+          resizeMode="cover"
+          source={Images.login_background_new}>
+          <View
+            style={{flex: 1, alignItems: 'center', minHeight: windowHeight}}>
+            {/* <Image
+              // resizeMode="contain"
+              // resizeMethod=
+              source={Images.login_background_new}
               style={{
-                ...styles.inputContainer,
-                height: 43,
-                borderWidth: 0,
-                paddingLeft: 2,
-              }}>
+                // flex: 1,
+                position: 'absolute',
+                top: 0,
+                bottom: 0,
+                // minHeight: windowHeight,
+                // resizeMode: 'cover',
+                // width: '100%',
+              }}
+            /> */}
+            {/* START LOGIN FORM */}
+
+            <Animated.View
+              style={[styles.carret, {height: headerHeight, opacity: transp}]}>
+              <TouchableOpacity
+                style={{alignItems: 'center', justifyContent: 'center'}}
+                onPress={this.login_animation}>
+                <View style={{width: 500}}>
+                  <Animated.Text
+                    style={{
+                      color: COLOR_GREY,
+                      fontSize: 18,
+                      padding: padLogin,
+                      width: '100%',
+                      textAlign: 'center',
+                      fontFamily: FontFamilyMedium,
+                    }}>
+                    LOGIN
+                  </Animated.Text>
+                </View>
+              </TouchableOpacity>
+              {/* START LOGIN INPUT */}
+              <InputLogin
+                placeholder="Email"
+                returnKeyType="next"
+                onChangeText={(text) => this.setState({login_email: text})}
+                onSubmitEditing={() => {
+                  this.passInput.focus();
+                }}
+                blurOnSubmit={false}
+              />
+
+              <InputLogin
+                placeholder="Password"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  this.passInput.focus();
+                }}
+                onChangeText={(text) => this.setState({login_password: text})}
+                secureTextEntry={true}
+                inputReff={(ref) => {
+                  this.passInput = ref;
+                }}
+              />
+              {/* <LinearGradient
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 0}}
+                // colors={['#4c669f', '#3b5998', '#192f6a']}
+                // start={{x: 0, y: 0}}
+                // end={{x: 1, y: 1}}
+                style={{
+                  ...styles.inputContainer,
+                  height: 43,
+                  borderWidth: 0,
+                  paddingLeft: 2,
+                  shadowColor: '#DB1A23',
+                  shadowOffset: {
+                    width: 0,
+                    height: 3,
+                  },
+                  shadowOpacity: 0.27,
+                  shadowRadius: 4.65,
+
+                  elevation: 6,
+                }}> */}
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={[
                   styles.inputContainer,
                   {
-                    backgroundColor: 'black',
+                    backgroundColor: RED_BTN_COLOR,
                     justifyContent: 'center',
-                    marginTop: 0,
+
+                    marginTop: 20,
+                    shadowColor: 'red',
+                    shadowOffset: {
+                      width: 0,
+                      height: 8,
+                    },
+                    shadowOpacity: 0.46,
+                    shadowRadius: 11.14,
+
+                    elevation: 17,
                   },
                 ]}
                 onPress={this.doLogin}>
@@ -224,113 +258,141 @@ class LoginScreen extends React.Component {
                   <ActivityIndicator size="large" color="white" />
                 ) : (
                   <Text
-                    style={{fontWeight: 'bold', fontSize: 18, color: 'white'}}>
+                    style={{
+                      fontSize: 18,
+                      color: COLOR_GREY,
+                      fontFamily: FontFamilyMedium,
+                    }}>
                     LOGIN
                   </Text>
                 )}
               </TouchableOpacity>
-            </LinearGradient>
+              {/* </LinearGradient> */}
 
-            {/* END LOGIN INPUT */}
+              {/* END LOGIN INPUT */}
 
-            <TouchableOpacity
-              onPress={() => this.goNext('ForgotPassword')}
-              style={{paddingTop: 10}}>
-              <Text style={{color: 'white', fontSize: 16, fontWeight: '600'}}>
-                {' '}
-                FORGOT PASSWORD?{' '}
-              </Text>
-            </TouchableOpacity>
-          </Animated.View>
-          {/* END LOGIN FORM */}
-
-          {/* START SIGNUP FORM */}
-          <Animated.View
-            scrollEventThrottle={2}
-            onScroll={Animated.event(
-              [{nativeEvent: {contentOffset: {y: this.state.scrollY}}}],
-              {useNativeDriver: false},
-            )}
-            style={[styles.scrollView, {marginTop: padSignup}]}
-            contentContainerStyle={{
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <View style={styles.bottom}>
               <TouchableOpacity
-                activeOpacity={0.8}
-                style={{
-                  marginTop: 20,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-                onPress={this.signup_animation}>
-                <View style={{textAlign: 'center', width: 500}}>
-                  <Text
-                    style={{color: 'white', fontSize: 14, textAlign: 'center'}}>
-                    NEW MEMBER?
-                  </Text>
-                  <Text
-                    style={{
-                      color: 'white',
-                      fontWeight: 'bold',
-                      fontSize: 36,
-                      textAlign: 'center',
-                    }}>
-                    SIGNUP
-                  </Text>
-                </View>
-              </TouchableOpacity>
-              <InputLogin
-                mode={1}
-                placeholder="Name"
-                placeholderTextColor="white"
-                onChangeText={(text) => this.setState({signup_name: text})}
-                onFocus={() => {
-                  if (!this.state.showSignup) {
-                    this.setState({showSignup: true});
-                    Animated.timing(this.state.scrollY, {
-                      toValue: HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
-                      duration: 300,
-                      easing: Easing.linear,
-                      useNativeDriver: false,
-                    }).start();
-                  }
-                }}
-              />
-              {/* START SIGNUP INPUT */}
+                onPress={() => this.goNext('ForgotPassword')}
+                style={{paddingTop: 10, marginTop: 20}}>
+                <Text
+                  style={{
+                    color: COLOR_GREY,
+                    fontSize: 16,
+                    lineHeight: 30,
+                    fontWeight: '500',
 
-              <InputLogin
-                mode={1}
-                placeholder="Email"
-                placeholderTextColor="white"
-                onChangeText={(text) => this.setState({signup_email: text})}
-              />
-              <InputLogin
-                mode={1}
-                placeholder="Password"
-                placeholderTextColor="white"
-                secureTextEntry={true}
-                onChangeText={(text) => this.setState({signup_password: text})}
-              />
-              <LinearGradient
-                colors={['#fff', '#000']}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                style={{
-                  ...styles.inputContainer2,
-                  height: 43,
-                  borderWidth: 0,
-                  paddingLeft: 2,
-                }}>
+                    textDecorationLine: 'underline',
+                    // textDecorationStyle
+                  }}>
+                  FORGOT PASSWORD?
+                </Text>
+              </TouchableOpacity>
+            </Animated.View>
+            {/* END LOGIN FORM */}
+
+            {/* START SIGNUP FORM */}
+            <Animated.View
+              scrollEventThrottle={2}
+              onScroll={Animated.event(
+                [{nativeEvent: {contentOffset: {y: this.state.scrollY}}}],
+                {useNativeDriver: false},
+              )}
+              style={[styles.scrollView, {marginTop: padSignup}]}
+              contentContainerStyle={{
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <View style={styles.bottom}>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  style={{
+                    marginTop: 0,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onPress={this.signup_animation}>
+                  <View style={{textAlign: 'center', width: 500}}>
+                    <Text
+                      style={{
+                        color: COLOR_GREY,
+                        fontSize: 14,
+                        textAlign: 'center',
+                        fontFamily: FontFamilyMedium,
+                      }}>
+                      NEW MEMBER?
+                    </Text>
+                    <Text
+                      style={{
+                        color: COLOR_GREY,
+                        fontSize: 18,
+                        textAlign: 'center',
+                        fontFamily: FontFamilyMedium,
+                      }}>
+                      SIGNUP
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <InputLogin
+                  mode={1}
+                  placeholder="Name"
+                  placeholderTextColor="white"
+                  onChangeText={(text) => this.setState({signup_name: text})}
+                  onFocus={() => {
+                    if (!this.state.showSignup) {
+                      this.setState({showSignup: true});
+                      Animated.timing(this.state.scrollY, {
+                        toValue: HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT,
+                        duration: 300,
+                        easing: Easing.linear,
+                        useNativeDriver: false,
+                      }).start();
+                    }
+                  }}
+                />
+                {/* START SIGNUP INPUT */}
+
+                <InputLogin
+                  mode={1}
+                  placeholder="Email"
+                  placeholderTextColor={COLOR_GREY}
+                  onChangeText={(text) => this.setState({signup_email: text})}
+                />
+                <InputLogin
+                  mode={1}
+                  placeholder="Password"
+                  placeholderTextColor={COLOR_GREY}
+                  secureTextEntry={true}
+                  onChangeText={(text) =>
+                    this.setState({signup_password: text})
+                  }
+                />
+                {/* <LinearGradient
+                  colors={['#fff', '#000']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 1}}
+                  style={{
+                    ...styles.inputContainer2,
+                    height: 43,
+                    borderWidth: 0,
+                    paddingLeft: 2,
+                  }}> */}
                 <TouchableOpacity
                   activeOpacity={0.8}
                   style={[
                     styles.inputContainer2,
                     {
-                      backgroundColor: 'black',
+                      backgroundColor: RED_BTN_COLOR,
                       justifyContent: 'center',
-                      marginTop: 0,
+                      marginTop: 20,
+                      shadowColor: 'red',
+                      shadowOffset: {
+                        width: 0,
+                        height: 8,
+                      },
+                      shadowOpacity: 0.46,
+                      shadowRadius: 11.14,
+                      elevation: 17,
+                      height: 45,
                     },
                   ]}
                   onPress={this.doSignup}>
@@ -339,22 +401,23 @@ class LoginScreen extends React.Component {
                   ) : (
                     <Text
                       style={{
-                        fontWeight: 'bold',
                         fontSize: 18,
-                        color: 'white',
+                        color: COLOR_GREY,
+                        fontFamily: FontFamilyMedium,
                       }}>
-                      Sign Up
+                      SIGN UP
                     </Text>
                   )}
                 </TouchableOpacity>
-              </LinearGradient>
+                {/* </LinearGradient> */}
 
-              {/* END SIGNUP INPUT */}
-            </View>
-          </Animated.View>
-          {/* END SIGNUP FORM */}
-        </View>
-        {/* </ImageBackground> */}
+                {/* END SIGNUP INPUT */}
+              </View>
+            </Animated.View>
+            {/* END SIGNUP FORM */}
+          </View>
+          {/* </ImageBackground> */}
+        </ImageBackground>
       </SafeAreaView>
     );
   }
@@ -520,7 +583,7 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.64,
     opacity: 1,
     borderRadius: 500,
-    borderColor: 'black',
+    borderColor: 'red',
     borderWidth: 1,
     height: 40,
     flexDirection: 'row',
