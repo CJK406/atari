@@ -23,6 +23,9 @@ import {updateBallance, setAllHistory} from '../Redux/Actions';
 import {InputPin, AwesomeAlert} from '../Components';
 let RESEND_TIME = 90;
 
+const fontFamily = 'BwModelicaSS01-Medium';
+const fontWhiteColor = '#D0D0D0';
+
 class SendConfirmScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -58,7 +61,11 @@ class SendConfirmScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.sendOTPCode();
+    if (__DEV__) {
+      console.log('salman');
+    } else {
+      this.sendOTPCode();
+    }
   }
 
   componentDidUpdate() {
@@ -243,6 +250,7 @@ class SendConfirmScreen extends React.Component {
 
     return (
       <KeyboardAwareScrollView
+        showsVerticalScrollIndicator={false}
         style={{backgroundColor: darkmode ? 'rgb(33,33,33)' : 'white'}}>
         <SafeAreaView
           style={{
@@ -254,61 +262,91 @@ class SendConfirmScreen extends React.Component {
           <View style={[CustomStyles.container, styles.innerContainer]}>
             <View
               style={{
-                height: 70,
+                height: 100,
+                // alignItems: 'spa',
                 alignItems: 'center',
-                justifyContent: 'center',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                padding: 10,
                 position: 'relative',
                 backgroundColor: darkmode ? 'black' : 'white',
                 width: '100%',
               }}>
               <TouchableOpacity
-                style={{position: 'absolute', left: 10}}
+                // style={{position: 'absolute', left: 10}}
                 onPress={this.goBack}>
                 <Ionicons
                   name="arrow-back-outline"
-                  size={20}
+                  size={24}
                   color={darkmode ? 'white' : 'black'}
                 />
               </TouchableOpacity>
               <Image source={Images.Logo} style={{width: 160, height: 50}} />
+              <View>
+                <View style={styles.redKeyImage}></View>
+                <Image
+                  resizeMode="contain"
+                  resizeMethod="auto"
+                  style={styles.keyImage}
+                  source={Images.white_key}
+                />
+              </View>
             </View>
-            <View style={{padding: 20}}>
-              <Text style={{fontSize: 25, color: darkmode ? 'white' : 'black'}}>
-                Confirm Payment
-              </Text>
-              <Text
-                style={{
-                  fontSize: 20,
-                  color: darkmode ? 'white' : 'black',
-                  marginTop: 20,
-                }}>
-                SUMMARY
-              </Text>
+
+            <View style={{backgroundColor: '#191919'}}>
+              <View style={{backgroundColor: '#1D1D1D', padding: 20}}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    lineHeight: 22,
+                    color: darkmode ? fontWhiteColor : 'black',
+                    textAlign: 'center',
+                    fontFamily: 'BwModelicaSS01-Bold',
+                  }}>
+                  Confirm Payment
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    color: darkmode ? fontWhiteColor : 'black',
+                    textAlign: 'center',
+                    fontFamily: 'BwModelicaSS01-Regular',
+                  }}>
+                  Summary
+                </Text>
+              </View>
               <View
                 style={{
                   flexDirection: 'row',
-                  marginTop: 20,
-                  borderBottomWidth: 2,
-                  borderBottomColor: darkmode ? '#333333' : 'gray',
-                  paddingBottom: 20,
+                  marginTop: -5,
+                  // borderBottomWidth: 2,
+                  backgroundColor: darkmode ? '#232323' : 'gray',
+                  // borderBottomColor: darkmode ? '#333333' : 'gray',
+                  // paddingBottom: 20,
                   justifyContent: 'space-between',
+                  borderTopLeftRadius: 15,
+                  borderTopRightRadius: 15,
+                  padding: 20,
+                  paddingTop: 30,
+                  paddingBottom: 30,
                 }}>
                 <Text
                   style={{
                     width: '50%',
-                    fontSize: 20,
+                    fontSize: 12,
                     letterSpacing: 1,
-                    color: darkmode ? 'white' : 'black',
+                    color: darkmode ? fontWhiteColor : 'black',
+                    fontFamily: 'BwModelica-Medium',
                   }}>
                   Sending to
                 </Text>
                 <View
                   style={{
                     flexDirection: 'row',
-                    borderRadius: 10,
+                    // borderRadius: 10,
                     padding: 2,
-                    paddingLeft: 10,
-                    backgroundColor: '#3a3a3a',
+                    paddingLeft: 5,
+                    // backgroundColor: '#3a3a3a',
                   }}>
                   <Image
                     source={Headers[info.currentTab]['Image']}
@@ -318,19 +356,21 @@ class SendConfirmScreen extends React.Component {
                       justifyContent: 'center',
                       alignSelf: 'center',
                       alignItems: 'center',
-                      maxWidth: '50%',
+                      maxWidth: '60%',
                     }}
                   />
                   <View
                     style={{
                       flexDirection: 'row',
-                      paddingLeft: 10,
-                      paddingRight: 20,
+                      paddingLeft: 5,
+                      paddingRight: 10,
                     }}>
-                    <Text style={{color: 'white', width: 60}} numberOfLines={1}>
+                    <Text
+                      style={{color: fontWhiteColor, width: 100}}
+                      numberOfLines={1}>
                       {leftText}
                     </Text>
-                    <Text style={{color: 'white'}} numberOfLines={1}>
+                    <Text style={{color: fontWhiteColor}} numberOfLines={1}>
                       {rightText}
                     </Text>
                   </View>
@@ -349,25 +389,33 @@ class SendConfirmScreen extends React.Component {
 
               <View
                 style={{
-                  marginTop: 20,
-                  borderBottomWidth: 2,
-                  borderBottomColor: darkmode ? '#333333' : 'gray',
-                  paddingBottom: 20,
+                  marginTop: -15,
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  // borderBottomWidth: 2,
+                  paddingTop: 10,
+                  backgroundColor: darkmode ? '#121212' : 'gray',
+                  // borderBottomColor: darkmode ? '#121212' : 'gray',
                 }}>
-                <Text
-                  style={{
-                    marginBottom: 20,
-                    fontSize: 20,
-                    letterSpacing: 1,
-                    color: darkmode ? 'white' : 'black',
-                  }}>
-                  Enter your pincode*
-                </Text>
+                <View style={styles.enterContainer}>
+                  <Text
+                    style={{
+                      marginBottom: 10,
+                      fontSize: 12,
+                      letterSpacing: 2,
+                      color: darkmode ? fontWhiteColor : 'black',
+                      fontFamily: 'BwModelicaSS01-Medium',
+                    }}>
+                    Enter your pincode*
+                  </Text>
+                  <View style={styles.enterPinCodeLine}></View>
+                </View>
                 <View
                   style={{
                     flex: 1,
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    // justifyContent: 'center',
+                    marginBottom: 10,
                   }}>
                   <InputPin
                     value={this.state.codePin}
@@ -378,7 +426,7 @@ class SendConfirmScreen extends React.Component {
                     onTextChange={(code) => this.setState({codePin: code})}
                     textStyle={{
                       fontSize: 24,
-                      color: darkmode ? 'black' : 'white',
+                      color: darkmode ? 'black' : fontWhiteColor,
                     }}
                   />
                 </View>
@@ -386,21 +434,26 @@ class SendConfirmScreen extends React.Component {
 
               <View
                 style={{
-                  marginTop: 20,
-                  marginBottom: 20,
-                  borderBottomWidth: 2,
-                  borderBottomColor: darkmode ? '#333333' : 'gray',
-                  paddingBottom: 5,
+                  // marginTop: 20,
+                  // marginBottom: 20,
+                  // borderBottomWidth: 2,
+                  backgroundColor: darkmode ? '#121212' : 'gray',
+                  // borderBottomColor: darkmode ? '#333333' : 'gray',
+                  paddingBottom: 40,
                 }}>
-                <Text
-                  style={{
-                    marginBottom: 20,
-                    fontSize: 20,
-                    letterSpacing: 1,
-                    color: darkmode ? 'white' : 'black',
-                  }}>
-                  Enter OTP*
-                </Text>
+                <View style={styles.enterContainer}>
+                  <Text
+                    style={{
+                      marginBottom: 10,
+                      fontSize: 12,
+                      letterSpacing: 1,
+                      color: darkmode ? fontWhiteColor : 'black',
+                      fontFamily: 'BwModelicaSS01-Medium',
+                    }}>
+                    Enter OTP*
+                  </Text>
+                  <View style={styles.enterLine}></View>
+                </View>
                 <View
                   style={{
                     flex: 1,
@@ -425,7 +478,7 @@ class SendConfirmScreen extends React.Component {
                   disabled={this.state.timer !== 1}
                   onPress={this.sendOTPCode}
                   style={{
-                    width: '40%',
+                    width: '35%',
                     alignSelf: 'center',
                     marginBottom: 10,
                     marignTop: 20,
@@ -440,11 +493,11 @@ class SendConfirmScreen extends React.Component {
                   }}>
                   <Text
                     style={{
-                      fontSize: 18,
+                      fontSize: 14,
                       color: this.state.timer === 1 ? 'white' : '#696969',
                       textAlign: 'center',
                       justifyContent: 'center',
-                      fontWeight: 'bold',
+                      fontFamily: fontFamily,
                     }}>
                     {this.state.isShowOtpProgress ? (
                       <ActivityIndicator color="white" size="small" />
@@ -455,29 +508,50 @@ class SendConfirmScreen extends React.Component {
                 </TouchableOpacity>
 
                 {this.state.timer === 1 ? null : (
-                  <Text style={styles.resendText}>
-                    Resend code in {this.secondsToHms(this.state.timer)}
-                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        color: 'gray',
+                        fontSize: 14,
+                        marginRight: 5,
+                        fontFamily: fontFamily,
+                      }}>
+                      Dont receive?
+                    </Text>
+                    <Text style={styles.resendText}>
+                      Resend code in {this.secondsToHms(this.state.timer)}
+                    </Text>
+                  </View>
                 )}
               </View>
 
               <View
                 style={{
                   flexDirection: 'row',
-                  marginTop: 20,
+                  marginTop: -10,
                   marginBottom: 30,
-                  borderBottomWidth: 2,
-                  borderBottomColor: darkmode ? '#333333' : 'gray',
+                  paddingLeft: 40,
+                  paddingRight: 40,
                   paddingBottom: 20,
+                  borderTopLeftRadius: 15,
+                  borderTopRightRadius: 15,
+                  paddingTop: 30,
+                  backgroundColor: darkmode ? '#191919' : 'gray',
                 }}>
                 <Text
                   style={{
                     width: '50%',
-                    fontSize: 20,
+                    fontSize: 12,
                     letterSpacing: 1,
-                    color: darkmode ? 'white' : 'black',
+                    color: darkmode ? fontWhiteColor : 'black',
+                    fontFamily: 'BwModelicaSS01-Medium',
                   }}>
-                  TOTAL AMOUNT
+                  Total amount
                 </Text>
                 <View
                   style={{
@@ -485,19 +559,27 @@ class SendConfirmScreen extends React.Component {
                     textAlign: 'right',
                     justifyContent: 'flex-end',
                     alignSelf: 'flex-end',
-                    alignItems: 'flex-end',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    backgroundColor: darkmode ? '#191919' : 'gray',
                   }}>
                   <Text
                     style={{
-                      fontSize: 20,
+                      fontSize: 14,
                       fontWeight: '700',
-                      marginBottom: 5,
-                      color: darkmode ? 'white' : 'black',
+                      // marginBottom: 5,
+                      color: darkmode ? fontWhiteColor : 'black',
+                      fontFamily: fontFamily,
                     }}>
                     {info.send_amount} {Headers[info.currentTab]['text']}
                   </Text>
                   <Text
-                    style={{fontSize: 17, color: darkmode ? 'white' : 'black'}}>
+                    style={{
+                      fontSize: 12,
+                      color: darkmode ? fontWhiteColor : 'black',
+                      marginLeft: 5,
+                      fontFamily: fontFamily,
+                    }}>
                     {info.send_usd_amount} USD
                   </Text>
                 </View>
@@ -511,9 +593,9 @@ class SendConfirmScreen extends React.Component {
                   marignTop: 20,
                   textAlign: 'center',
                   justifyContent: 'center',
-                  padding: 20,
+                  padding: 10,
                   alignSelf: 'center',
-                  borderRadius: 10,
+                  borderRadius: 60,
                   textAlign: 'center',
                   justifyContent: 'center',
                 }}>
@@ -522,11 +604,12 @@ class SendConfirmScreen extends React.Component {
                 ) : (
                   <Text
                     style={{
-                      fontSize: 18,
-                      color: 'white',
+                      fontSize: 16,
+                      color: fontWhiteColor,
                       textAlign: 'center',
                       justifyContent: 'center',
-                      fontWeight: 'bold',
+                      fontFamily: fontFamily,
+                      letterSpacing: 1,
                     }}>
                     SEND
                   </Text>
@@ -575,6 +658,44 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 14,
+    fontFamily: fontFamily,
+  },
+  keyImage: {
+    height: 30,
+    width: 30,
+    marginTop: -10,
+  },
+  redKeyImage: {
+    position: 'absolute',
+    top: '-42%',
+    right: '44.5%',
+    height: 30,
+    width: 3,
+    backgroundColor: 'red',
+    zIndex: 2,
+  },
+  enterContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: '10%',
+    paddingRight: 100,
+    width: '100%',
+    paddingTop: 20,
+  },
+  enterLine: {
+    height: 1.2,
+    backgroundColor: fontWhiteColor,
+    width: '90%',
+    marginTop: -5,
+    marginLeft: 10,
+  },
+  enterPinCodeLine: {
+    height: 1.2,
+    backgroundColor: fontWhiteColor,
+    width: '60.5%',
+    marginTop: -5,
+    marginLeft: 10,
+    flexShrink: 0,
   },
 });
 

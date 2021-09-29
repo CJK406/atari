@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -16,17 +18,21 @@ const styles = StyleSheet.create({
   cellDefault: {
     borderColor: 'gray',
     borderWidth: 1,
+    fontFamily: 'BwModelicaSS01-Bold',
   },
   cellFocusedDefault: {
     borderColor: 'black',
     borderWidth: 2,
+    fontFamily: 'BwModelicaSS01-Bold',
   },
   textStyleDefault: {
     color: 'gray',
     fontSize: 24,
+    fontFamily: 'BwModelicaSS01-Bold',
   },
   textStyleFocusedDefault: {
     color: 'black',
+    fontFamily: 'BwModelicaSS01-Bold',
   },
 });
 
@@ -196,11 +202,12 @@ class InputPin extends Component {
                   {
                     width: cellSize,
                     height: cellSize,
-                    marginLeft: cellSpacing / 2,
-                    marginRight: cellSpacing / 2,
+                    marginLeft: cellSpacing / 1,
+                    marginRight: cellSpacing / 1,
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    borderRadius: 4,
                   },
                   cellStyle,
                   cellFocused ? cellStyleFocused : {},
@@ -215,8 +222,11 @@ class InputPin extends Component {
                 duration={500}>
                 {isCellText && !maskComponent && (
                   <Text
-                    style={[textStyle, cellFocused ? textStyleFocused : {}]}>
-                    {cellText}
+                    style={
+                      ([textStyle, cellFocused ? textStyleFocused : {}],
+                      [{fontFamily: 'BwModelicaSS01-Bold', fontSize: 18}])
+                    }>
+                    {cellText ? cellText : '-'}
                   </Text>
                 )}
 
@@ -238,12 +248,14 @@ class InputPin extends Component {
           autoFocus={autoFocus}
           keyboardType={keyboardType}
           numberOfLines={1}
+          placeholder="-"
           caretHidden
           maxLength={codeLength}
           selection={{
             start: value.length,
             end: value.length,
           }}
+          placeholderTextColor="black"
           style={{
             flex: 1,
             opacity: 0,
@@ -259,7 +271,7 @@ class InputPin extends Component {
   }
 
   static defaultProps = {
-    value: '',
+    value: '-',
     codeLength: 4,
     cellSize: 48,
     cellSpacing: 4,

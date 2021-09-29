@@ -1,10 +1,12 @@
 /* eslint-disable */
 
+import atariLogs from '../Utils/AtariLogs';
 import {getAPI, postAPI} from './base';
 
 export async function login(data) {
   const response = await postAPI('login', data);
   if (response && response.token) {
+    atariLogs.debugLog('login result', response);
     const {user, token, pricePerToken} = response;
     if (pricePerToken?.statusCode === 429) {
       pricePerToken.atariPrice = 0;
@@ -101,7 +103,7 @@ export async function userprofile() {
       ftm: 0,
       bnb: pricePerToken.bnbPrice,
     };
-    return {...response.body, price, balance};
+    return {...response, price, balance};
   }
 
   return response.body;

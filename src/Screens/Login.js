@@ -140,7 +140,6 @@ class LoginScreen extends React.Component {
     return (
       // <View style={{alignItems: 'center', flex: 1,minHeight:windowHeight}}>
       <SafeAreaView style={{alignItems: 'center', flex: 1}}>
-        {console.log('env', API_TOKEN)}
         {/* <ImageBackground style={{alignItems: 'center', flex: 1}} resizeMode="cover" source={Images.login_background}> */}
         <View style={{flex: 1, alignItems: 'center', minHeight: windowHeight}}>
           <Image
