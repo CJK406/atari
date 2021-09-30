@@ -4,7 +4,7 @@ import React from 'react';
 import {View, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './style';
-import {COLOR_GREY} from '../../Utils/AppContants';
+import {COLOR_GREY, FontFamilyMedium} from '../../Utils/AppContants';
 
 class InputLogin extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class InputLogin extends React.Component {
         <View style={{width: '90%'}}>
           <TextInput
             ref={this.props.inputReff}
-            style={styles.input}
+            style={[styles.input, {fontFamily: FontFamilyMedium}]}
             placeholderTextColor={COLOR_GREY}
             {...this.props}
           />

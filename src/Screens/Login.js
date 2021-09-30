@@ -192,7 +192,7 @@ class LoginScreen extends React.Component {
               {/* START LOGIN INPUT */}
               <InputLogin
                 placeholder="Email"
-                returnKeyType="next"
+                returnKeyType="email"
                 onChangeText={(text) => this.setState({login_email: text})}
                 onSubmitEditing={() => {
                   this.passInput.focus();
@@ -377,14 +377,14 @@ class LoginScreen extends React.Component {
                     paddingLeft: 2,
                   }}> */}
                 <TouchableOpacity
-                  activeOpacity={0.8}
+                  // activeOpacity={0.8}
                   style={[
                     styles.inputContainer2,
                     {
                       backgroundColor: RED_BTN_COLOR,
                       justifyContent: 'center',
                       marginTop: 20,
-                      shadowColor: 'red',
+                      shadowColor: RED_BTN_COLOR,
                       shadowOffset: {
                         width: 0,
                         height: 8,
