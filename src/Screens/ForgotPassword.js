@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import * as React from 'react';
 import {
   SafeAreaView,
@@ -8,6 +10,7 @@ import {
   View,
   TextInput,
   ActivityIndicator,
+  ImageBackground,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
@@ -16,6 +19,7 @@ import {CustomStyles} from '../Constant';
 import Toast from 'react-native-simple-toast';
 import {forgetPassword} from '../Api';
 import {update_verifyToken} from '../Redux/Actions';
+import {COLOR_GREY, FontFamilyMedium} from '../Utils/AppContants';
 
 class ForgotPasswordScreen extends React.Component {
   state = {
@@ -34,81 +38,105 @@ class ForgotPasswordScreen extends React.Component {
     return (
       <SafeAreaView
         style={{...CustomStyles.container, backgroundColor: 'rgb(33,33,33)'}}>
-        <View style={[CustomStyles.container, CustomStyles.innerContainer]}>
-          <Image source={Images.Forget_icon} style={{marginLeft: '35%'}} />
-          <Text
-            style={{
-              fontSize: 45,
-              lineHeight: 55,
-              textAlign: 'center',
-              fontWeight: 'bold',
-              color: 'white',
-              marginBottom: 35,
-            }}>
-            Forget Password
-          </Text>
-          <Text style={{...styles.customWriting}}>
-            We just need your registered email to send you password reset
-            instructions
-          </Text>
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <TextInput
-              value={email}
+        <ImageBackground
+          source={Images.login_background_new}
+          style={[CustomStyles.container, CustomStyles.innerContainer]}>
+          <View style={{backgroundColor: 'rgba(30, 3, 4, 0.8)', padding: 20}}>
+            <View style={styles.lock_container}>
+              <Image style={styles.lock_image} source={Images.white_lock} />
+            </View>
+            <Text
               style={{
-                ...CustomStyles.textInput,
-                marginBottom: 20,
-                color: 'white',
-              }}
-              onChangeText={(text) => this.setState({email: text})}
-              autoCompleteType="email"
-              keyboardType="email-address"
-              placeholder="Email"
-              placeholderTextColor="rgba(255,255,255,0.3)"
-            />
-            <TouchableOpacity
-              onPress={this.goNext}
-              style={{
-                backgroundColor: 'rgb(227,30,45)',
-                width: '100%',
-                padding: 20,
-                borderRadius: 10,
+                fontSize: 20,
+                lineHeight: 28,
                 textAlign: 'center',
-                justifyContent: 'center',
-                shadowColor: '#000',
-                shadowOffset: {width: 0, height: 10},
-                shadowOpacity: 0.8,
-                shadowRadius: 2,
+                color: 'white',
+                marginBottom: 35,
+                fontFamily: FontFamilyMedium,
               }}>
-              {this.state.button_loading ? (
-                <ActivityIndicator size="large" color="white" />
-              ) : (
+              FORGET PASSWORD
+            </Text>
+            <View style={styles.descContainer}>
+              <Text style={{...styles.customWriting}}>
+                We just need your registered email to send you password reset
+                instructions
+              </Text>
+            </View>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <View style={{...CustomStyles.forgetPasswordInputContainer}}>
+                <TextInput
+                  value={email}
+                  style={{
+                    ...CustomStyles.textInput,
+                    color: 'white',
+                    borderRadius: 500,
+                    width: '100%',
+                  }}
+                  onChangeText={(text) => this.setState({email: text})}
+                  autoCompleteType="email"
+                  keyboardType="email-address"
+                  placeholder="Email"
+                  placeholderTextColor="rgba(255,255,255,0.3)"
+                />
+              </View>
+              <TouchableOpacity
+                onPress={this.goNext}
+                style={{
+                  backgroundColor: 'rgb(227,30,45)',
+                  // width: '%',
+                  padding: 10,
+                  paddingLeft: 20,
+                  paddingRight: 20,
+                  borderRadius: 500,
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                  shadowColor: '#000',
+                  shadowOffset: {width: 0, height: 10},
+                  shadowOpacity: 0.8,
+                  shadowRadius: 2,
+                }}>
+                {this.state.button_loading ? (
+                  <ActivityIndicator size="large" color="white" />
+                ) : (
+                  <Text
+                    style={{
+                      fontWeight: 'bold',
+                      fontSize: 18,
+                      color: 'white',
+                      textAlign: 'center',
+                    }}>
+                    SEND EMAIL
+                  </Text>
+                )}
+
+                {/* <Text style={{fontSize: 18,color:'white',textAlign:'center',justifyContent:'center',fontWeight:'bold'}}>SEND EMAIL</Text> */}
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={this.goBack}
+                style={{
+                  marginTop: 60,
+                  borderRadius: 10,
+
+                  ...CustomStyles.buttonStyle,
+                  ...CustomStyles.smallBtn,
+                  ...CustomStyles.longBtn,
+                  backgroundColor: thirdcolor,
+                }}>
                 <Text
                   style={{
-                    fontWeight: 'bold',
-                    fontSize: 18,
-                    color: 'white',
-                    textAlign: 'center',
+                    fontSize: 12,
+                    color: COLOR_GREY,
+                    lineHeight: 33,
+                    letterSpacing: 1,
+                    textDecorationLine: 'underline',
+                    fontFamily: FontFamilyMedium,
                   }}>
-                  SEND EMAIL
+                  BACK TO LOGIN
                 </Text>
-              )}
-
-              {/* <Text style={{fontSize: 18,color:'white',textAlign:'center',justifyContent:'center',fontWeight:'bold'}}>SEND EMAIL</Text> */}
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.goBack}
-              style={{
-                marginTop: 20,
-                borderRadius: 10,
-                ...CustomStyles.buttonStyle,
-                ...CustomStyles.smallBtn,
-                ...CustomStyles.longBtn,
-                backgroundColor: thirdcolor,
-              }}>
-              <Text style={{fontSize: 18, color: 'white'}}>BACK TO LOGIN</Text>
-            </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </ImageBackground>
       </SafeAreaView>
     );
   }
@@ -156,10 +184,26 @@ class ForgotPasswordScreen extends React.Component {
 }
 const styles = StyleSheet.create({
   customWriting: {
-    fontSize: 18,
-    color: '#7882A2',
+    fontSize: 13,
+    color: COLOR_GREY,
     textAlign: 'center',
     marginBottom: 40,
+  },
+  lock_container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  lock_image: {
+    height: 60,
+    width: 60,
+    resizeMode: 'contain',
+  },
+
+  descContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 function mapStateToProps(state) {

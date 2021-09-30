@@ -31,5 +31,6 @@ export const Images = {
   login_background_new: require('./backgroundimage.png'),
   dashboard_background: require('./ATARI_WALLET.png'),
   btnbackground: require('./btnbackground.png'),
+  white_lock: require('./whitelock.png'),
   white_key: require('./whitekey.png'),
 };
