@@ -4,7 +4,7 @@ import atariLogs from '../Utils/AtariLogs';
 import {getAPI, postAPI} from './base';
 
 export async function login(data) {
-  const response = await postAPI('login', data);
+  const response = await postAPI('user/login', data);
   if (response && response.token) {
     atariLogs.debugLog('login result', response);
     const {user, token, pricePerToken} = response;
@@ -57,7 +57,7 @@ export async function login(data) {
 }
 
 export async function userprofile() {
-  const response = await getAPI('userprofile');
+  const response = await postAPI('user/profile');
   if (response && response.body) {
     const {user, pricePerToken} = response.body;
     if (pricePerToken?.statusCode === 429) {
@@ -110,16 +110,16 @@ export async function userprofile() {
 }
 
 export async function signup(data) {
-  return await postAPI('register', data);
+  return await postAPI('user/register', data);
 }
 export async function setPincode(data) {
-  return await postAPI('setPinCode', data);
+  return await postAPI('user/setPinCode', data);
 }
 
 export async function forgetPassword(data) {
-  return await postAPI('forgot-password', data);
+  return await postAPI('user/forgot-password', data);
 }
 
 export async function resetPassword(data) {
-  return await postAPI('reset-password', data);
+  return await postAPI('user/reset-password', data);
 }
