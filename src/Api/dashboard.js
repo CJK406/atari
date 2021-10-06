@@ -44,7 +44,7 @@ export async function sendOTP() {
   return await getAPI('transaction/sendOTPTransaction');
 }
 export async function reset_pin() {
-  return await getAPI('user/forgotpincode');
+  return await postAPI('user/forgotpincode');
 }
 
 export async function getBalance() {

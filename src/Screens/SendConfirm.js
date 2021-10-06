@@ -148,13 +148,15 @@ class SendConfirmScreen extends React.Component {
           'Please enter otp code',
         );
         return;
-      } else if (input_pincode !== user_pincode) {
-        this.awesomeAlert.showAlert(
-          'error',
-          'Failed!',
-          'Pincode is not correct',
-        );
-      } else {
+      }
+      // else if (input_pincode !== user_pincode) {
+      //   this.awesomeAlert.showAlert(
+      //     'error',
+      //     'Failed!',
+      //     'Pincode is not correct',
+      //   );
+      // }
+      else {
         this.setState({
           isLoading: true,
         });

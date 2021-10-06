@@ -50,7 +50,7 @@ const Menus = [
   },
   {name: 'Logout', page: '', icon: 'log-out-outline', description: ''},
   {
-    name: 'Version 2.07.03',
+    name: 'Version 2.08.01',
     page: '',
     icon: 'information-circle-outline',
     description: '',

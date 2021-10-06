@@ -1,7 +1,10 @@
 /* eslint-disable */
 import axios from 'axios';
 import atariLogs from '../Utils/AtariLogs';
+import {authLogout} from '../Redux/Actions/Auth';
 import EncryptionUtils from '../Utils/EncryptionUtils';
+
+import crashlytics from '@react-native-firebase/crashlytics';
 
 var CryptoJS = require('crypto-js');
 
@@ -38,9 +41,21 @@ export async function getAPI(url) {
     let result = await axios.get(`${API_URL}/${url}`, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
-
+    // Todo
+    crashlytics().log(result);
     return result;
   } catch (error) {
+    // Todo
+    let errorMessage = {
+      url: url,
+      headers: getHeader(),
+    };
+
+    crashlytics().recordError(
+      error,
+      'Error Reason: ' + JSON.stringify(errorMessage),
+    );
+    crashlytics().log(errorMsg);
     if (error.response) {
       return error.response.data;
     }
@@ -55,6 +70,7 @@ export async function getGraphAPI(url) {
     return result;
   } catch (error) {
     if (error.response) {
+      // console.log('errpor0', error);
       return error.response.data;
     }
     throw error;
@@ -66,8 +82,21 @@ export async function postAPI(url, data) {
     let result = await axios.post(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
+    crashlytics().log(result);
     return result;
   } catch (error) {
+    // Todo
+    let errorMessage = {
+      url: url,
+      headers: getHeader(),
+      params: JSON.stringify(data),
+    };
+    // let errorMessage = 'URL: ' + url + 'token: ' + token + 'Params: ' + JSON.stringify(data);
+    // console.log('errorrr', errorMessage);
+    let errorMsg = 'Error Reason: ' + JSON.stringify(errorMessage);
+    atariLogs.debugLog('errorMsg', errorMsg);
+    crashlytics().recordError(error, 'API ERROR');
+    crashlytics().log(errorMsg);
     if (error.response) {
       return error.response.data;
     }

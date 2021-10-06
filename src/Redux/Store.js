@@ -1,6 +1,6 @@
-import { createStore, applyMiddleware } from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { persistStore, persistReducer } from 'redux-persist';
+import {persistStore, persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import rootReducer from './Reducers';
@@ -9,7 +9,7 @@ import sagas from './Sagas';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['search']
+  blacklist: ['search'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -20,7 +20,7 @@ export default function configureStore(initialState = {}) {
   const store = createStore(
     persistedReducer,
     initialState,
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(sagaMiddleware),
   );
 
   // Extensions
@@ -30,5 +30,5 @@ export default function configureStore(initialState = {}) {
 
   let persistor = persistStore(store);
 
-  return { store, persistor };
+  return {store, persistor};
 }

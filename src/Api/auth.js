@@ -1,12 +1,12 @@
 /* eslint-disable */
 
 import atariLogs from '../Utils/AtariLogs';
-import {getAPI, postAPI} from './base';
+import {getAPI, postAPI, putAPI} from './base';
 
 export async function login(data) {
+  atariLogs.debugLog('data', data);
   const response = await postAPI('user/login', data);
   if (response && response.token) {
-    atariLogs.debugLog('login result', response);
     const {user, token, pricePerToken} = response;
     if (pricePerToken?.statusCode === 429) {
       pricePerToken.atariPrice = 0;
@@ -117,9 +117,9 @@ export async function setPincode(data) {
 }
 
 export async function forgetPassword(data) {
-  return await postAPI('user/forgot-password', data);
+  return await putAPI('user/forgot-password', data);
 }
 
 export async function resetPassword(data) {
-  return await postAPI('user/reset-password', data);
+  return await putAPI('user/reset-password', data);
 }

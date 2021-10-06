@@ -404,8 +404,11 @@ class LoginScreen extends React.Component {
     if (
       !login_email
         .toLowerCase()
+        // .match(
+        //   /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
+        // )
         .match(
-          /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
+          /^\s*(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))\s*$/,
         )
     ) {
       Toast.show('Invalid Email Format');
@@ -414,8 +417,8 @@ class LoginScreen extends React.Component {
     try {
       this.setState({login_loading: true});
       let response = await loginApi({
-        email: login_email,
-        password: login_password,
+        email: login_email.trim(),
+        password: login_password.trim(),
       });
       this.setState({login_loading: false});
       if (response && response.balance) {
@@ -448,6 +451,7 @@ class LoginScreen extends React.Component {
     }
     if (
       !signup_email
+        .trim()
         .toLowerCase()
         .match(
           /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
@@ -459,7 +463,7 @@ class LoginScreen extends React.Component {
     try {
       this.setState({signup_loading: true});
       let signup_data = {};
-      signup_data.email = signup_email;
+      signup_data.email = signup_email.trim();
       signup_data.password = signup_password;
       signup_data.name = signup_name;
       const signup_response = await signupApi(signup_data);

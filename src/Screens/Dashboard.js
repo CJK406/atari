@@ -28,6 +28,7 @@ import {
   updateStartScreenState,
   updateMenuStatus,
   getAppConfig,
+  authLogout,
 } from '../Redux/Actions';
 import PTRView from 'react-native-pull-to-refresh';
 // import PTRView from '../Components/PullToRefreshCustom';
@@ -91,6 +92,9 @@ class DashboardScreen extends React.Component {
           setTimeout(() => {
             if (this.state !== null) {
               this.state.isLoading = false;
+              this.setState({
+                isLoading: false,
+              });
             }
           }, 2000);
           this.setState({history_finish: true});
@@ -114,6 +118,7 @@ class DashboardScreen extends React.Component {
   check() {
     if (isInternetConnected() === true) {
       this.resetError();
+      this.state.isLoading = false;
       this.setState({
         isLoading: true,
       });
@@ -125,6 +130,7 @@ class DashboardScreen extends React.Component {
   }
 
   componentDidMount() {
+    console.log('this.props', this.props);
     if (isInternetConnected() === true) {
       this.setView();
       if (this.props.pincode !== null) {
@@ -601,4 +607,5 @@ export default connect(mapStateToProps, {
   updateStartScreenState,
   updateMenuStatus,
   getAppConfig,
+  authLogout,
 })(withTheme(DashboardScreen));

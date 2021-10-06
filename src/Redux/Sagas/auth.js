@@ -19,6 +19,7 @@ import {
   INTERNAL_ERROR_CODE,
   APP_CONFIG_SUCCESS,
   GET_APP_CONFIG_DATA,
+  AUTH_LOGOUT,
 } from '../type';
 import {takeLatest, put, select, call} from 'redux-saga/effects';
 
@@ -74,6 +75,10 @@ export function* watchSetToken() {
 
 function* getAllAddress(payload) {
   const result = yield get_receive_address();
+  
+  if (result.code === 401) {
+    return yield put({type: AUTH_LOGOUT, data: {}});
+  }
 
   let result1 = {
     atri: result?.body?.address,
@@ -116,6 +121,9 @@ export function* watchgetAllHistory() {
 
 function* getAllHistory(payload) {
   const result = yield get_allHistory();
+  if (result.code == 401) {
+    return yield put({type: AUTH_LOGOUT, data: {}});
+  }
   if (result.code == 200) {
     yield put({type: AUTH_SET_ALL_HISTORY_SUCCESS, data: result});
   } else {
@@ -139,7 +147,9 @@ function* updateBallance() {
 
   yield put({type: AUTH_SET_PRICE, data: login_api_result.price});
   const update_result = yield getBalance();
-
+  if (update_result.code == 401) {
+    return yield put({type: AUTH_LOGOUT, data: {}});
+  }
   if (update_result.code === 200) {
     yield put({type: AUTH_UPDATE_BALLANCE_SUCCESS, data: update_result});
     const formData = new FormData();
@@ -167,6 +177,9 @@ export function* watchUpdateBallance() {
 
 function* getAppConfig() {
   const result = yield appConfig();
+  if (result.code === 401) {
+    return yield put({type: AUTH_LOGOUT, data: {}});
+  }
   if (result.code == 200) {
     yield put({
       type: APP_CONFIG_SUCCESS,
