@@ -39,7 +39,6 @@ import appUtils from '../Utils/AppUtils';
 import UpdateVersionModal from '../Components/UpdateVersionModal';
 import appNavigation from '../Utils/AppNavigation';
 import atariLogs from '../Utils/AtariLogs';
-import {SALT_MIX_KEY, IV_KEY} from '@env';
 const {height} = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
 let backPressed = 0;
@@ -68,12 +67,16 @@ class DashboardScreen extends React.Component {
       this.state?.history != nextState.history ||
       this.state?.darkmode != nextState.darkmode ||
       this.state?.history_finish != nextState.history_finish ||
-      this.state.modalVisible != nextState.modalVisible
+      this.state.modalVisible != nextState.modalVisible ||
+      this.state.isLoading != nextState.isLoading
     );
   }
 
   setView() {
-    this.state.isLoading = true;
+    // this.state.isLoading = true;
+    this.setState({
+      isLoading: true,
+    });
     InteractionManager.runAfterInteractions(() => {
       this.props.updateMenuStatus(true);
       if (this.props.pincode === null) {
@@ -91,7 +94,7 @@ class DashboardScreen extends React.Component {
         } else {
           setTimeout(() => {
             if (this.state !== null) {
-              this.state.isLoading = false;
+              // this.state.isLoading = false;
               this.setState({
                 isLoading: false,
               });
@@ -118,14 +121,14 @@ class DashboardScreen extends React.Component {
   check() {
     if (isInternetConnected() === true) {
       this.resetError();
-      this.state.isLoading = false;
+      // this.state.isLoading = false;
       this.setState({
-        isLoading: true,
+        isLoading: false,
       });
       this.setView();
-      this.forceUpdate();
+      // this.forceUpdate();
     } else {
-      this.forceUpdate();
+      // this.forceUpdate();
     }
   }
 

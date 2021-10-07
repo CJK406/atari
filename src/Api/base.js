@@ -41,8 +41,6 @@ export async function getAPI(url) {
     let result = await axios.get(`${API_URL}/${url}`, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
-    // Todo
-    crashlytics().log(result);
     return result;
   } catch (error) {
     // Todo
@@ -82,7 +80,6 @@ export async function postAPI(url, data) {
     let result = await axios.post(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
-    crashlytics().log(result);
     return result;
   } catch (error) {
     // Todo
