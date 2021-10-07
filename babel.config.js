@@ -7,7 +7,7 @@ module.exports = {
         moduleName: '@env',
         path: '.env',
         blocklist: null,
-        allowlist: ['API_URL', 'API_TOKEN', 'SALT_MIX_KEY', 'IV_KEY'],
+        allowlist: ['API_TOKEN', 'SALT_MIX_KEY', 'IV_KEY'],
         blacklist: null, // DEPRECATED
         whitelist: null, // DEPRECATED
         safe: false,
