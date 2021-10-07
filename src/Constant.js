@@ -2,6 +2,7 @@
 
 import {StyleSheet} from 'react-native';
 import {Images} from './Assets';
+import {COLOR_GREY} from './Utils/AppContants';
 export const CustomStyles = StyleSheet.create({
   container: {
     flex: 1,
@@ -17,23 +18,42 @@ export const CustomStyles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
     fontWeight: 'bold',
+    textDecorationLine: 'underline',
   },
   longBtn: {
     width: '100%',
+    textDecorationLine: 'underline',
   },
   smallBtn: {
     width: 186,
     height: 46,
+    textDecorationLine: 'underline',
   },
   textInput: {
-    height: 44,
+    // borderWidth: 1,
+    // // borderColor: '#7070701f',
+    // borderColor: COLOR_GREY,
+    // width: '80%',
+    // borderRadius: 500,
+    // padding: 10,
+    // paddingLeft: 40,
+    // // backgroundColor: '',
+    // paddingLeft: 16,
+    // color: '#7882A2',
+    // fontSize: 12,
+  },
+
+  forgetPasswordInputContainer: {
     borderWidth: 1,
-    borderColor: '#7070701f',
-    width: '100%',
-    backgroundColor: '#23262C',
-    paddingLeft: 16,
-    color: '#7882A2',
+    // borderColor: '#7070701f',
+    borderColor: COLOR_GREY,
+    width: '80%',
+    borderRadius: 500,
+    padding: 0,
+    // backgroundColor: '',
+    paddingLeft: 26,
     fontSize: 12,
+    marginBottom: 40,
   },
   topBanner: {
     position: 'absolute',

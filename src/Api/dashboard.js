@@ -3,10 +3,17 @@
 import {getAPI, postAPI, getGraphAPI} from './base';
 
 export async function currency_convert(currency, value) {
-  return await postAPI('currency-convert', {currency: currency, value: value});
+  return await postAPI('transaction/currency-convert', {
+    currency: currency,
+    value: value,
+  });
 }
+// export async function get_allHistory() {
+//   return await getAPI('getGroupedTransactionHistoryByUser');
+// }
+
 export async function get_allHistory() {
-  return await getAPI('getGroupedTransactionHistoryByUser');
+  return await getAPI('transaction/getGroupedTransactionHistoryByUser');
 }
 
 export async function get_History(currency) {
@@ -30,26 +37,33 @@ export async function get_percent(currency, period) {
   );
 }
 export async function get_receive_address() {
-  return await getAPI('get_receive_address');
+  return await getAPI('transaction/get_receive_address');
 }
 
 export async function sendAttari(data) {
-  return await postAPI('transferToken', data);
+  return await postAPI('transaction/transferToken', data);
 }
 
 export async function sendOTP() {
-  return await getAPI('sendOTPTransaction');
+  return await getAPI('transaction/sendOTPTransaction');
 }
+// export async function reset_pin() {
+//   return await getAPI('forgetPincode');
+// }
+
 export async function reset_pin() {
-  return await getAPI('forgetPincode');
+  return await getAPI('user/forgotpincode');
 }
 
 export async function getBalance() {
-  return await getAPI('getBalOff');
+  return await getAPI('transaction/getBalOff');
 }
 
 export async function exchange(currency, amount) {
-  return await postAPI('exchangeToAttari', {token: currency, amount: amount});
+  return await postAPI('transaction/exchangeToAttari', {
+    token: currency,
+    amount: amount,
+  });
 }
 
 export async function appConfig() {

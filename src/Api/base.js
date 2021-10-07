@@ -10,7 +10,7 @@ let store;
 // const API_URL="https://atari-backend.herokuapp.com/api/users";
 // const API_URL = 'https://www.vub.gla.mybluehost.me/api/users';
 // Todo
-const API_URL = 'https://acstgapi.atarichain.com/users';
+const API_URL = 'https://acstgapi.atarichain.com/api';
 // const API_URL = 'http://3.16.252.212:5000/users';
 // const API_URL="http://151.106.108.46/api/users";
 const ACTION_API_URL = 'https://panel.atarichain.com/api';
@@ -66,9 +66,11 @@ export async function postAPI(url, data) {
     let result = await axios.post(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
+    atariLogs.debugLog('succrsss', result);
     return result;
   } catch (error) {
     if (error.response) {
+      atariLogs.debugLog('error', error);
       return error.response.data;
     }
     throw error;
