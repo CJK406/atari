@@ -39,6 +39,7 @@ import UpdateVersionModal from '../Components/UpdateVersionModal';
 import appNavigation from '../Utils/AppNavigation';
 import atariLogs from '../Utils/AtariLogs';
 import {SALT_MIX_KEY, IV_KEY} from '@env';
+import {COLOR_GREY, FontFamilyMedium} from '../Utils/AppContants';
 const {height} = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
 let backPressed = 0;
@@ -57,7 +58,8 @@ class DashboardScreen extends React.Component {
     get_address: {atri: '', btc: '', eth: '', ltc: '', bch: '', flag: false},
     interval: null,
     triggerRefresh: false,
-    isLoading: true,
+    // To
+    isLoading: false,
     modalVisible: false,
   };
 
@@ -72,7 +74,7 @@ class DashboardScreen extends React.Component {
   }
 
   setView() {
-    this.state.isLoading = true;
+    this.state.isLoading = false;
     InteractionManager.runAfterInteractions(() => {
       this.props.updateMenuStatus(true);
       if (this.props.pincode === null) {
@@ -115,7 +117,7 @@ class DashboardScreen extends React.Component {
     if (isInternetConnected() === true) {
       this.resetError();
       this.setState({
-        isLoading: true,
+        isLoading: false,
       });
       this.setView();
       this.forceUpdate();
@@ -299,34 +301,76 @@ class DashboardScreen extends React.Component {
       <View style={[CustomStyles.container, styles.innerContainer]}>
         <Header darkmode={darkmode} />
         <View
-          style={{...CustomStyles.innerContainer, ...styles.balanceContainer}}>
-          <Text
-            style={{
-              fontSize: 17,
-              justifyContent: 'center',
-              alignItems: 'center',
-              alignSelf: 'center',
-              marginBottom: 100,
-              ...txtColor,
-            }}>
-            Total Balance{' '}
-          </Text>
-          <Text
-            style={{
-              fontSize: 16,
-              justifyContent: 'center',
-              alignItems: 'center',
-              alignSelf: 'center',
-              marginBottom: -140,
-              ...txtColor,
-            }}>
-            ${this.commafy(balance?.sum?.toFixed(2))}
-          </Text>
+          style={
+            darkmode
+              ? {...CustomStyles.innerContainer, ...styles.balanceContainer}
+              : {
+                  ...CustomStyles.innerContainer,
+                  ...styles.balanceContainerWhite,
+                }
+          }>
           <View style={{marginTop: 10}}>
-            <View style={{marginTop: 0}}>
+            <View style={{marginTop: 0, marginBottom: 10}}>
+              <Text
+                style={
+                  darkmode
+                    ? {
+                        fontSize: 14,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        marginBottom: 100,
+                        color: COLOR_GREY,
+                        fontFamily: FontFamilyMedium,
+                        position: 'absolute',
+                        top: '40%',
+                      }
+                    : {
+                        fontSize: 14,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        marginBottom: 100,
+                        color: COLOR_GREY,
+                        position: 'absolute',
+                        top: '40%',
+                        fontFamily: FontFamilyMedium,
+                      }
+                }>
+                Total Balance
+              </Text>
+              <Text
+                style={
+                  darkmode
+                    ? {
+                        fontSize: 20,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        top: '55%',
+                        transform: [{translateY: -7}],
+                        color: 'white',
+                        fontFamily: FontFamilyMedium,
+                        // left: '50%', // marginBottom: -140,
+                      }
+                    : {
+                        fontSize: 20,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        position: 'absolute',
+                        top: '55%',
+                        transform: [{translateY: -7}],
+                        color: 'black',
+                        fontFamily: FontFamilyMedium,
+                      }
+                }>
+                ${this.commafy(balance?.sum?.toFixed(2))}
+              </Text>
               {this.state.balance != null ? (
                 <PieChart
-                  style={{height: 180, marginTop: 30}}
+                  style={{height: 180, marginTop: 0}}
                   data={pieData}
                   innerRadius="95%"
                 />
@@ -334,9 +378,9 @@ class DashboardScreen extends React.Component {
                 <View
                   style={{
                     justifyContent: 'center',
-                    alignItems: 'center',
-                    alignSelf: 'center',
-                    marginTop: '40%',
+                    // alignItems: 'center',
+                    // alignSelf: 'center',
+                    // marginTop: '10%',
                   }}>
                   <ActivityIndicator
                     size="large"
@@ -352,7 +396,7 @@ class DashboardScreen extends React.Component {
                 flexDirection: 'row',
                 justifyContent: 'center',
               }}>
-              <View style={{flexDirection: 'column', marginRight: 16}}>
+              <View style={{flexDirection: 'column', marginTop: 15}}>
                 <BalanceList
                   darkmode={darkmode}
                   balance={this?.state?.balance?.atri?.toFixed(0)}
@@ -378,7 +422,12 @@ class DashboardScreen extends React.Component {
                 />
               </View>
 
-              <View style={{flexDirection: 'column', marginLeft: 16}}>
+              <View
+                style={{
+                  flexDirection: 'column',
+                  marginLeft: 16,
+                  marginTop: 15,
+                }}>
                 <BalanceList
                   darkmode={darkmode}
                   balance={this.state?.balance?.btc?.toFixed(8)}
@@ -461,7 +510,7 @@ class DashboardScreen extends React.Component {
                       width: '100%',
                       height: height,
                     }}
-                    source={Images.dashboard_background}
+                    source={Images.login_background_new}
                   />
                 )}
 
@@ -473,7 +522,6 @@ class DashboardScreen extends React.Component {
                   // keyExtractor={item => item?.id}
                   onRefresh={() => this.refresh()}
                 />
-                {/* </ImageBackground> */}
               </View>
             )}
           </View>
@@ -550,8 +598,26 @@ const styles = StyleSheet.create({
   balanceContainer: {
     flex: 1,
     paddingBottom: 20,
-    paddingLeft: 20,
+    // paddingLeft: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    margin: 10,
+    width: '90%',
+    backgroundColor: 'rgba(30, 3, 4, 0.8)',
   },
+  balanceContainerWhite: {
+    flex: 1,
+    paddingBottom: 20,
+    // paddingLeft: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    margin: 10,
+    width: '90%',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  },
+
   tryAgainContainer: {
     flex: 1,
     justifyContent: 'center',

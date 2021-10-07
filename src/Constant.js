@@ -12,6 +12,7 @@ export const CustomStyles = StyleSheet.create({
     justifyContent: 'center',
     padding: 15,
     position: 'relative',
+    marginBottom: 20,
   },
   buttonStyle: {
     alignItems: 'center',
@@ -73,6 +74,7 @@ export const CustomStyles = StyleSheet.create({
   },
   d_text: {
     color: 'white',
+    fontSize: 12,
   },
   w_text: {
     color: 'black',

@@ -192,7 +192,7 @@ class LoginScreen extends React.Component {
               {/* START LOGIN INPUT */}
               <InputLogin
                 placeholder="Email"
-                returnKeyType="email"
+                // returnKeyType="email"
                 onChangeText={(text) => this.setState({login_email: text})}
                 onSubmitEditing={() => {
                   this.passInput.focus();
@@ -202,7 +202,7 @@ class LoginScreen extends React.Component {
 
               <InputLogin
                 placeholder="Password"
-                returnKeyType="next"
+                // returnKeyType="next"
                 onSubmitEditing={() => {
                   this.passInput.focus();
                 }}

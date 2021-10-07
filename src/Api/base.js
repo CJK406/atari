@@ -66,11 +66,10 @@ export async function postAPI(url, data) {
     let result = await axios.post(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
-    atariLogs.debugLog('succrsss', result);
+    console.log('register', result);
     return result;
   } catch (error) {
     if (error.response) {
-      atariLogs.debugLog('error', error);
       return error.response.data;
     }
     throw error;
