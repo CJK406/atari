@@ -18,24 +18,38 @@ const ExchangeInput = (props) => {
             }}
             value={props.inputValue}
             placeholder="Type amount"
-            placeholderTextColor={'rgba(0,0,0,0.6)'}
-            style={styles.inputField}
+            placeholderTextColor={txColor}
+            style={props.darkmode ? styles.inputField : styles.inputFieldBlack}
             keyboardType={'numeric'}
           />
         ) : (
-          <Text style={styles.textField}>{props.inputValue}</Text>
+          <Text
+            style={props?.darkmode ? styles.textField : styles.textFieldBlack}>
+            {props.inputValue}
+          </Text>
         )}
-        <View style={styles.iconContainer}>
+        <View
+          style={
+            props.darkmode ? styles.iconContainer : styles.iconContainerBlack
+          }>
           <Image source={props.centerIcon} style={styles.centerIcon} />
         </View>
-        <Text style={styles.textField}>{props.usdInputValue}</Text>
+        <Text
+          style={props?.darkmode ? styles.textField : styles.textFieldBlack}>
+          {props.usdInputValue}
+        </Text>
         {/* <Text onChangeText={(e) => {props.onChangeUsdInput(e)}} value={props.usdInputValue} style={styles.textField} >{props.usdInputValue}</Text> */}
-        <View style={styles.iconContainer}>
+        <View
+          style={
+            props.darkmode
+              ? styles.iconContainerLast
+              : styles.iconContainerLastBlack
+          }>
           <Ionicons
             name="logo-usd"
             style={{marginTop: 7}}
             size={30}
-            color="black"
+            color={txColor}
           />
         </View>
       </View>

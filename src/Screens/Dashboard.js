@@ -39,7 +39,11 @@ import UpdateVersionModal from '../Components/UpdateVersionModal';
 import appNavigation from '../Utils/AppNavigation';
 import atariLogs from '../Utils/AtariLogs';
 import {SALT_MIX_KEY, IV_KEY} from '@env';
-import {COLOR_GREY, FontFamilyMedium} from '../Utils/AppContants';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  TRANSPARENT_COLOR,
+} from '../Utils/AppContants';
 const {height} = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
 let backPressed = 0;
@@ -604,7 +608,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     margin: 10,
     width: '90%',
-    backgroundColor: 'rgba(30, 3, 4, 0.8)',
+    backgroundColor: TRANSPARENT_COLOR,
   },
   balanceContainerWhite: {
     flex: 1,

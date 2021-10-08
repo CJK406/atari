@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
   ActivityIndicator,
+  ImageBackground,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
@@ -25,6 +26,7 @@ import Modal from 'react-native-modal';
 import {exchange as exchangeApi, exchangeActionApi} from '../Api';
 import {updateBallance} from '../Redux/Actions';
 import DeviceInfo from 'react-native-device-info';
+import {RED_BTN_COLOR, TRANSPARENT_COLOR} from '../Utils/AppContants';
 
 let ip_address = '';
 DeviceInfo.getIpAddress().then((ip) => {
@@ -255,7 +257,8 @@ class ExchangeScreen extends React.Component {
     const renderItem = ({item}) => (
       <View style={[CustomStyles.container, styles.innerContainer]}>
         <Header darkmode={darkmode} />
-        <View style={{padding: 20}}>
+        <View
+          style={{padding: 20, backgroundColor: TRANSPARENT_COLOR, margin: 10}}>
           <ExchangeDropdown
             items={exchage_from_data}
             darkmode={darkmode}
@@ -316,12 +319,22 @@ class ExchangeScreen extends React.Component {
 
           <TouchableOpacity
             style={{
-              backgroundColor: 'rgb(227,30,45)',
+              backgroundColor: RED_BTN_COLOR,
               marginTop: 20,
-              padding: 15,
-              borderRadius: 10,
+              padding: 7,
+              borderRadius: 100,
               textAlign: 'center',
               justifyContent: 'center',
+              width: '60%',
+
+              alignSelf: 'center',
+              shadowColor: 'red',
+              shadowOffset: {
+                width: 10,
+                height: 0,
+              },
+              shadowOpacity: 0.46,
+              shadowRadius: 1.14,
             }}
             onPress={this.exchange}>
             {this.state.loading ? (
@@ -343,8 +356,10 @@ class ExchangeScreen extends React.Component {
       </View>
     );
     return (
-      <SafeAreaView
-        style={{...CustomStyles.container, backgroundColor: themeBg}}>
+      <ImageBackground
+        resizeMode="cover"
+        source={Images.login_background_new}
+        style={{...CustomStyles.container}}>
         <FlatList
           data={[{id: 1}]}
           renderItem={renderItem}
@@ -401,7 +416,7 @@ class ExchangeScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </Modal>
-      </SafeAreaView>
+      </ImageBackground>
     );
   }
 }

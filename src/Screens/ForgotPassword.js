@@ -19,7 +19,11 @@ import {CustomStyles} from '../Constant';
 import Toast from 'react-native-simple-toast';
 import {forgetPassword} from '../Api';
 import {update_verifyToken} from '../Redux/Actions';
-import {COLOR_GREY, FontFamilyMedium} from '../Utils/AppContants';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  TRANSPARENT_COLOR,
+} from '../Utils/AppContants';
 
 class ForgotPasswordScreen extends React.Component {
   state = {
@@ -41,7 +45,7 @@ class ForgotPasswordScreen extends React.Component {
         <ImageBackground
           source={Images.login_background_new}
           style={[CustomStyles.container, CustomStyles.innerContainer]}>
-          <View style={{backgroundColor: 'rgba(30, 3, 4, 0.8)', padding: 20}}>
+          <View style={{backgroundColor: TRANSPARENT_COLOR, padding: 20}}>
             <View style={styles.lock_container}>
               <Image style={styles.lock_image} source={Images.white_lock} />
             </View>
