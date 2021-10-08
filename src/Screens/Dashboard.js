@@ -133,7 +133,6 @@ class DashboardScreen extends React.Component {
   }
 
   componentDidMount() {
-    console.log('this.props', this.props);
     if (isInternetConnected() === true) {
       this.setView();
       if (this.props.pincode !== null) {
@@ -414,6 +413,7 @@ class DashboardScreen extends React.Component {
             </View>
           </View>
         </View>
+        {atariLogs.debugLog('history result', history?.body?.arr)}
         <History
           label={'History'}
           data={history?.body?.arr}

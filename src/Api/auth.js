@@ -4,7 +4,6 @@ import atariLogs from '../Utils/AtariLogs';
 import {getAPI, postAPI, putAPI} from './base';
 
 export async function login(data) {
-  atariLogs.debugLog('data', data);
   const response = await postAPI('user/login', data);
   if (response && response.token) {
     const {user, token, pricePerToken} = response;

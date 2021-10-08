@@ -6,8 +6,6 @@ import EncryptionUtils from '../Utils/EncryptionUtils';
 
 import crashlytics from '@react-native-firebase/crashlytics';
 
-var CryptoJS = require('crypto-js');
-
 let store;
 
 // const API_URL="https://atari-backend.herokuapp.com/api/users";
@@ -83,17 +81,17 @@ export async function postAPI(url, data) {
     return result;
   } catch (error) {
     // Todo
-    let errorMessage = {
-      url: url,
-      headers: getHeader(),
-      params: JSON.stringify(data),
-    };
+    // let errorMessage = {
+    //   url: url,
+    //   headers: getHeader(),
+    //   params: JSON.stringify(data),
+    // };
     // let errorMessage = 'URL: ' + url + 'token: ' + token + 'Params: ' + JSON.stringify(data);
     // console.log('errorrr', errorMessage);
-    let errorMsg = 'Error Reason: ' + JSON.stringify(errorMessage);
-    atariLogs.debugLog('errorMsg', errorMsg);
-    crashlytics().recordError(error, 'API ERROR');
-    crashlytics().log(errorMsg);
+    // let errorMsg = 'Error Reason: ' + JSON.stringify(errorMessage);
+    // atariLogs.debugLog('errorMsg', errorMsg);
+    // crashlytics().recordError(error, 'API ERROR');
+    // crashlytics().log(errorMsg);
     if (error.response) {
       return error.response.data;
     }

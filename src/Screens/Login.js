@@ -463,10 +463,11 @@ class LoginScreen extends React.Component {
     try {
       this.setState({signup_loading: true});
       let signup_data = {};
-      signup_data.email = signup_email.trim();
+      signup_data.email = signup_email;
       signup_data.password = signup_password;
       signup_data.name = signup_name;
       const signup_response = await signupApi(signup_data);
+      console.log('response', signup_response);
       if (signup_response.code === 200) {
         const login_response = await loginApi({
           email: signup_email,
