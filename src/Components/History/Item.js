@@ -41,13 +41,13 @@ class HistoryItem extends React.Component {
     return formatted_date;
   }
   render() {
-    const {darkmode, item} = null;
+    const {darkmode, item} = this.props;
 
     let date = this.convert(item?.createdAt);
     let value = parseFloat(item?.value).toFixed(
       CryptoStyle[item?.asset?.toLowerCase()]['decimal'],
     );
-    let e_value = parseFloat(item?.e_value).toFixed(
+    let e_value = parseFloat(item?.e_value ? item?.e_value : '0').toFixed(
       CryptoStyle[item?.asset.toLowerCase()]['decimal'],
     );
 
