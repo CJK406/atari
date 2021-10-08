@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import {View, Text, TextInput, Image} from 'react-native';
 import styles from './style';
