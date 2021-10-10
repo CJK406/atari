@@ -22,6 +22,7 @@ export const Images = {
   bch_qr_icon: require('./usdt.png'),
   ftm_qr_icon: require('./ftm.png'),
   bnb_qr_icon: require('./bnb_qr.png'),
+  btcIcon: require('./btnIcon.png'),
 
   exchange_gif: require('./giphy.gif'),
   Background_image: require('./background.jpeg'),
@@ -33,4 +34,8 @@ export const Images = {
   btnbackground: require('./btnbackground.png'),
   white_lock: require('./whitelock.png'),
   white_key: require('./whitekey.png'),
+  whitearrow: require('./whitearrow.png'),
+  tramsDrop: require('./tramsDrop.png'),
+  dollarTrans: require('./dollarTrans.png'),
+  loginShadow: require('./loginShadow.png'),
 };

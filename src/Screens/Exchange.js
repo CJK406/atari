@@ -26,7 +26,11 @@ import Modal from 'react-native-modal';
 import {exchange as exchangeApi, exchangeActionApi} from '../Api';
 import {updateBallance} from '../Redux/Actions';
 import DeviceInfo from 'react-native-device-info';
-import {RED_BTN_COLOR, TRANSPARENT_COLOR} from '../Utils/AppContants';
+import {
+  FontFamilyMedium,
+  RED_BTN_COLOR,
+  TRANSPARENT_COLOR,
+} from '../Utils/AppContants';
 
 let ip_address = '';
 DeviceInfo.getIpAddress().then((ip) => {
@@ -51,6 +55,7 @@ class ExchangeScreen extends React.Component {
     receiveInputValue: 0,
     usdInputValue: 0,
     loading: false,
+    selectedImageIndex: 0,
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -258,17 +263,41 @@ class ExchangeScreen extends React.Component {
       <View style={[CustomStyles.container, styles.innerContainer]}>
         <Header darkmode={darkmode} />
         <View
-          style={{padding: 20, backgroundColor: TRANSPARENT_COLOR, margin: 10}}>
+          style={
+            darkmode
+              ? {
+                  padding: 20,
+                  backgroundColor: TRANSPARENT_COLOR,
+                  margin: 10,
+                  borderRadius: 6,
+                }
+              : {padding: 20, margin: 10}
+          }>
+          <View style={CustomStyles.exchangeImageHeader}>
+            <Image
+              style={{height: 30, width: 30}}
+              source={exchage_from_data[this.state.selectedImageIndex]['image']}
+            />
+            <Image
+              source={Images.whitearrow}
+              resizeMode="contain"
+              style={{height: 15, width: 40, marginLeft: 10, marginRight: 10}}
+            />
+            <Image style={{height: 30, width: 30}} source={Images.Atri_icon} />
+          </View>
+
           <ExchangeDropdown
             items={exchage_from_data}
             darkmode={darkmode}
             label={'From'}
+            selectedImageIndex={this.state.selectedImageIndex}
             onSelect={(index) =>
               this.setState({
                 drop1_key: index,
                 buyInputValue: 0,
                 receiveInputValue: 0,
                 usdInputValue: 0,
+                selectedImageIndex: index,
               })
             }
             isOpen={this.state.drop1_open_flag}
@@ -320,7 +349,8 @@ class ExchangeScreen extends React.Component {
           <TouchableOpacity
             style={{
               backgroundColor: RED_BTN_COLOR,
-              marginTop: 20,
+              marginTop: 30,
+              marginBottom: 15,
               padding: 7,
               borderRadius: 100,
               textAlign: 'center',
@@ -346,9 +376,9 @@ class ExchangeScreen extends React.Component {
                   color: 'white',
                   textAlign: 'center',
                   justifyContent: 'center',
-                  fontWeight: 'bold',
+                  fontFamily: FontFamilyMedium,
                 }}>
-                Buy Now
+                BUY NOW
               </Text>
             )}
           </TouchableOpacity>

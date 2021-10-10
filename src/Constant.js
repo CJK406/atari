@@ -9,10 +9,10 @@ export const CustomStyles = StyleSheet.create({
     flexDirection: 'column',
   },
   innerContainer: {
+    flex: 1,
     justifyContent: 'center',
     padding: 15,
     position: 'relative',
-    marginBottom: 20,
   },
   buttonStyle: {
     alignItems: 'center',
@@ -78,6 +78,11 @@ export const CustomStyles = StyleSheet.create({
   },
   w_text: {
     color: 'black',
+  },
+  exchangeImageHeader: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

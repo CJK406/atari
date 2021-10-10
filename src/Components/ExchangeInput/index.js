@@ -4,9 +4,11 @@ import React from 'react';
 import {View, Text, TextInput, Image} from 'react-native';
 import styles from './style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {COLOR_GREY} from '../../Utils/AppContants';
+import {Images} from '../../Assets';
 
 const ExchangeInput = (props) => {
-  const txColor = props.darkmode ? 'white' : 'black';
+  const txColor = props.darkmode ? COLOR_GREY : 'black';
   return (
     <View style={styles.container}>
       <Text style={{...styles.label, color: txColor}}>{props.label}</Text>
@@ -24,7 +26,7 @@ const ExchangeInput = (props) => {
           />
         ) : (
           <Text
-            style={props?.darkmode ? styles.textField : styles.textFieldBlack}>
+            style={props?.darkmode ? styles.textBuyNow : styles.textBuyNowDark}>
             {props.inputValue}
           </Text>
         )}
@@ -45,11 +47,16 @@ const ExchangeInput = (props) => {
               ? styles.iconContainerLast
               : styles.iconContainerLastBlack
           }>
-          <Ionicons
+          {/* <Ionicons
             name="logo-usd"
             style={{marginTop: 7}}
             size={30}
             color={txColor}
+          /> */}
+          <Image
+            resizeMode="contain"
+            style={{height: 20}}
+            source={Images.dollarTrans}
           />
         </View>
       </View>

@@ -22,6 +22,8 @@ import {update_verifyToken} from '../Redux/Actions';
 import {
   COLOR_GREY,
   FontFamilyMedium,
+  FontFamilyRegular,
+  SILVER_GREY,
   TRANSPARENT_COLOR,
 } from '../Utils/AppContants';
 
@@ -40,108 +42,117 @@ class ForgotPasswordScreen extends React.Component {
     const {thirdcolor} = this.props.theme.palette;
     const {email} = this.state;
     return (
-      <SafeAreaView
-        style={{...CustomStyles.container, backgroundColor: 'rgb(33,33,33)'}}>
-        <ImageBackground
-          source={Images.login_background_new}
-          style={[CustomStyles.container, CustomStyles.innerContainer]}>
-          <View style={{backgroundColor: TRANSPARENT_COLOR, padding: 20}}>
-            <View style={styles.lock_container}>
-              <Image style={styles.lock_image} source={Images.white_lock} />
-            </View>
-            <Text
-              style={{
-                fontSize: 20,
-                lineHeight: 28,
-                textAlign: 'center',
-                color: 'white',
-                marginBottom: 35,
-                fontFamily: FontFamilyMedium,
-              }}>
-              FORGET PASSWORD
+      // <SafeAreaView
+      //   style={{...CustomStyles.container, backgroundColor: 'rgb(33,33,33)'}}>
+      <ImageBackground
+        resizeMode="cover"
+        source={Images.login_background_new}
+        style={[CustomStyles.container, CustomStyles.innerContainer]}>
+        <View
+          style={{
+            backgroundColor: TRANSPARENT_COLOR,
+            padding: 20,
+            borderRadius: 6,
+          }}>
+          <View style={styles.lock_container}>
+            <Image style={styles.lock_image} source={Images.white_lock} />
+          </View>
+          <Text
+            style={{
+              fontSize: 20,
+              lineHeight: 28,
+              textAlign: 'center',
+              color: 'white',
+              marginBottom: 35,
+              fontFamily: FontFamilyMedium,
+            }}>
+            FORGET PASSWORD
+          </Text>
+          <View style={styles.descContainer}>
+            <Text style={{...styles.customWriting}}>
+              We just need your registered email to send you password reset
+              instructions
             </Text>
-            <View style={styles.descContainer}>
-              <Text style={{...styles.customWriting}}>
-                We just need your registered email to send you password reset
-                instructions
-              </Text>
-            </View>
-            <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <View style={{...CustomStyles.forgetPasswordInputContainer}}>
-                <TextInput
-                  value={email}
-                  style={{
-                    ...CustomStyles.textInput,
-                    color: 'white',
-                    borderRadius: 500,
-                    width: '100%',
-                  }}
-                  onChangeText={(text) => this.setState({email: text})}
-                  autoCompleteType="email"
-                  keyboardType="email-address"
-                  placeholder="Email"
-                  placeholderTextColor="rgba(255,255,255,0.3)"
-                />
-              </View>
-              <TouchableOpacity
-                onPress={this.goNext}
+          </View>
+          <View style={{justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{...CustomStyles.forgetPasswordInputContainer}}>
+              <TextInput
+                value={email}
                 style={{
-                  backgroundColor: 'rgb(227,30,45)',
-                  // width: '%',
-                  padding: 10,
-                  paddingLeft: 20,
-                  paddingRight: 20,
+                  ...CustomStyles.textInput,
+                  color: 'white',
                   borderRadius: 500,
-                  textAlign: 'center',
-                  justifyContent: 'center',
-                  shadowColor: '#000',
-                  shadowOffset: {width: 0, height: 10},
-                  shadowOpacity: 0.8,
-                  shadowRadius: 2,
-                }}>
-                {this.state.button_loading ? (
-                  <ActivityIndicator size="large" color="white" />
-                ) : (
-                  <Text
-                    style={{
-                      fontWeight: 'bold',
-                      fontSize: 18,
-                      color: 'white',
-                      textAlign: 'center',
-                    }}>
-                    SEND EMAIL
-                  </Text>
-                )}
-
-                {/* <Text style={{fontSize: 18,color:'white',textAlign:'center',justifyContent:'center',fontWeight:'bold'}}>SEND EMAIL</Text> */}
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={this.goBack}
-                style={{
-                  marginTop: 60,
-                  borderRadius: 10,
-
-                  ...CustomStyles.buttonStyle,
-                  ...CustomStyles.smallBtn,
-                  ...CustomStyles.longBtn,
-                  backgroundColor: thirdcolor,
-                }}>
+                  width: '100%',
+                  fontWeight: 'normal',
+                  fontFamily: FontFamilyMedium,
+                  fontSize: 14,
+                }}
+                onChangeText={(text) => this.setState({email: text})}
+                autoCompleteType="email"
+                keyboardType="email-address"
+                placeholder="Email"
+                placeholderTextColor="rgba(255,255,255,0.3)"
+              />
+            </View>
+            <TouchableOpacity
+              onPress={this.goNext}
+              style={{
+                backgroundColor: 'rgb(227,30,45)',
+                // width: '%',
+                padding: 10,
+                paddingLeft: 20,
+                paddingRight: 20,
+                borderRadius: 500,
+                textAlign: 'center',
+                justifyContent: 'center',
+                shadowColor: '#000',
+                shadowOffset: {width: 0, height: 10},
+                shadowOpacity: 0.8,
+                shadowRadius: 2,
+              }}>
+              {this.state.button_loading ? (
+                <ActivityIndicator size="large" color="white" />
+              ) : (
                 <Text
                   style={{
-                    fontSize: 12,
-                    color: COLOR_GREY,
-                    lineHeight: 33,
-                    letterSpacing: 1,
-                    textDecorationLine: 'underline',
+                    fontSize: 16,
+                    color: 'white',
+                    textAlign: 'center',
                     fontFamily: FontFamilyMedium,
                   }}>
-                  BACK TO LOGIN
+                  SEND EMAIL
                 </Text>
-              </TouchableOpacity>
-            </View>
+              )}
+
+              {/* <Text style={{fontSize: 18,color:'white',textAlign:'center',justifyContent:'center',fontWeight:'bold'}}>SEND EMAIL</Text> */}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.goBack}
+              style={{
+                marginTop: 60,
+                borderRadius: 10,
+
+                ...CustomStyles.buttonStyle,
+                ...CustomStyles.smallBtn,
+                ...CustomStyles.longBtn,
+                backgroundColor: thirdcolor,
+              }}>
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: SILVER_GREY,
+                  lineHeight: 33,
+                  letterSpacing: 1,
+                  textDecorationLine: 'underline',
+                  fontFamily: FontFamilyMedium,
+                }}>
+                BACK TO LOGIN
+              </Text>
+            </TouchableOpacity>
           </View>
-        </ImageBackground>
-      </SafeAreaView>
+        </View>
+      </ImageBackground>
+      // </SafeAreaView>
     );
   }
   goNext = async () => {
@@ -189,9 +200,10 @@ class ForgotPasswordScreen extends React.Component {
 const styles = StyleSheet.create({
   customWriting: {
     fontSize: 13,
-    color: COLOR_GREY,
+    color: SILVER_GREY,
     textAlign: 'center',
     marginBottom: 40,
+    fontFamily: FontFamilyRegular,
   },
   lock_container: {
     justifyContent: 'center',

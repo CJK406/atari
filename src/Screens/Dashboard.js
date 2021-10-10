@@ -42,6 +42,8 @@ import {SALT_MIX_KEY, IV_KEY} from '@env';
 import {
   COLOR_GREY,
   FontFamilyMedium,
+  FontFamilyRegular,
+  SILVER_GREY,
   TRANSPARENT_COLOR,
 } from '../Utils/AppContants';
 const {height} = Dimensions.get('window');
@@ -78,6 +80,7 @@ class DashboardScreen extends React.Component {
   }
 
   setView() {
+    // Todo
     this.state.isLoading = false;
     InteractionManager.runAfterInteractions(() => {
       this.props.updateMenuStatus(true);
@@ -120,6 +123,7 @@ class DashboardScreen extends React.Component {
   check() {
     if (isInternetConnected() === true) {
       this.resetError();
+      // Todo
       this.setState({
         isLoading: false,
       });
@@ -324,10 +328,10 @@ class DashboardScreen extends React.Component {
                         alignItems: 'center',
                         alignSelf: 'center',
                         marginBottom: 100,
-                        color: COLOR_GREY,
-                        fontFamily: FontFamilyMedium,
+                        color: SILVER_GREY,
+                        fontFamily: FontFamilyRegular,
                         position: 'absolute',
-                        top: '40%',
+                        top: '38%',
                       }
                     : {
                         fontSize: 14,
@@ -338,7 +342,7 @@ class DashboardScreen extends React.Component {
                         color: COLOR_GREY,
                         position: 'absolute',
                         top: '40%',
-                        fontFamily: FontFamilyMedium,
+                        fontFamily: FontFamilyRegular,
                       }
                 }>
                 Total Balance
@@ -436,8 +440,7 @@ class DashboardScreen extends React.Component {
                   darkmode={darkmode}
                   balance={this.state?.balance?.btc?.toFixed(8)}
                   label={'BTC'}
-                  isIcon
-                  icon="bitcoin"
+                  icon={Images.btcIcon}
                   iconColor={color_data[1]}
                 />
                 <BalanceList
@@ -485,7 +488,7 @@ class DashboardScreen extends React.Component {
                       width: '100%',
                       height: height,
                     }}
-                    source={Images.dashboard_background}
+                    source={Images.login_background_new}
                   />
                 )}
                 <Header darkmode={darkmode} />
@@ -609,6 +612,7 @@ const styles = StyleSheet.create({
     margin: 10,
     width: '90%',
     backgroundColor: TRANSPARENT_COLOR,
+    borderRadius: 6,
   },
   balanceContainerWhite: {
     flex: 1,
