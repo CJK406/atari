@@ -7,6 +7,7 @@ export const CustomStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    
   },
   innerContainer: {
     flex: 1,

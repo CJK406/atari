@@ -38,4 +38,8 @@ export const Images = {
   tramsDrop: require('./tramsDrop.png'),
   dollarTrans: require('./dollarTrans.png'),
   loginShadow: require('./loginShadow.png'),
+  logouticon: require('./logouticon.png'),
+  refresh: require('./refresh.png'),
+  themeIcon: require('./themeIcon.png'),
+  supporticon: require('./supporticon.png'),
 };
