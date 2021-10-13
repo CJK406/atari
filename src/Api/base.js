@@ -22,12 +22,20 @@ const ACTION1_API_URL = 'http://3.17.146.124/api/index.php';
 function getHeader() {
   let state = store.getState();
   const {token} = state.Auth;
-  return {
-    headers: {
-      'Content-Type': 'application/json',
-      'auth-token': `${token}`,
-    },
-  };
+  if (token === undefined || token === '') {
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+  } else {
+    return {
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': `${token}`,
+      },
+    };
+  }
 }
 
 export function setStore(appStore) {
@@ -53,7 +61,10 @@ export async function getAPI(url) {
     );
     crashlytics().log(errorMsg);
     if (error.response) {
-      return error.response.data;
+      let errorMEssage = EncryptionUtils.getInstance().decrypt(
+        error.response.data,
+      );
+      return errorMEssage;
     }
     throw error;
   }
@@ -80,34 +91,31 @@ export async function postAPI(url, data) {
     result = EncryptionUtils.getInstance().decrypt(result);
     return result;
   } catch (error) {
-    // Todo
-    // let errorMessage = {
-    //   url: url,
-    //   headers: getHeader(),
-    //   params: JSON.stringify(data),
-    // };
-    // let errorMessage = 'URL: ' + url + 'token: ' + token + 'Params: ' + JSON.stringify(data);
-    // console.log('errorrr', errorMessage);
-    // let errorMsg = 'Error Reason: ' + JSON.stringify(errorMessage);
-    // atariLogs.debugLog('errorMsg', errorMsg);
-    // crashlytics().recordError(error, 'API ERROR');
-    // crashlytics().log(errorMsg);
     if (error.response) {
-      return error.response.data;
+      let errorMEssage = EncryptionUtils.getInstance().decrypt(
+        error.response.data,
+      );
+      return errorMEssage;
     }
     throw error;
   }
 }
 
 export async function putAPI(url, data) {
+  atariLogs.debugLog('result', data);
   try {
     let result = await axios.put(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
+    atariLogs.debugLog('result', result);
     return result;
   } catch (error) {
     if (error.response) {
-      return error.response.data;
+      atariLogs.debugLog('error', error.response.data);
+      let errorMessage = EncryptionUtils.getInstance().decrypt(
+        error.response.data,
+      );
+      return errorMessage;
     }
     throw error;
   }

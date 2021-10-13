@@ -42,13 +42,18 @@ class HistoryItem extends React.Component {
   }
   render() {
     const {darkmode, item} = this.props;
+    console.log('item', item?.asset.toLowerCase());
 
     let date = this.convert(item?.createdAt);
     let value = parseFloat(item?.value).toFixed(
-      CryptoStyle[item?.asset?.toLowerCase()]['decimal'],
+      CryptoStyle[
+        item?.asset.toLowerCase() ? item?.asset.toLowerCase() : 'atari'
+      ]['decimal'],
     );
-    let e_value = parseFloat(item?.e_value ? item?.e_value : '0').toFixed(
-      CryptoStyle[item?.asset.toLowerCase()]['decimal'],
+    let e_value = parseFloat(item?.e_value).toFixed(
+      CryptoStyle[
+        item?.asset.toLowerCase() ? item?.asset.toLowerCase() : 'atari'
+      ]['decimal'],
     );
 
     if (item.value < 1 && item?.asset?.toLowerCase() === 'atari') value = 1;
