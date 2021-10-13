@@ -1,5 +1,10 @@
 import {StyleSheet} from 'react-native';
-import {FontFamilyMedium, FontFamilyRegular} from '../../Utils/AppContants';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  FontFamilyRegular,
+  SILVER_GREY,
+} from '../../Utils/AppContants';
 
 export default StyleSheet.create({
   container: {
@@ -17,15 +22,15 @@ export default StyleSheet.create({
     position: 'relative',
   },
   title: {
-    color: 'white',
+    color: COLOR_GREY,
     marginLeft: 10,
     fontSize: 20,
-    fontFamily: FontFamilyMedium,
+    fontFamily: FontFamilyRegular,
   },
   subTitle: {
     marginLeft: 10,
     fontSize: 10,
-    color: '#a7a7a7',
+    color: SILVER_GREY,
     fontFamily: FontFamilyMedium,
   },
 });

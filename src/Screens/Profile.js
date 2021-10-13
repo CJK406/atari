@@ -105,7 +105,7 @@ class ProfileScreen extends React.Component {
     const renderItem = ({item}) => (
       <View
         style={{
-          padding: 20,
+          padding: 30,
         }}>
         {/* <Text style={{fontSize:15,marginBottom:14, color:txtColor}}>General</Text> */}
 
@@ -164,18 +164,20 @@ class ProfileScreen extends React.Component {
             <View
               style={{
                 backgroundColor: TRANSPARENT_COLOR,
-                margin: 15,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flex: 1,
+                margin: 25,
+                // justifyContent: 'center',
+                // alignItems: 'center',
+                // flex: 1,
+                height: '70%',
+                borderRadius: 10,
               }}>
               <FlatList
                 data={[{id: 1}]}
                 renderItem={renderItem}
                 contentContainerStyle={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: '100%',
+                  // justifyContent: 'center',
+                  // alignItems: 'center',
+                  height: '90%',
                 }}
                 keyExtractor={(item) => item?.id}
               />

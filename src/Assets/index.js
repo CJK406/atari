@@ -42,4 +42,8 @@ export const Images = {
   refresh: require('./refresh.png'),
   themeIcon: require('./themeIcon.png'),
   supporticon: require('./supporticon.png'),
+  recievedIcon: require('./recievedIcon.png'),
+  sendTransIcon: require('./sendTransIcon.png'),
+  revieveArrow: require('./recieveArrow.png'),
+  sendArrow: require('./sendArrow.png'),
 };

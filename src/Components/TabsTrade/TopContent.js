@@ -117,6 +117,7 @@ const TopContent = (props) => {
             label={'Receive'}
             icon={'trending-down-outline'}
             position={'left'}
+            image={Images.sendArrow}
             onPress={() => showModalComponent(0)}
           />
         )}
@@ -132,6 +133,7 @@ const TopContent = (props) => {
           <SideTrade
             label={'Send'}
             icon={'trending-up-outline'}
+            image={Images.revieveArrow}
             position={'right'}
             onPress={() => showModalComponent(1)}
           />

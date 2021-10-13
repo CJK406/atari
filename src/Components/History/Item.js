@@ -1,10 +1,16 @@
 import React from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import {View, Text, ActivityIndicator, Image} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {CustomStyles, CryptoStyle} from '../../Constant';
-import Moment from 'react-moment';
+import moment from 'moment';
+import {
+  COLOR_GREY,
+  FontFamilyRegular,
+  SILVER_GREY,
+} from '../../Utils/AppContants';
+import {Images} from '../../Assets';
 class HistoryItem extends React.Component {
   constructor(props) {
     super(props);
@@ -40,12 +46,17 @@ class HistoryItem extends React.Component {
   render() {
     const {darkmode, item} = this.props;
 
+    console.log('item', item);
     let date = this.convert(item?.createdAt);
     let value = parseFloat(item?.value).toFixed(
-      CryptoStyle[item?.asset?.toLowerCase()]['decimal'],
+      CryptoStyle[
+        item?.asset?.toLowerCase() ? item?.asset?.toLowerCase() : 'atari'
+      ]['decimal'],
     );
-    let e_value = parseFloat(item?.e_value ? item?.e_value : '0').toFixed(
-      CryptoStyle[item?.asset.toLowerCase()]['decimal'],
+    let e_value = parseFloat(item?.e_value).toFixed(
+      CryptoStyle[
+        item?.asset.toLowerCase() ? item?.asset.toLowerCase() : 'atari'
+      ]['decimal'],
     );
 
     if (item.value < 1 && item?.asset?.toLowerCase() === 'atari') value = 1;
@@ -60,14 +71,17 @@ class HistoryItem extends React.Component {
     let icon = 'arrow-up-circle-outline';
     let type = 'Sent';
     let color = 'rgb(244,67,54)';
+    let transIcon = Images.recievedIcon;
     if (item.transactionType === 'receive') {
       icon = 'arrow-down-circle-outline';
       type = 'Received';
       color = 'rgb(70,155,74)';
+      transIcon = Images.recievedIcon;
     } else if (item.transactionType === 'exchange') {
       type = 'Exchange';
       icon = 'shuffle';
       color = 'rgb(12,145,255)';
+      transIcon = Images.sendTransIcon;
     }
     if (item?.status === 'Pending') {
       type = 'Pending';
@@ -75,41 +89,80 @@ class HistoryItem extends React.Component {
     }
     return (
       <View>
-        <View style={{marginBottom: 15, flexDirection: 'row'}}>
+        <View
+          style={{
+            marginBottom: 15,
+            flexDirection: 'row',
+            borderBottomColor: COLOR_GREY,
+            borderBottomWidth: 0.5,
+            paddingBottom: 10,
+            alignItems: 'center',
+          }}>
           <View
             style={{
               alignItems: 'center',
               alignSelf: 'center',
-              paddingRight: 10,
+              paddingRight: 7,
             }}>
             {type === 'Pending' ? (
               <ActivityIndicator size="small" color={color} />
             ) : (
-              <Ionicons
-                name={icon}
-                size={25}
-                color={darkmode ? 'white' : 'black'}
-              />
+              <View>
+                <Ionicons
+                  name={icon}
+                  size={25}
+                  color={darkmode ? 'white' : 'black'}
+                />
+                {/* <Image style={{height: 25, width: 25}} source={coinIcon} /> */}
+              </View>
             )}
           </View>
-          <View style={{flex: 1}}>
-            <Text
-              style={[
-                darkmode ? CustomStyles.d_text : CustomStyles.w_text,
-                {fontSize: 15},
-              ]}>
-              {type}
-            </Text>
-            <Text
-              style={[
-                darkmode ? CustomStyles.d_text : CustomStyles.w_text,
-                {fontSize: 11},
-              ]}>
-              {date}
-            </Text>
+          <View
+            style={{
+              height: '85%',
+              width: 0.5,
+              backgroundColor: COLOR_GREY,
+              marginRight: 9,
+            }}></View>
+          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+            <View>
+              <Text
+                style={[
+                  darkmode ? CustomStyles.d_text : CustomStyles.w_text,
+                  {
+                    fontSize: 18,
+                    fontFamily: FontFamilyRegular,
+                    color: COLOR_GREY,
+                  },
+                ]}>
+                {type}
+              </Text>
+              <Text
+                style={[
+                  darkmode ? CustomStyles.d_text : CustomStyles.w_text,
+                  {
+                    fontSize: 8,
+                    color: SILVER_GREY,
+                    fontFamily: FontFamilyRegular,
+                  },
+                ]}>
+                {moment(date).format('DD-MM-YYY h:m:s')}
+              </Text>
+            </View>
+            <Image
+              resizeMode="contain"
+              style={{marginLeft: 5, height: 10, width: 10}}
+              source={transIcon}
+            />
           </View>
           <View style={{width: '35%'}}>
-            <Text style={{color: color, fontSize: 15, textAlign: 'right'}}>
+            <Text
+              style={{
+                color: color,
+                fontSize: 13,
+                textAlign: 'right',
+                fontFamily: FontFamilyRegular,
+              }}>
               {value} {item.asset.toUpperCase()}
             </Text>
 

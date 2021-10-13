@@ -42,6 +42,7 @@ const TabsTrade = (props) => {
         tabData={props.tabData}
         trigger={props.trigger}
       />
+
       <History
         label={'Activity'}
         data={history.body.obj[tabData.history_t]}
