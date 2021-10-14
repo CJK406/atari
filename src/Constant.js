@@ -7,7 +7,6 @@ export const CustomStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    
   },
   innerContainer: {
     flex: 1,
@@ -48,7 +47,6 @@ export const CustomStyles = StyleSheet.create({
   forgetPasswordInputContainer: {
     borderWidth: 1,
     // borderColor: '#7070701f',
-    borderColor: COLOR_GREY,
     width: '80%',
     borderRadius: 500,
     padding: 0,

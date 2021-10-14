@@ -11,6 +11,7 @@ import {
   TextInput,
   ActivityIndicator,
   ImageBackground,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
@@ -24,6 +25,7 @@ import {
   FontFamilyMedium,
   FontFamilyRegular,
   SILVER_GREY,
+  STATUS_BAR_COLOR,
   TRANSPARENT_COLOR,
 } from '../Utils/AppContants';
 
@@ -46,36 +48,58 @@ class ForgotPasswordScreen extends React.Component {
       //   style={{...CustomStyles.container, backgroundColor: 'rgb(33,33,33)'}}>
       <ImageBackground
         resizeMode="cover"
-        source={Images.login_background_new}
+        source={
+          this.props.darkmode
+            ? Images.login_background_new
+            : Images.forgotPBackGround
+        }
         style={[CustomStyles.container, CustomStyles.innerContainer]}>
+        <StatusBar
+          backgroundColor={this.props.darkmode ? 'black' : STATUS_BAR_COLOR}
+          barStyle={this.props.darkmode ? 'light-content' : 'dark-content'}
+        />
         <View
           style={{
-            backgroundColor: TRANSPARENT_COLOR,
+            backgroundColor: this.props.darkmode ? TRANSPARENT_COLOR : 'white',
             padding: 20,
-            borderRadius: 6,
+            borderRadius: 8,
           }}>
           <View style={styles.lock_container}>
-            <Image style={styles.lock_image} source={Images.white_lock} />
+            <Image
+              style={styles.lock_image}
+              source={
+                this.props.darkmode ? Images.white_lock : Images.redForgotLock
+              }
+            />
           </View>
           <Text
             style={{
               fontSize: 20,
               lineHeight: 28,
               textAlign: 'center',
-              color: 'white',
+              color: this.props.darkmode ? 'white' : 'black',
               marginBottom: 35,
               fontFamily: FontFamilyMedium,
             }}>
             FORGET PASSWORD
           </Text>
           <View style={styles.descContainer}>
-            <Text style={{...styles.customWriting}}>
+            <Text
+              style={{
+                ...styles.customWriting,
+                color: this.props.darkmode ? COLOR_GREY : '#454545',
+              }}>
               We just need your registered email to send you password reset
               instructions
             </Text>
           </View>
           <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <View style={{...CustomStyles.forgetPasswordInputContainer}}>
+            <View
+              style={{
+                ...CustomStyles.forgetPasswordInputContainer,
+
+                borderColor: COLOR_GREY,
+              }}>
               <TextInput
                 value={email}
                 style={{
@@ -91,7 +115,9 @@ class ForgotPasswordScreen extends React.Component {
                 autoCompleteType="email"
                 keyboardType="email-address"
                 placeholder="Email"
-                placeholderTextColor="rgba(255,255,255,0.3)"
+                placeholderTextColor={
+                  this.props.darkmode ? 'rgba(255,255,255,0.3)' : COLOR_GREY
+                }
               />
             </View>
             <TouchableOpacity
@@ -100,8 +126,8 @@ class ForgotPasswordScreen extends React.Component {
                 backgroundColor: 'rgb(227,30,45)',
                 // width: '%',
                 padding: 10,
-                paddingLeft: 20,
-                paddingRight: 20,
+                paddingLeft: 30,
+                paddingRight: 30,
                 borderRadius: 500,
                 textAlign: 'center',
                 justifyContent: 'center',
@@ -115,8 +141,8 @@ class ForgotPasswordScreen extends React.Component {
               ) : (
                 <Text
                   style={{
-                    fontSize: 16,
-                    color: 'white',
+                    fontSize: 14,
+                    color: this.props.darkmode ? 'white' : 'white',
                     textAlign: 'center',
                     fontFamily: FontFamilyMedium,
                   }}>
@@ -140,7 +166,7 @@ class ForgotPasswordScreen extends React.Component {
               <Text
                 style={{
                   fontSize: 12,
-                  color: SILVER_GREY,
+                  color: this.props.darkmode ? SILVER_GREY : COLOR_GREY,
                   lineHeight: 33,
                   letterSpacing: 1,
                   textDecorationLine: 'underline',
@@ -149,6 +175,7 @@ class ForgotPasswordScreen extends React.Component {
                 BACK TO LOGIN
               </Text>
             </TouchableOpacity>
+            {console.log('darkmode', this.props.darkmode)}
           </View>
         </View>
       </ImageBackground>
@@ -223,7 +250,9 @@ const styles = StyleSheet.create({
   },
 });
 function mapStateToProps(state) {
-  return {};
+  return {
+    darkmode: state?.Auth?.darkmode,
+  };
 }
 export default connect(mapStateToProps, {update_verifyToken})(
   withTheme(ForgotPasswordScreen),

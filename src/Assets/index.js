@@ -46,4 +46,6 @@ export const Images = {
   sendTransIcon: require('./sendTransIcon.png'),
   revieveArrow: require('./recieveArrow.png'),
   sendArrow: require('./sendArrow.png'),
+  redForgotLock: require('./redForgotLock.png'),
+  forgotPBackGround: require('./forgotPBackGround.png'),
 };

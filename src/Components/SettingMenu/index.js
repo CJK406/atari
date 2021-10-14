@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import {TouchableOpacity, View, Switch, Image, Text} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,7 +16,7 @@ const SettingMenu = (props) => {
       {...onPress}
       activeOpacity={0.8}>
       <View style={styles.childBox}>
-        <View style={{width: '10%'}}>
+        <View style={{width: '10%', marginRight: 10}}>
           <Image
             resizeMode="contain"
             source={props.icon}
@@ -32,7 +34,7 @@ const SettingMenu = (props) => {
           {props.withAction && (
             <Switch
               trackColor={{false: 'white', true: 'red'}}
-              thumbColor="white"
+              thumbColor="black"
               ios_backgroundColor="#3e3e3e"
               onValueChange={props.onAction}
               value={props.actionValue}

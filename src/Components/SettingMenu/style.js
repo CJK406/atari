@@ -9,7 +9,7 @@ import {
 export default StyleSheet.create({
   container: {
     // backgroundColor: 'rgb(66,66,66)',
-    marginBottom: 15,
+    marginBottom: 20,
     padding: 10,
     borderRadius: 15,
     flexDirection: 'row',

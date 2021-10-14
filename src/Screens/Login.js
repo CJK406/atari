@@ -15,6 +15,7 @@ import {
   Image,
   FlatList,
   ImageBackground,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
@@ -48,6 +49,8 @@ import {
   FontFamilyMedium,
   FontFamilyRegular,
   RED_BTN_COLOR,
+  SILVER_GREY,
+  STATUS_BAR_COLOR,
 } from '../Utils/AppContants';
 
 const windowWidth = Dimensions.get('window').width;
@@ -153,10 +156,17 @@ class LoginScreen extends React.Component {
           style={{alignItems: 'center', flex: 1}}
           resizeMode="cover"
           source={Images.login_background_new}>
+          <StatusBar
+            backgroundColor={this.props.darkmode ? 'black' : STATUS_BAR_COLOR}
+          />
           <ImageBackground
             resizeMode="cover"
             style={{flex: 1}}
-            source={Images.loginShadow}>
+            source={
+              this.props.darkmode
+                ? Images.loginShadow
+                : Images.forgotPBackGround
+            }>
             <View
               style={{flex: 1, alignItems: 'center', minHeight: windowHeight}}>
               {/* <Image
@@ -186,7 +196,7 @@ class LoginScreen extends React.Component {
                   <View style={{width: 500}}>
                     <Animated.Text
                       style={{
-                        color: COLOR_GREY,
+                        color: this.props.darkmode ? COLOR_GREY : 'black',
                         fontSize: 18,
                         padding: padLogin,
                         width: '100%',
@@ -206,6 +216,7 @@ class LoginScreen extends React.Component {
                     this.passInput.focus();
                   }}
                   blurOnSubmit={false}
+                  darkmode={this.props.darkmode}
                 />
 
                 <InputLogin
@@ -219,6 +230,7 @@ class LoginScreen extends React.Component {
                   inputReff={(ref) => {
                     this.passInput = ref;
                   }}
+                  darkmode={this.props.darkmode}
                 />
                 {/* <LinearGradient
                 start={{x: 0, y: 0}}
@@ -268,7 +280,7 @@ class LoginScreen extends React.Component {
                     <Text
                       style={{
                         fontSize: 18,
-                        color: COLOR_GREY,
+                        color: this.props.darkmode ? COLOR_GREY : 'white',
                         fontFamily: FontFamilyMedium,
                       }}>
                       LOGIN
@@ -284,7 +296,7 @@ class LoginScreen extends React.Component {
                   style={{paddingTop: 10, marginTop: 20}}>
                   <Text
                     style={{
-                      color: COLOR_GREY,
+                      color: this.props.darkmode ? COLOR_GREY : 'grey',
                       fontSize: 13,
                       lineHeight: 30,
                       fontWeight: '500',
@@ -322,8 +334,8 @@ class LoginScreen extends React.Component {
                     <View style={{textAlign: 'center', width: 500}}>
                       <Text
                         style={{
-                          color: COLOR_GREY,
-                          fontSize: 14,
+                          color: this.props.darkmode ? COLOR_GREY : '#424242',
+                          fontSize: 10,
                           textAlign: 'center',
                           fontFamily: FontFamilyMedium,
                         }}>
@@ -331,7 +343,7 @@ class LoginScreen extends React.Component {
                       </Text>
                       <Text
                         style={{
-                          color: COLOR_GREY,
+                          color: this.props.darkmode ? COLOR_GREY : 'black',
                           fontSize: 18,
                           textAlign: 'center',
                           fontFamily: FontFamilyMedium,
@@ -342,8 +354,9 @@ class LoginScreen extends React.Component {
                   </TouchableOpacity>
                   <InputLogin
                     mode={1}
+                    darkmode={this.props.darkmode}
                     placeholder="Name"
-                    placeholderTextColor="white"
+                    placeholderTextColor={COLOR_GREY}
                     onChangeText={(text) => this.setState({signup_name: text})}
                     onFocus={() => {
                       if (!this.state.showSignup) {
@@ -361,12 +374,14 @@ class LoginScreen extends React.Component {
 
                   <InputLogin
                     mode={1}
+                    darkmode={this.props.darkmode}
                     placeholder="Email"
                     placeholderTextColor={COLOR_GREY}
                     onChangeText={(text) => this.setState({signup_email: text})}
                   />
                   <InputLogin
                     mode={1}
+                    darkmode={this.props.darkmode}
                     placeholder="Password"
                     placeholderTextColor={COLOR_GREY}
                     secureTextEntry={true}
@@ -613,6 +628,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     app_config_data: state?.Auth?.app_config_data,
+    darkmode: state?.Auth?.darkmode,
   };
 }
 export default connect(mapStateToProps, {

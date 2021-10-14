@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import * as React from 'react';
 import {
   SafeAreaView,
@@ -105,7 +107,8 @@ class ProfileScreen extends React.Component {
     const renderItem = ({item}) => (
       <View
         style={{
-          padding: 30,
+          padding: 25,
+          paddingTop: 45,
         }}>
         {/* <Text style={{fontSize:15,marginBottom:14, color:txtColor}}>General</Text> */}
 
@@ -169,7 +172,7 @@ class ProfileScreen extends React.Component {
                 // alignItems: 'center',
                 // flex: 1,
                 height: '70%',
-                borderRadius: 10,
+                borderRadius: 7,
               }}>
               <FlatList
                 data={[{id: 1}]}

@@ -43,12 +43,14 @@ const TabsTrade = (props) => {
         trigger={props.trigger}
       />
 
-      <History
-        label={'Activity'}
-        data={history.body.obj[tabData.history_t]}
-        darkmode={darkmode}
-        isLoad={!history_finish}
-      />
+      {history.body && history.body.length === 0 ? null : (
+        <History
+          label={'Activity'}
+          data={history.body.obj[tabData.history_t]}
+          darkmode={darkmode}
+          isLoad={!history_finish}
+        />
+      )}
     </View>
   );
 };
