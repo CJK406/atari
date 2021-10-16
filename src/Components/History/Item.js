@@ -42,7 +42,6 @@ class HistoryItem extends React.Component {
   }
   render() {
     const {darkmode, item} = this.props;
-    console.log('item', item?.asset.toLowerCase());
 
     let date = this.convert(item?.createdAt);
     let value = parseFloat(item?.value).toFixed(
