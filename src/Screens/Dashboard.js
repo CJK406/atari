@@ -65,7 +65,7 @@ class DashboardScreen extends React.Component {
     interval: null,
     triggerRefresh: false,
     // To
-    isLoading: false,
+    isLoading: true,
     modalVisible: false,
   };
 
@@ -81,7 +81,7 @@ class DashboardScreen extends React.Component {
 
   setView() {
     // Todo
-    this.state.isLoading = false;
+    this.state.isLoading = true;
     InteractionManager.runAfterInteractions(() => {
       this.props.updateMenuStatus(true);
       if (this.props.pincode === null) {
@@ -461,6 +461,7 @@ class DashboardScreen extends React.Component {
             </View>
           </View>
         </View>
+        {console.log('hostoru', history.body.arr)}
         <History
           label={'History'}
           data={history?.body?.arr}
@@ -475,7 +476,7 @@ class DashboardScreen extends React.Component {
           <View style={{flex: 1}}>
             {this.state.isLoading ? (
               <View style={{flex: 1}}>
-                {darkmode && (
+                {/* {darkmode && (
                   <Image
                     resizeMode="contain"
                     style={{
@@ -488,9 +489,9 @@ class DashboardScreen extends React.Component {
                       width: '100%',
                       height: height,
                     }}
-                    source={Images.login_background_new}
+                    source={Images.dashBoardBackImage}
                   />
-                )}
+                )} */}
                 <Header darkmode={darkmode} />
                 <View
                   style={{
@@ -498,13 +499,16 @@ class DashboardScreen extends React.Component {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <ActivityIndicator color="white" size="large" />
+                  <ActivityIndicator
+                    color={darkmode ? 'white' : 'black'}
+                    size="large"
+                  />
                 </View>
               </View>
             ) : (
               <View style={{flex: 1}}>
                 {/* <ImageBackground style={{alignItems: 'center', flex: 1,}} source={darkmode ? Images.dashboard_background : null} > */}
-                {darkmode && (
+                {darkmode ? (
                   <Image
                     resizeMode="contain"
                     style={{
@@ -517,13 +521,29 @@ class DashboardScreen extends React.Component {
                       width: '100%',
                       height: height,
                     }}
-                    source={Images.login_background_new}
+                    source={Images.dashBoardBackImage}
+                  />
+                ) : (
+                  <Image
+                    resizeMode="contain"
+                    style={{
+                      resizeMode: 'cover',
+                      position: 'absolute',
+                      top: 0,
+                      bottom: 0,
+                      flex: 1,
+                      alignSelf: 'stretch',
+                      width: '100%',
+                      height: height,
+                    }}
+                    source={Images.forgotPBackGround}
                   />
                 )}
 
                 <FlatList
                   data={[{id: 1}]}
                   renderItem={renderItem}
+                  showsVerticalScrollIndicator={false}
                   keyExtractor={(item) => item?.id}
                   refreshing={this.state.triggerRefresh}
                   // keyExtractor={item => item?.id}
@@ -534,7 +554,7 @@ class DashboardScreen extends React.Component {
           </View>
         ) : (
           <View style={{flex: 1, backgroundColor: themeBG}}>
-            {darkmode && (
+            {darkmode ? (
               <Image
                 resizeMode="contain"
                 style={{
@@ -548,6 +568,21 @@ class DashboardScreen extends React.Component {
                   height: height,
                 }}
                 source={Images?.dashboard_background}
+              />
+            ) : (
+              <Image
+                resizeMode="contain"
+                style={{
+                  resizeMode: 'cover',
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  flex: 1,
+                  alignSelf: 'stretch',
+                  width: '100%',
+                  height: height,
+                }}
+                source={Images?.forgotPBackGround}
               />
             )}
             <Header darkmode={darkmode} />
@@ -603,27 +638,28 @@ const styles = StyleSheet.create({
     color: '#7882A2',
   },
   balanceContainer: {
-    flex: 1,
     paddingBottom: 20,
     // paddingLeft: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center',
-    margin: 10,
-    width: '90%',
+    marginTop: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 10,
     backgroundColor: TRANSPARENT_COLOR,
-    borderRadius: 6,
+    borderRadius: 7,
   },
   balanceContainerWhite: {
     flex: 1,
     paddingBottom: 20,
-    // paddingLeft: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center',
-    margin: 10,
-    width: '90%',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    marginTop: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 10,
+    backgroundColor: 'white',
+    borderRadius: 7,
   },
 
   tryAgainContainer: {

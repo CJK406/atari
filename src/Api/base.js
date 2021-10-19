@@ -21,6 +21,7 @@ const ACTION1_API_URL = 'http://3.17.146.124/api/index.php';
 function getHeader() {
   let state = store.getState();
   const {token} = state.Auth;
+  console.log('token', token);
   return {
     headers: {
       'Content-Type': 'application/json',
@@ -66,11 +67,13 @@ export async function postAPI(url, data) {
     let result = await axios.post(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
-    console.log('register', result);
+    // console.log('SETpIN CODE', result);
     return result;
   } catch (error) {
     if (error.response) {
-      return error.response.data;
+      const result = EncryptionUtils.getInstance().decrypt(error);
+      console.log('result', result.response);
+      return result.response.data;
     }
     throw error;
   }

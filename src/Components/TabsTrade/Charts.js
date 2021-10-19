@@ -9,7 +9,7 @@ import {
 import {Dimensions} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {get_Graph, get_percent} from '../../Api';
-import {COLOR_GREY} from '../../Utils/AppContants';
+import {BwModelicaRegular, COLOR_GREY} from '../../Utils/AppContants';
 const screenWidth = Dimensions.get('window').width;
 const Charts = (props) => {
   const [currTabPeriod, setCurrTabPeriod] = useState('1');
@@ -102,22 +102,26 @@ const Charts = (props) => {
           currTabPeriod === period
             ? // ? {backgroundColor: '#d24646'}
               // : {backgroundColor: '#c42626'},
-              {borderColor: COLOR_GREY, borderWidth: 1}
+              {
+                borderColor: props.darkmode ? COLOR_GREY : 'black',
+                borderWidth: 1,
+              }
             : {backgroundColor: 'transparent'},
           {
             borderRadius: 9,
-            // width: 50,
-            // height: 30,
             padding: 4.5,
             marginLeft: 10,
-            // borderWidth: 0.8,
-            // borderColor: 'white',
             alignItems: 'center',
             alignSelf: 'center',
             justifyContent: 'center',
           },
         ]}>
-        <Text style={{color: 'white', fontSize: 11}}>
+        <Text
+          style={{
+            color: props.darkmode ? 'white' : 'black',
+            fontSize: 12,
+            fontFamily: BwModelicaRegular,
+          }}>
           {perTabLabel[period]}
         </Text>
       </TouchableOpacity>
@@ -146,6 +150,10 @@ const Charts = (props) => {
             withVerticalLabels={false}
             segments={4}
             bezier
+            style={{marginRight: 35}}
+            // style={
+
+            // }
           />
         ) : finishLoad ? (
           <View style={{marginTop: 50}}>
@@ -170,8 +178,8 @@ const Charts = (props) => {
           alignItems: 'center',
           textAlign: 'center',
           justifyContent: 'center',
-          borderBottomColor: props.darkmode ? 'white' : 'black',
-          borderBottomWidth: 1,
+          // borderBottomColor: props.darkmode ? 'white' : 'black',
+          // borderBottomWidth: 1,
           width: '100%',
           paddingBottom: 30,
           marginTop: 20,

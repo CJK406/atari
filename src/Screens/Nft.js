@@ -17,6 +17,7 @@ import {withTheme} from 'react-native-material-ui';
 import {Images} from '../Assets';
 const {height} = Dimensions.get('window');
 import PTRView from 'react-native-pull-to-refresh';
+import {FontFamilyMedium, FontFamilyRegular} from '../Utils/AppContants';
 
 class NftScreen extends React.Component {
   state = {
@@ -57,6 +58,7 @@ class NftScreen extends React.Component {
               fontSize: 13,
               textAlign: 'center',
               marginTop: 100,
+              fontFamily: FontFamilyMedium,
             }}>
             WELCOME TO THE
           </Text>
@@ -66,6 +68,7 @@ class NftScreen extends React.Component {
               fontSize: 35,
               textAlign: 'center',
               marginTop: 10,
+              fontFamily: FontFamilyMedium,
             }}>
             Atari NFT Universe
           </Text>
@@ -75,6 +78,7 @@ class NftScreen extends React.Component {
               fontSize: 15,
               textAlign: 'center',
               marginTop: 10,
+              fontFamily: FontFamilyRegular,
             }}>
             Buy, store and sell your NFTs
           </Text>
@@ -84,6 +88,7 @@ class NftScreen extends React.Component {
               fontSize: 17,
               textAlign: 'center',
               marginTop: 10,
+              fontFamily: FontFamilyMedium,
             }}>
             ( Coming Soon )
           </Text>

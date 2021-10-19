@@ -271,7 +271,12 @@ class ExchangeScreen extends React.Component {
                   margin: 10,
                   borderRadius: 6,
                 }
-              : {padding: 20, margin: 10}
+              : {
+                  padding: 20,
+                  margin: 15,
+                  borderRadius: 7,
+                  backgroundColor: 'white',
+                }
           }>
           <View style={CustomStyles.exchangeImageHeader}>
             <Image
@@ -279,7 +284,7 @@ class ExchangeScreen extends React.Component {
               source={exchage_from_data[this.state.selectedImageIndex]['image']}
             />
             <Image
-              source={Images.whitearrow}
+              source={darkmode ? Images.whitearrow : Images.directionDarkArrow}
               resizeMode="contain"
               style={{height: 15, width: 40, marginLeft: 10, marginRight: 10}}
             />
@@ -373,7 +378,7 @@ class ExchangeScreen extends React.Component {
               <Text
                 style={{
                   fontSize: 18,
-                  color: 'white',
+                  color: darkmode ? 'white' : 'black',
                   textAlign: 'center',
                   justifyContent: 'center',
                   fontFamily: FontFamilyMedium,
@@ -388,7 +393,9 @@ class ExchangeScreen extends React.Component {
     return (
       <ImageBackground
         resizeMode="cover"
-        source={Images.login_background_new}
+        source={
+          darkmode ? Images.login_background_new : Images.forgotPBackGround
+        }
         style={{...CustomStyles.container}}>
         <FlatList
           data={[{id: 1}]}

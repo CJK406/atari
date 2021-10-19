@@ -13,14 +13,14 @@ const HeaderTab = (props) => {
   const txtColor = props.darkmode ? 'white' : 'black';
   return (
     <View>
-      <View style={{backgroundColor: themeBG, paddingBottom: 10}}>
+      {/* <View style={{backgroundColor: themeBG, paddingBottom: 10}}>
         <Text style={{color: txtColor, ...styles.alignCenter}}>
           Total Balance
         </Text>
         <Text style={{color: txtColor, ...styles.alignCenter}}>
           ${commafy(balance.sum.toFixed(2))}
         </Text>
-      </View>
+      </View> */}
       <View style={[{backgroundColor: themeBG}, styles.topTabBar]}>
         {Headers.map((item, index) => (
           <TouchableHighlight

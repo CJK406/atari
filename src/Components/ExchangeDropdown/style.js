@@ -4,6 +4,7 @@ import {
   FontFamilyMedium,
   FontFamilyRegular,
   SILVER_GREY,
+  SILVER_GREY_RGBA,
 } from '../../Utils/AppContants';
 
 export default StyleSheet.create({
@@ -12,7 +13,6 @@ export default StyleSheet.create({
   },
   label: {
     fontSize: 12,
-    letterSpacing: 1,
     marginBottom: 13,
     marginTop: 7,
     color: COLOR_GREY,
@@ -26,7 +26,7 @@ export default StyleSheet.create({
     paddingBottom: 13,
     paddingRight: 20,
     borderWidth: 0.8,
-    borderColor: COLOR_GREY,
+    borderColor: SILVER_GREY_RGBA,
     // backgroundColor: 'white',
     flexDirection: 'row',
     borderRadius: 18,
@@ -64,7 +64,21 @@ export default StyleSheet.create({
     fontFamily: FontFamilyMedium,
   },
 
+  activeTitleWhite: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: 'black',
+    fontFamily: FontFamilyMedium,
+  },
+
   activeTitleOpen: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: 'white',
+    fontFamily: FontFamilyMedium,
+  },
+
+  activeTitleOpenWhite: {
     fontSize: 12,
     fontWeight: '600',
     color: 'white',

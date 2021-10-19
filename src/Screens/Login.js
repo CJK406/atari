@@ -33,7 +33,7 @@ import {
   signupActionApi,
   appConfig,
 } from '../Api';
-import {InputLogin} from '../Components';
+import {InputLogin, Header} from '../Components';
 import LinearGradient from 'react-native-linear-gradient';
 import DeviceInfo from 'react-native-device-info';
 import {API_TOKEN, SALT_MIX_KEY, IV_KEY} from '@env';
@@ -152,12 +152,13 @@ class LoginScreen extends React.Component {
     return (
       // <View style={{alignItems: 'center', flex: 1,minHeight:windowHeight}}>
       <SafeAreaView style={{alignItems: 'center', flex: 1}}>
+        <Header darkmode={this.props.darkmode} />
         <ImageBackground
           style={{alignItems: 'center', flex: 1}}
           resizeMode="cover"
           source={Images.login_background_new}>
           <StatusBar
-            backgroundColor={this.props.darkmode ? 'black' : STATUS_BAR_COLOR}
+            backgroundColor={this.props.darkmode ? 'black' : 'white'}
           />
           <ImageBackground
             resizeMode="cover"
@@ -189,6 +190,7 @@ class LoginScreen extends React.Component {
                 style={[
                   styles.carret,
                   {height: headerHeight, opacity: transp},
+                  {marginTop: -10},
                 ]}>
                 <TouchableOpacity
                   style={{alignItems: 'center', justifyContent: 'center'}}
@@ -202,6 +204,7 @@ class LoginScreen extends React.Component {
                         width: '100%',
                         textAlign: 'center',
                         fontFamily: FontFamilyMedium,
+                        fontWeight: '600',
                       }}>
                       LOGIN
                     </Animated.Text>
@@ -209,6 +212,7 @@ class LoginScreen extends React.Component {
                 </TouchableOpacity>
                 {/* START LOGIN INPUT */}
                 <InputLogin
+                  checkAutoCapital={true}
                   placeholder="Email"
                   // returnKeyType="email"
                   onChangeText={(text) => this.setState({login_email: text})}
@@ -220,6 +224,7 @@ class LoginScreen extends React.Component {
                 />
 
                 <InputLogin
+                  checkAutoCapital={true}
                   placeholder="Password"
                   // returnKeyType="next"
                   onSubmitEditing={() => {
@@ -260,7 +265,7 @@ class LoginScreen extends React.Component {
                     {
                       backgroundColor: RED_BTN_COLOR,
                       justifyContent: 'center',
-
+                      width: '50%',
                       marginTop: 20,
                       shadowColor: 'red',
                       shadowOffset: {
@@ -270,7 +275,7 @@ class LoginScreen extends React.Component {
                       shadowOpacity: 0.46,
                       shadowRadius: 11.14,
 
-                      elevation: 17,
+                      elevation: this.props.darkmode ? 17 : 0,
                     },
                   ]}
                   onPress={this.doLogin}>
@@ -293,11 +298,11 @@ class LoginScreen extends React.Component {
 
                 <TouchableOpacity
                   onPress={() => this.goNext('ForgotPassword')}
-                  style={{paddingTop: 10, marginTop: 20}}>
+                  style={{paddingTop: 10, marginTop: 10}}>
                   <Text
                     style={{
-                      color: this.props.darkmode ? COLOR_GREY : 'grey',
-                      fontSize: 13,
+                      color: this.props.darkmode ? COLOR_GREY : SILVER_GREY,
+                      fontSize: 12,
                       lineHeight: 30,
                       fontWeight: '500',
                       fontFamily: FontFamilyRegular,
@@ -347,6 +352,7 @@ class LoginScreen extends React.Component {
                           fontSize: 18,
                           textAlign: 'center',
                           fontFamily: FontFamilyMedium,
+                          fontWeight: '600',
                         }}>
                         SIGNUP
                       </Text>
@@ -354,6 +360,7 @@ class LoginScreen extends React.Component {
                   </TouchableOpacity>
                   <InputLogin
                     mode={1}
+                    checkAutoCapital={false}
                     darkmode={this.props.darkmode}
                     placeholder="Name"
                     placeholderTextColor={COLOR_GREY}
@@ -374,6 +381,7 @@ class LoginScreen extends React.Component {
 
                   <InputLogin
                     mode={1}
+                    checkAutoCapital={true}
                     darkmode={this.props.darkmode}
                     placeholder="Email"
                     placeholderTextColor={COLOR_GREY}
@@ -381,6 +389,7 @@ class LoginScreen extends React.Component {
                   />
                   <InputLogin
                     mode={1}
+                    checkAutoCapital={true}
                     darkmode={this.props.darkmode}
                     placeholder="Password"
                     placeholderTextColor={COLOR_GREY}
@@ -406,7 +415,7 @@ class LoginScreen extends React.Component {
                       {
                         backgroundColor: RED_BTN_COLOR,
                         justifyContent: 'center',
-                        marginTop: 20,
+                        marginTop: 40,
                         shadowColor: RED_BTN_COLOR,
                         shadowOffset: {
                           width: 0,
@@ -414,8 +423,8 @@ class LoginScreen extends React.Component {
                         },
                         shadowOpacity: 0.46,
                         shadowRadius: 11.14,
-                        elevation: 17,
-                        height: 45,
+                        elevation: this.props.darkmode ? 17 : 0,
+                        height: 38,
                       },
                     ]}
                     onPress={this.doSignup}>
@@ -425,7 +434,7 @@ class LoginScreen extends React.Component {
                       <Text
                         style={{
                           fontSize: 18,
-                          color: COLOR_GREY,
+                          color: this.props.darkmode ? COLOR_GREY : 'white',
                           fontFamily: FontFamilyMedium,
                         }}>
                         SIGN UP
@@ -615,12 +624,13 @@ const styles = StyleSheet.create({
   },
   inputContainer2: {
     marginTop: 30,
-    width: windowWidth * 0.7,
+    width: windowWidth * 0.4,
     opacity: 1,
     borderRadius: 500,
-    borderColor: 'black',
-    borderWidth: 1,
+    // borderColor: 'black',
+    // borderWidth: 1,
     height: 40,
+
     flexDirection: 'row',
     alignItems: 'center',
   },

@@ -7,7 +7,12 @@ const History = (props) => {
   const color = props.darkmode ? 'white' : 'black';
   return (
     <View style={{...styles.container}}>
-      <View style={styles.backGroundHistory}>
+      <View
+        style={
+          props.darkmode
+            ? styles.backGroundHistory
+            : styles.backGroundHistoryWhite
+        }>
         <FlatList
           ListHeaderComponent={() => (
             <Text style={{fontSize: 16, color: color, marginBottom: 10}}>

@@ -4,6 +4,7 @@ import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {connect} from 'react-redux';
@@ -55,22 +56,27 @@ const tabsArr = {
   Dashboard1: {
     component: DashboardScreen,
     icon: 'reader-outline',
+    image: false,
   },
   Trade: {
     component: TradeScreen,
     icon: 'pulse-outline',
+    image: true,
   },
   QRScan: {
     component: NftScreen,
     icon: 'apps',
+    image: false,
   },
   Exchange: {
     component: ExchangeScreen,
     icon: 'swap-horizontal-outline',
+    image: false,
   },
   Setting: {
     component: ProfileScreen,
     icon: 'settings-outline',
+    image: false,
   },
 };
 const StactTabs = (elprops) => (

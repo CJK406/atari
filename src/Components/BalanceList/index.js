@@ -4,7 +4,11 @@ import React from 'react';
 import {View, Text, Image} from 'react-native';
 import {CustomStyles} from '../../Constant';
 import FontawesomeIcon from 'react-native-vector-icons/FontAwesome';
-import {COLOR_GREY, FontFamilyMedium} from '../../Utils/AppContants';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  SILVER_GREY_RGBA,
+} from '../../Utils/AppContants';
 
 const BalanceList = (props) => {
   return (
@@ -18,7 +22,7 @@ const BalanceList = (props) => {
               // marginLeft: 10,
               // width: '95%',
               borderWidth: 0.5,
-              borderColor: COLOR_GREY,
+              borderColor: SILVER_GREY_RGBA,
               borderRadius: 200,
               paddingRight: 5,
               // paddingLeft: 10,
@@ -33,7 +37,7 @@ const BalanceList = (props) => {
               // marginLeft: 10,
               // width: '95%',
               borderWidth: 0.5,
-              borderColor: 'black',
+              borderColor: SILVER_GREY_RGBA,
               borderRadius: 200,
               paddingRight: 10,
               paddingLeft: 10,

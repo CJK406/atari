@@ -2,7 +2,6 @@
 
 import {StyleSheet} from 'react-native';
 import {Images} from './Assets';
-import {COLOR_GREY} from './Utils/AppContants';
 export const CustomStyles = StyleSheet.create({
   container: {
     flex: 1,

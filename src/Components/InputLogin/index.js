@@ -20,7 +20,6 @@ class InputLogin extends React.Component {
       <View
         style={[
           this.props.mode ? styles.container2 : styles.container,
-
           this.props.darkmode
             ? {borderColor: COLOR_GREY}
             : {borderColor: SILVER_GREY},
@@ -29,7 +28,14 @@ class InputLogin extends React.Component {
         <View style={{width: '90%'}}>
           <TextInput
             ref={this.props.inputReff}
-            style={[styles.input, {fontFamily: FontFamilyMedium}]}
+            style={[
+              styles.input,
+              {
+                fontFamily: FontFamilyMedium,
+                color: this.props.darkmode ? 'white' : 'black',
+              },
+            ]}
+            autoCapitalize={this.props.checkAutoCapital ? 'none' : 'characters'}
             placeholderTextColor={COLOR_GREY}
             {...this.props}
           />

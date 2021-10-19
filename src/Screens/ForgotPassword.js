@@ -29,6 +29,8 @@ import {
   TRANSPARENT_COLOR,
 } from '../Utils/AppContants';
 
+import {Header} from '../Components';
+
 class ForgotPasswordScreen extends React.Component {
   state = {
     email: '',
@@ -44,142 +46,146 @@ class ForgotPasswordScreen extends React.Component {
     const {thirdcolor} = this.props.theme.palette;
     const {email} = this.state;
     return (
-      // <SafeAreaView
-      //   style={{...CustomStyles.container, backgroundColor: 'rgb(33,33,33)'}}>
-      <ImageBackground
-        resizeMode="cover"
-        source={
-          this.props.darkmode
-            ? Images.login_background_new
-            : Images.forgotPBackGround
-        }
-        style={[CustomStyles.container, CustomStyles.innerContainer]}>
-        <StatusBar
-          backgroundColor={this.props.darkmode ? 'black' : STATUS_BAR_COLOR}
-          barStyle={this.props.darkmode ? 'light-content' : 'dark-content'}
-        />
-        <View
-          style={{
-            backgroundColor: this.props.darkmode ? TRANSPARENT_COLOR : 'white',
-            padding: 20,
-            borderRadius: 8,
-          }}>
-          <View style={styles.lock_container}>
-            <Image
-              style={styles.lock_image}
-              source={
-                this.props.darkmode ? Images.white_lock : Images.redForgotLock
-              }
-            />
-          </View>
-          <Text
+      <SafeAreaView style={{flex: 1}}>
+        <Header darkmode={this.props.darkmode} />
+        <ImageBackground
+          resizeMode="cover"
+          source={
+            this.props.darkmode
+              ? Images.login_background_new
+              : Images.forgotPBackGround
+          }
+          style={[CustomStyles.container, CustomStyles.innerContainer]}>
+          <StatusBar
+            backgroundColor={this.props.darkmode ? 'black' : STATUS_BAR_COLOR}
+            barStyle={this.props.darkmode ? 'light-content' : 'dark-content'}
+          />
+          <View
             style={{
-              fontSize: 20,
-              lineHeight: 28,
-              textAlign: 'center',
-              color: this.props.darkmode ? 'white' : 'black',
-              marginBottom: 35,
-              fontFamily: FontFamilyMedium,
+              backgroundColor: this.props.darkmode
+                ? TRANSPARENT_COLOR
+                : 'white',
+              padding: 20,
+              // marginTop: -30,
+              borderRadius: 8,
             }}>
-            FORGET PASSWORD
-          </Text>
-          <View style={styles.descContainer}>
-            <Text
-              style={{
-                ...styles.customWriting,
-                color: this.props.darkmode ? COLOR_GREY : '#454545',
-              }}>
-              We just need your registered email to send you password reset
-              instructions
-            </Text>
-          </View>
-          <View style={{justifyContent: 'center', alignItems: 'center'}}>
-            <View
-              style={{
-                ...CustomStyles.forgetPasswordInputContainer,
-
-                borderColor: COLOR_GREY,
-              }}>
-              <TextInput
-                value={email}
-                style={{
-                  ...CustomStyles.textInput,
-                  color: 'white',
-                  borderRadius: 500,
-                  width: '100%',
-                  fontWeight: 'normal',
-                  fontFamily: FontFamilyMedium,
-                  fontSize: 14,
-                }}
-                onChangeText={(text) => this.setState({email: text})}
-                autoCompleteType="email"
-                keyboardType="email-address"
-                placeholder="Email"
-                placeholderTextColor={
-                  this.props.darkmode ? 'rgba(255,255,255,0.3)' : COLOR_GREY
+            <View style={styles.lock_container}>
+              <Image
+                style={styles.lock_image}
+                source={
+                  this.props.darkmode ? Images.white_lock : Images.redForgotLock
                 }
               />
             </View>
-            <TouchableOpacity
-              onPress={this.goNext}
+            <Text
               style={{
-                backgroundColor: 'rgb(227,30,45)',
-                // width: '%',
-                padding: 10,
-                paddingLeft: 30,
-                paddingRight: 30,
-                borderRadius: 500,
+                fontSize: 20,
+                lineHeight: 28,
                 textAlign: 'center',
-                justifyContent: 'center',
-                shadowColor: '#000',
-                shadowOffset: {width: 0, height: 10},
-                shadowOpacity: 0.8,
-                shadowRadius: 2,
+                color: this.props.darkmode ? 'white' : 'black',
+                marginBottom: 35,
+                fontFamily: FontFamilyMedium,
               }}>
-              {this.state.button_loading ? (
-                <ActivityIndicator size="large" color="white" />
-              ) : (
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: this.props.darkmode ? 'white' : 'white',
-                    textAlign: 'center',
-                    fontFamily: FontFamilyMedium,
-                  }}>
-                  SEND EMAIL
-                </Text>
-              )}
-
-              {/* <Text style={{fontSize: 18,color:'white',textAlign:'center',justifyContent:'center',fontWeight:'bold'}}>SEND EMAIL</Text> */}
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.goBack}
-              style={{
-                marginTop: 60,
-                borderRadius: 10,
-
-                ...CustomStyles.buttonStyle,
-                ...CustomStyles.smallBtn,
-                ...CustomStyles.longBtn,
-                backgroundColor: thirdcolor,
-              }}>
+              FORGOT PASSWORD
+            </Text>
+            <View style={styles.descContainer}>
               <Text
                 style={{
-                  fontSize: 12,
-                  color: this.props.darkmode ? SILVER_GREY : COLOR_GREY,
-                  lineHeight: 33,
-                  letterSpacing: 1,
-                  textDecorationLine: 'underline',
-                  fontFamily: FontFamilyMedium,
+                  ...styles.customWriting,
+                  color: this.props.darkmode ? COLOR_GREY : '#454545',
                 }}>
-                BACK TO LOGIN
+                We just need your registered email to send you password reset
+                instructions
               </Text>
-            </TouchableOpacity>
-            {console.log('darkmode', this.props.darkmode)}
+            </View>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <View
+                style={{
+                  ...CustomStyles.forgetPasswordInputContainer,
+
+                  borderColor: COLOR_GREY,
+                }}>
+                <TextInput
+                  value={email}
+                  style={{
+                    ...CustomStyles.textInput,
+                    color: this.props.darkmode ? 'white' : 'black',
+                    borderRadius: 500,
+                    width: '100%',
+                    fontWeight: 'normal',
+                    fontFamily: FontFamilyMedium,
+                    fontSize: 14,
+                  }}
+                  autoCapitalize="none"
+                  onChangeText={(text) => this.setState({email: text})}
+                  autoCompleteType="email"
+                  keyboardType="email-address"
+                  placeholder="Email"
+                  placeholderTextColor={
+                    this.props.darkmode ? 'rgba(255,255,255,0.3)' : COLOR_GREY
+                  }
+                />
+              </View>
+              <TouchableOpacity
+                onPress={this.goNext}
+                style={{
+                  backgroundColor: 'rgb(227,30,45)',
+                  // width: '%',
+                  padding: 10,
+                  paddingLeft: 30,
+                  paddingRight: 30,
+                  borderRadius: 500,
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                  shadowColor: '#000',
+                  shadowOffset: {width: 0, height: 10},
+                  shadowOpacity: 0.8,
+                  shadowRadius: 2,
+                }}>
+                {this.state.button_loading ? (
+                  <ActivityIndicator size="large" color="white" />
+                ) : (
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: this.props.darkmode ? 'white' : 'white',
+                      textAlign: 'center',
+                      fontFamily: FontFamilyMedium,
+                    }}>
+                    SEND EMAIL
+                  </Text>
+                )}
+
+                {/* <Text style={{fontSize: 18,color:'white',textAlign:'center',justifyContent:'center',fontWeight:'bold'}}>SEND EMAIL</Text> */}
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={this.goBack}
+                style={{
+                  marginTop: 60,
+                  borderRadius: 10,
+
+                  ...CustomStyles.buttonStyle,
+                  ...CustomStyles.smallBtn,
+                  ...CustomStyles.longBtn,
+                  backgroundColor: thirdcolor,
+                }}>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: this.props.darkmode ? SILVER_GREY : COLOR_GREY,
+                    lineHeight: 33,
+                    letterSpacing: 1,
+                    textDecorationLine: 'underline',
+                    fontFamily: FontFamilyMedium,
+                  }}>
+                  BACK TO LOGIN
+                </Text>
+              </TouchableOpacity>
+              {console.log('darkmode', this.props.darkmode)}
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-      // </SafeAreaView>
+        </ImageBackground>
+      </SafeAreaView>
     );
   }
   goNext = async () => {

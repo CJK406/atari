@@ -3,8 +3,8 @@ import {TRANSPARENT_COLOR} from '../../Utils/AppContants';
 
 export default StyleSheet.create({
   container: {
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 15,
+    paddingRight: 15,
     paddingTop: 10,
     paddingBottom: 10,
     // paddingBottom: 75,
@@ -14,6 +14,12 @@ export default StyleSheet.create({
     backgroundColor: TRANSPARENT_COLOR,
     padding: 10,
     paddingTop: 15,
-    borderRadius: 3,
+    borderRadius: 7,
+  },
+  backGroundHistoryWhite: {
+    backgroundColor: 'white',
+    padding: 10,
+    paddingTop: 15,
+    borderRadius: 7,
   },
 });

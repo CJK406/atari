@@ -113,7 +113,7 @@ export async function signup(data) {
   return await postAPI('user/register', data);
 }
 export async function setPincode(data) {
-  return await postAPI('setPinCode', data);
+  return await postAPI('user/setPinCode', data);
 }
 
 export async function forgetPassword(data) {

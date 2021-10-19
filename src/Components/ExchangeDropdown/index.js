@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, {useEffect, useState} from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -21,14 +23,17 @@ const ExchangeDropdown = (props) => {
   const txColor = darkmode ? 'white' : 'black';
   const carretIcon = () => {
     const icon = isOpen ? 'angle-up' : 'angle-down';
-    const iconColor = isOpen ? 'black' : 'white';
+    const iconColor = isOpen ? 'white' : 'black';
     return (
-      //   <Icon name={icon} style={styles.carretIcon} size={20} color={iconColor} />
-      <Image
-        resizeMode="contain"
-        source={Images.tramsDrop}
-        style={{height: 13, width: 13}}
-      />
+      // <Icon name={icon} style={styles.carretIcon} size={20} color={txColor} />
+      <View>
+        <Image
+          tintColor={darkmode ? 'white' : 'black'}
+          resizeMode="contain"
+          source={Images.tramsDrop}
+          style={{height: 13, width: 13}}
+        />
+      </View>
     );
   };
   const onSelect = (selectedIdx) => {
@@ -39,7 +44,7 @@ const ExchangeDropdown = (props) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={{color: txColor, ...styles.label}}>{label}:</Text>
+      <Text style={{...styles.label, color: txColor}}>{label}:</Text>
       <TouchableOpacity
         onPress={() =>
           isOpen ? props.drop_open(false) : props.drop_open(true)
@@ -66,7 +71,15 @@ const ExchangeDropdown = (props) => {
             }}></View>
           <View style={styles.activeLabel}>
             <Text
-              style={[isOpen ? styles.activeTitleOpen : styles.activeTitle]}>
+              style={
+                darkmode
+                  ? [isOpen ? styles.activeTitleOpen : styles.activeTitle]
+                  : [
+                      isOpen
+                        ? styles.activeTitleOpenWhite
+                        : styles.activeTitleWhite,
+                    ]
+              }>
               {items[activeKey]['f_text']} {items[activeKey]['text']}
             </Text>
             <Text

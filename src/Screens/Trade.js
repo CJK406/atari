@@ -1,12 +1,13 @@
 /* eslint-disable */
 
 import * as React from 'react';
-import {SafeAreaView, FlatList, View} from 'react-native';
+import {SafeAreaView, FlatList, View, ImageBackground} from 'react-native';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
 import {CustomStyles, Headers} from '../Constant';
 import {Header, TradeHeaderTab, TabsTrade} from '../Components';
 import {updateBallance, setAllHistory} from '../Redux/Actions';
+import {Images} from '../Assets';
 
 class TradeScreen extends React.Component {
   state = {
@@ -87,20 +88,28 @@ class TradeScreen extends React.Component {
           balance={balance}
           tabData={this.state.tabData}
           trigger={this.state.triggerRefresh}
+          darkmode={darkmode}
         />
       </View>
     );
     return (
       <SafeAreaView
         style={{...CustomStyles.container, backgroundColor: themeBG}}>
-        {/* <PTRView onRefresh={()=>this.refresh()} > */}
-        <FlatList
-          data={[{id: 1}]}
-          renderItem={renderItem}
-          refreshing={this.state.triggerRefresh}
-          keyExtractor={(item) => item?.id}
-          onRefresh={() => this.refresh()}
-        />
+        <ImageBackground
+          style={{flex: 1}}
+          source={
+            darkmode ? Images.dashBoardBackImage : Images.forgotPBackGround
+          }
+          resizeMode="cover">
+          {/* <PTRView onRefresh={()=>this.refresh()} > */}
+          <FlatList
+            data={[{id: 1}]}
+            renderItem={renderItem}
+            refreshing={this.state.triggerRefresh}
+            keyExtractor={(item) => item?.id}
+            onRefresh={() => this.refresh()}
+          />
+        </ImageBackground>
         {/* </PTRView> */}
       </SafeAreaView>
     );

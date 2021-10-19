@@ -19,7 +19,13 @@ import {CustomStyles} from '../Constant';
 import {Header, SettingMenu} from '../Components';
 import {settingTheme, authLogout, settingNotification} from '../Redux/Actions';
 import {Images} from '../Assets';
-import {TRANSPARENT_COLOR} from '../Utils/AppContants';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  FontFamilyRegular,
+  SILVER_GREY,
+  TRANSPARENT_COLOR,
+} from '../Utils/AppContants';
 
 const Menus = [
   {
@@ -127,7 +133,7 @@ class ProfileScreen extends React.Component {
           themeToggle={this.state.themeToggle}
         /> */}
         <SettingMenu
-          icon={Images.themeIcon}
+          icon={themeToggle ? Images.themeIcon : Images.settingThemeIcon}
           title={Menus[3].name}
           subTitle={Menus[3].description}
           withAction
@@ -136,23 +142,33 @@ class ProfileScreen extends React.Component {
           themeToggle={this.state.themeToggle}
         />
         <SettingMenu
-          icon={Images.supporticon}
+          icon={themeToggle ? Images.supporticon : Images.supportBlackIcon}
           title={Menus[4].name}
           onPress={() => Linking.openURL('mailto:token@atari.com')}
           themeToggle={this.state.themeToggle}
         />
         <SettingMenu
-          icon={Images.refresh}
+          icon={themeToggle ? Images.refresh : Images.resetThemeBlackIcon}
           title={Menus[5].name}
           onPress={() => this.goToDetail('ResetPin')}
           themeToggle={this.state.themeToggle}
         />
         <SettingMenu
-          icon={Images.logouticon}
+          icon={themeToggle ? Images.logouticon : Images.logoutThemeBlack}
           title={Menus[6].name}
           onPress={this.logout}
           themeToggle={this.state.themeToggle}
         />
+        <Text
+          style={{
+            color: themeToggle ? SILVER_GREY : 'black',
+            fontFamily: FontFamilyRegular,
+            marginLeft: 15,
+            marginTop: 5,
+            fontSize: 14,
+          }}>
+          Version 2.07.02
+        </Text>
       </View>
     );
     return (
@@ -160,13 +176,17 @@ class ProfileScreen extends React.Component {
         style={{
           ...CustomStyles.container,
         }}>
-        <ImageBackground style={{flex: 1}} source={Images.login_background_new}>
+        <ImageBackground
+          style={{flex: 1}}
+          source={
+            themeToggle ? Images.login_background_new : Images.forgotPBackGround
+          }>
           {/* <ImageBackground style={{flex: 1}} source={Images.loginShadow}> */}
           <View style={[CustomStyles.container, styles.innerContainer]}>
             <Header darkmode={themeToggle} />
             <View
               style={{
-                backgroundColor: TRANSPARENT_COLOR,
+                backgroundColor: themeToggle ? TRANSPARENT_COLOR : 'white',
                 margin: 25,
                 // justifyContent: 'center',
                 // alignItems: 'center',

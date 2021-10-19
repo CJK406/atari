@@ -7,8 +7,10 @@ import {CustomStyles, CryptoStyle} from '../../Constant';
 import moment from 'moment';
 import {
   COLOR_GREY,
+  FontFamilyMedium,
   FontFamilyRegular,
   SILVER_GREY,
+  SILVER_GREY_RGBA,
 } from '../../Utils/AppContants';
 import {Images} from '../../Assets';
 class HistoryItem extends React.Component {
@@ -93,7 +95,7 @@ class HistoryItem extends React.Component {
           style={{
             marginBottom: 15,
             flexDirection: 'row',
-            borderBottomColor: COLOR_GREY,
+            borderBottomColor: SILVER_GREY_RGBA,
             borderBottomWidth: 0.5,
             paddingBottom: 10,
             alignItems: 'center',
@@ -121,39 +123,43 @@ class HistoryItem extends React.Component {
             style={{
               height: '85%',
               width: 0.5,
-              backgroundColor: COLOR_GREY,
+              backgroundColor: SILVER_GREY_RGBA,
               marginRight: 9,
             }}></View>
-          <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+          <View
+            style={{flex: 1, flexDirection: 'row', alignItems: 'flex-start'}}>
             <View>
+              <View style={{flexDirection: 'row'}}>
+                <Text
+                  style={[
+                    darkmode ? CustomStyles.d_text : CustomStyles.w_text,
+                    {
+                      fontSize: 14,
+                      fontFamily: FontFamilyMedium,
+                      color: darkmode ? COLOR_GREY : 'black',
+                    },
+                  ]}>
+                  {type}
+                </Text>
+                <Image
+                  resizeMode="contain"
+                  style={{marginLeft: 5, height: 7, width: 7, marginTop: 5}}
+                  source={transIcon}
+                />
+              </View>
               <Text
                 style={[
                   darkmode ? CustomStyles.d_text : CustomStyles.w_text,
                   {
-                    fontSize: 18,
-                    fontFamily: FontFamilyRegular,
-                    color: COLOR_GREY,
-                  },
-                ]}>
-                {type}
-              </Text>
-              <Text
-                style={[
-                  darkmode ? CustomStyles.d_text : CustomStyles.w_text,
-                  {
-                    fontSize: 8,
+                    fontSize: 10,
+                    marginTop: 2,
                     color: SILVER_GREY,
                     fontFamily: FontFamilyRegular,
                   },
                 ]}>
-                {moment(date).format('DD-MM-YYY h:m:s')}
+                {moment(date).format('DD-MM-YYYY h:m:s')}
               </Text>
             </View>
-            <Image
-              resizeMode="contain"
-              style={{marginLeft: 5, height: 10, width: 10}}
-              source={transIcon}
-            />
           </View>
           <View style={{width: '35%'}}>
             <Text

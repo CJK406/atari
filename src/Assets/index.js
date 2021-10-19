@@ -48,4 +48,12 @@ export const Images = {
   sendArrow: require('./sendArrow.png'),
   redForgotLock: require('./redForgotLock.png'),
   forgotPBackGround: require('./forgotPBackGround.png'),
+  settingThemeIcon: require('./settingThemeIcon.png'),
+  resetThemeBlackIcon: require('./resetThemeBlackIcon.png'),
+  logoutThemeBlack: require('./logoutThemeBlack.png'),
+  supportBlackIcon: require('./supportBlackIcon.png'),
+  directionDarkArrow: require('./directionDarkArrow.png'),
+  blackDollar: require('./blackDollar.png'),
+  dashBoardBackImage: require('./dashBoardBackImage.png'),
+  tradeicon: require('./tradeicon.png'),
 };
