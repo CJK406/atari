@@ -9,14 +9,20 @@ import {
   TouchableOpacity,
   View,
   Image,
+  ImageBackground,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
 import {CustomStyles} from '../Constant';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Header} from '../Components';
 import {Images} from '../Assets';
 import {reset_pin} from '../Api';
 import Toast from 'react-native-simple-toast';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  TRANSPARENT_COLOR,
+} from '../Utils/AppContants';
 
 class ResetPinScreen extends React.Component {
   state = {
@@ -49,8 +55,10 @@ class ResetPinScreen extends React.Component {
           ...CustomStyles.container,
           backgroundColor: darkmode ? 'rgb(33,33,33)' : 'white',
         }}>
-        <View style={[CustomStyles.container]}>
-          <View
+        <ImageBackground style={{flex: 1}} source={Images.lightAtariBack}>
+          <Header darkmode={darkmode} />
+          <View style={[CustomStyles.container]}>
+            {/* <View
             style={{
               backgroundColor: darkmode ? 'black' : 'white',
               height: 74,
@@ -70,58 +78,73 @@ class ResetPinScreen extends React.Component {
             <Text style={{fontSize: 18, color: darkmode ? 'white' : 'black'}}>
               Reset Pincode
             </Text>
-          </View>
-          <View>
-            <View>
-              <Image
-                source={Images.reset_pin_animation}
-                style={{width: '100%', height: 250}}></Image>
-              <Text
-                style={{
-                  color: darkmode ? 'white' : 'black',
-                  fontSize: 20,
-                  width: '90%',
-                  textAlign: 'center',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  alignSelf: 'center',
-                  marginTop: 40,
-                  marginBottom: 40,
-                }}>
-                An email will be sent to your registered email address
-              </Text>
-            </View>
-            <TouchableOpacity
-              onPress={this.reset_pin}
+          </View> */}
+            <View
               style={{
-                backgroundColor: 'rgb(227,30,45)',
-                width: '60%',
-                marginBottom: 200,
-                textAlign: 'center',
-                justifyContent: 'center',
-                marginLeft: '18%',
-                padding: 20,
-                borderRadius: 10,
-                textAlign: 'center',
-                justifyContent: 'center',
+                backgroundColor: TRANSPARENT_COLOR,
+                position: 'absolute',
+                width: '100%',
+                bottom: 0,
+                height: '58%',
+                borderTopRightRadius: 20,
+                borderTopLeftRadius: 20,
               }}>
-              {this.state.loading ? (
-                <ActivityIndicator size="large" color="white" />
-              ) : (
+              <View>
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                  <Image
+                    resizeMode="contain"
+                    source={Images.email_notification}
+                    style={{
+                      width: 200,
+                      height: 200,
+                      marginTop: '-25%',
+                    }}></Image>
+                </View>
                 <Text
                   style={{
-                    fontSize: 18,
-                    color: 'white',
+                    color: darkmode ? COLOR_GREY : 'black',
+                    fontSize: 12,
                     textAlign: 'center',
                     justifyContent: 'center',
-                    fontWeight: 'bold',
+                    alignItems: 'center',
+                    marginTop: 30,
+                    marginBottom: 30,
+                    fontFamily: FontFamilyMedium,
                   }}>
-                  RESET
+                  An email will be sent to your registered email address
                 </Text>
-              )}
-            </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                onPress={this.reset_pin}
+                style={{
+                  backgroundColor: 'rgb(227,30,45)',
+                  width: '60%',
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                  marginLeft: '18%',
+                  padding: 9,
+                  borderRadius: 100,
+                  textAlign: 'center',
+                  justifyContent: 'center',
+                }}>
+                {this.state.loading ? (
+                  <ActivityIndicator size="large" color="white" />
+                ) : (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      color: 'white',
+                      textAlign: 'center',
+                      justifyContent: 'center',
+                      fontFamily: FontFamilyMedium,
+                    }}>
+                    RESET
+                  </Text>
+                )}
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </ImageBackground>
       </SafeAreaView>
     );
   }

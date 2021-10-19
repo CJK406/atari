@@ -72,7 +72,7 @@ export async function postAPI(url, data) {
   } catch (error) {
     if (error.response) {
       const result = EncryptionUtils.getInstance().decrypt(error);
-      console.log('result', result.response);
+      console.log('result', result);
       return result.response.data;
     }
     throw error;

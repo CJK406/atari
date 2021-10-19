@@ -80,7 +80,6 @@ class DashboardScreen extends React.Component {
   }
 
   setView() {
-    // Todo
     this.state.isLoading = true;
     InteractionManager.runAfterInteractions(() => {
       this.props.updateMenuStatus(true);
@@ -123,7 +122,6 @@ class DashboardScreen extends React.Component {
   check() {
     if (isInternetConnected() === true) {
       this.resetError();
-      // Todo
       this.setState({
         isLoading: false,
       });

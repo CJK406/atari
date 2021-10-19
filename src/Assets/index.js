@@ -56,4 +56,6 @@ export const Images = {
   blackDollar: require('./blackDollar.png'),
   dashBoardBackImage: require('./dashBoardBackImage.png'),
   tradeicon: require('./tradeicon.png'),
+  email_notification: require('./email_notification.png'),
+  lightAtariBack: require('./lightAtariBack.png'),
 };

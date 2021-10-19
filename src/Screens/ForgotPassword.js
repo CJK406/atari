@@ -174,14 +174,13 @@ class ForgotPasswordScreen extends React.Component {
                     fontSize: 12,
                     color: this.props.darkmode ? SILVER_GREY : COLOR_GREY,
                     lineHeight: 33,
-                    letterSpacing: 1,
+                    // letterSpacing: 1,
                     textDecorationLine: 'underline',
                     fontFamily: FontFamilyMedium,
                   }}>
                   BACK TO LOGIN
                 </Text>
               </TouchableOpacity>
-              {console.log('darkmode', this.props.darkmode)}
             </View>
           </View>
         </ImageBackground>

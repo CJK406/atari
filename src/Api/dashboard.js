@@ -67,5 +67,5 @@ export async function exchange(currency, amount) {
 }
 
 export async function appConfig() {
-  return await getAPI('app_config');
+  return await getAPI('user/app_config');
 }
