@@ -1,13 +1,20 @@
+/* eslint-disable */
+
 import React from 'react';
 import {View, Text, TextInput, Image} from 'react-native';
 import styles from './style';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {COLOR_GREY, SILVER_GREY_RGBA} from '../../Utils/AppContants';
+import {Images} from '../../Assets';
 
 const ExchangeInput = (props) => {
-  const txColor = props.darkmode ? 'white' : 'black';
+  const txColor = props.darkmode ? 'white' : SILVER_GREY_RGBA;
   return (
     <View style={styles.container}>
-      <Text style={{...styles.label, color: txColor}}>{props.label}</Text>
+      <Text
+        style={{...styles.label, color: props.darkmode ? 'white' : 'black'}}>
+        {props.label}
+      </Text>
       <View style={styles.row}>
         {props.Type ? (
           <TextInput
@@ -16,24 +23,37 @@ const ExchangeInput = (props) => {
             }}
             value={props.inputValue}
             placeholder="Type amount"
-            placeholderTextColor={'rgba(0,0,0,0.6)'}
-            style={styles.inputField}
+            placeholderTextColor={txColor}
+            style={props.darkmode ? styles.inputField : styles.inputFieldBlack}
             keyboardType={'numeric'}
           />
         ) : (
-          <Text style={styles.textField}>{props.inputValue}</Text>
+          <Text
+            style={props?.darkmode ? styles.textBuyNow : styles.textBuyNowDark}>
+            {props.inputValue}
+          </Text>
         )}
-        <View style={styles.iconContainer}>
+        <View
+          style={
+            props.darkmode ? styles.iconContainer : styles.iconContainerBlack
+          }>
           <Image source={props.centerIcon} style={styles.centerIcon} />
         </View>
-        <Text style={styles.textField}>{props.usdInputValue}</Text>
+        <Text
+          style={props?.darkmode ? styles.textField : styles.textFieldBlack}>
+          {props.usdInputValue}
+        </Text>
         {/* <Text onChangeText={(e) => {props.onChangeUsdInput(e)}} value={props.usdInputValue} style={styles.textField} >{props.usdInputValue}</Text> */}
-        <View style={styles.iconContainer}>
-          <Ionicons
-            name="logo-usd"
-            style={{marginTop: 7}}
-            size={30}
-            color="black"
+        <View
+          style={
+            props.darkmode
+              ? styles.iconContainerLast
+              : styles.iconContainerLastBlack
+          }>
+          <Image
+            resizeMode="contain"
+            style={{height: 20}}
+            source={props?.darkmode ? Images.dollarTrans : Images.blackDollar}
           />
         </View>
       </View>

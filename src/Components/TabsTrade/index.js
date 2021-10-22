@@ -6,6 +6,9 @@ import {withTheme} from 'react-native-material-ui';
 import History from '../History';
 import TopContent from './TopContent';
 import Charts from './Charts';
+import {TRANSPARENT_COLOR} from '../../Utils/AppContants';
+import {Images} from '../../Assets';
+import {SideTrade} from '../../Components';
 
 const TabsTrade = (props) => {
   const {darkmode, tabData, balance, currentTab, history, history_finish} =
@@ -29,25 +32,36 @@ const TabsTrade = (props) => {
 
   return (
     <View>
-      <TopContent
-        darkmode={darkmode}
-        currentTab={currentTab}
-        balance={balance}
-        chart_data={chart_data}
-        tabData={props.tabData}
-      />
-      <Charts
-        darkmode={darkmode}
-        onFinishLoad={(data) => setChartData(data)}
-        tabData={props.tabData}
-        trigger={props.trigger}
-      />
-      <History
-        label={'Activity'}
-        data={history.body.obj[tabData.history_t]}
-        darkmode={darkmode}
-        isLoad={!history_finish}
-      />
+      <View
+        style={{
+          backgroundColor: darkmode ? TRANSPARENT_COLOR : 'white',
+          margin: 15,
+          position: 'relative',
+          borderRadius: 7,
+        }}>
+        <TopContent
+          darkmode={darkmode}
+          currentTab={currentTab}
+          balance={balance}
+          chart_data={chart_data}
+          tabData={props.tabData}
+        />
+        <Charts
+          darkmode={darkmode}
+          onFinishLoad={(data) => setChartData(data)}
+          tabData={props.tabData}
+          trigger={props.trigger}
+        />
+      </View>
+
+      {history.body && history.body.length === 0 ? null : (
+        <History
+          label={'Activity'}
+          data={history.body.obj[tabData.history_t]}
+          darkmode={darkmode}
+          isLoad={!history_finish}
+        />
+      )}
     </View>
   );
 };

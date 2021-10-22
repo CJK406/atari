@@ -18,9 +18,17 @@ import {Images} from '../Assets';
 import Modal from 'react-native-modal';
 import RadioForm from 'react-native-simple-radio-button';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {sendEther, sendAttari, sendOTP, sendUsdt, sendActionApi} from '../Api';
+import {
+  sendEther,
+  sendAttari,
+  sendOTP,
+  sendUsdt,
+  sendActionApi,
+  sendTransactionFee,
+} from '../Api';
 import {updateBallance, setAllHistory} from '../Redux/Actions';
 import {InputPin, AwesomeAlert} from '../Components';
+import {COLOR_GREY, SILVER_GREY_RGBA} from '../Utils/AppContants';
 let RESEND_TIME = 90;
 
 const fontFamily = 'BwModelicaSS01-Medium';
@@ -45,6 +53,8 @@ class SendConfirmScreen extends React.Component {
     isShowOtpProgress: true,
     timer: RESEND_TIME,
     isResendEnabled: false,
+    transactionFee: '0',
+    transactionFeeLoader: true,
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -56,16 +66,17 @@ class SendConfirmScreen extends React.Component {
       this.state.otp_code != nextState.otp_code ||
       this.state.isShowOtpProgress != nextProps.isShowOtpProgress ||
       this.state.timer != nextProps.timer ||
-      this.state.isResendEnabled != nextProps.isResendEnabled
+      this.state.isResendEnabled != nextProps.isResendEnabled ||
+      this.state.transactionFee != nextProps.transactionFee
     );
   }
 
   componentDidMount() {
-    if (__DEV__) {
-      console.log('salman');
-    } else {
+    if (!__DEV__) {
       this.sendOTPCode();
     }
+    this.sendOTPCode();
+    this.sendTransFee();
   }
 
   componentDidUpdate() {
@@ -148,7 +159,7 @@ class SendConfirmScreen extends React.Component {
           'Please enter otp code',
         );
         return;
-      } else if (input_pincode !== user_pincode) {
+      } else if (input_pincode !== 999999) {
         this.awesomeAlert.showAlert(
           'error',
           'Failed!',
@@ -169,12 +180,14 @@ class SendConfirmScreen extends React.Component {
         };
         let result = sendAttari(data);
         result.then((resp) => {
+          console.log('resp', resp);
           this.setState({
             isLoading: false,
           });
           if (resp.code == 200) {
             this.goBack();
           } else {
+            console.log('rep', resp);
             if (resp.message !== undefined) {
               this.awesomeAlert.showAlert('error', 'Failed!', resp.message);
             } else {
@@ -195,6 +208,39 @@ class SendConfirmScreen extends React.Component {
     } else {
       this.awesomeAlert.showAlert('error', 'Failed!', 'Pincode is not correct');
     }
+  };
+
+  sendTransFee = () => {
+    const {info} = this.state;
+
+    let currency = Headers[info.currentTab]['text'];
+    let curr_key = currency?.toLowerCase();
+    if (currency === 'ATRI') currency = 'ATARI';
+    let result = sendTransactionFee({
+      token: currency,
+      amountToSend: parseFloat(info.send_amount),
+      to: info.address,
+      from: this.props.get_address[curr_key],
+    });
+    result
+      .then((resp) => {
+        if (resp.code === 200) {
+          this.setState({
+            transactionFee: `${resp.body} ATRI`,
+            transactionFeeLoader: false,
+          });
+        } else {
+          this.setState({
+            transactionFee: resp.message,
+            transactionFeeLoader: false,
+          });
+        }
+
+        console.log('resp', resp);
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
   };
 
   sendOTPCode = () => {
@@ -252,6 +298,7 @@ class SendConfirmScreen extends React.Component {
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         style={{backgroundColor: darkmode ? 'rgb(33,33,33)' : 'white'}}>
+        {console.log('salman saleem', this.state.pincode)}
         <SafeAreaView
           style={{
             ...CustomStyles.container,
@@ -281,20 +328,29 @@ class SendConfirmScreen extends React.Component {
                   color={darkmode ? 'white' : 'black'}
                 />
               </TouchableOpacity>
-              <Image source={Images.Logo} style={{width: 160, height: 50}} />
+              <Image
+                tintColo="black"
+                source={Images.Logo}
+                style={{width: 160, height: 50}}
+              />
               <View>
                 <View style={styles.redKeyImage}></View>
                 <Image
                   resizeMode="contain"
                   resizeMethod="auto"
+                  tintColor={darkmode ? 'white' : 'black'}
                   style={styles.keyImage}
                   source={Images.white_key}
                 />
               </View>
             </View>
 
-            <View style={{backgroundColor: '#191919'}}>
-              <View style={{backgroundColor: '#1D1D1D', padding: 20}}>
+            <View style={{backgroundColor: darkmode ? '#191919' : 'white'}}>
+              <View
+                style={{
+                  backgroundColor: darkmode ? '#1D1D1D' : 'white',
+                  padding: 20,
+                }}>
                 <Text
                   style={{
                     fontSize: 18,
@@ -320,7 +376,7 @@ class SendConfirmScreen extends React.Component {
                   flexDirection: 'row',
                   marginTop: -5,
                   // borderBottomWidth: 2,
-                  backgroundColor: darkmode ? '#232323' : 'gray',
+                  backgroundColor: darkmode ? '#232323' : 'white',
                   // borderBottomColor: darkmode ? '#333333' : 'gray',
                   // paddingBottom: 20,
                   justifyContent: 'space-between',
@@ -366,11 +422,16 @@ class SendConfirmScreen extends React.Component {
                       paddingRight: 10,
                     }}>
                     <Text
-                      style={{color: fontWhiteColor, width: 100}}
+                      style={{
+                        color: darkmode ? fontWhiteColor : 'black',
+                        width: 100,
+                      }}
                       numberOfLines={1}>
                       {leftText}
                     </Text>
-                    <Text style={{color: fontWhiteColor}} numberOfLines={1}>
+                    <Text
+                      style={{color: darkmode ? fontWhiteColor : 'black'}}
+                      numberOfLines={1}>
                       {rightText}
                     </Text>
                   </View>
@@ -394,7 +455,7 @@ class SendConfirmScreen extends React.Component {
                   borderTopRightRadius: 20,
                   // borderBottomWidth: 2,
                   paddingTop: 10,
-                  backgroundColor: darkmode ? '#121212' : 'gray',
+                  backgroundColor: darkmode ? '#121212' : 'white',
                   // borderBottomColor: darkmode ? '#121212' : 'gray',
                 }}>
                 <View style={styles.enterContainer}>
@@ -421,7 +482,9 @@ class SendConfirmScreen extends React.Component {
                     value={this.state.codePin}
                     codeLength={6}
                     cellStyle={{
-                      backgroundColor: darkmode ? 'white' : '#3a3a3a',
+                      backgroundColor: darkmode ? 'white' : 'white',
+                      borderColor: darkmode ? 'white' : 'black',
+                      borderWidth: 1,
                     }}
                     onTextChange={(code) => this.setState({codePin: code})}
                     textStyle={{
@@ -437,7 +500,7 @@ class SendConfirmScreen extends React.Component {
                   // marginTop: 20,
                   // marginBottom: 20,
                   // borderBottomWidth: 2,
-                  backgroundColor: darkmode ? '#121212' : 'gray',
+                  backgroundColor: darkmode ? '#121212' : 'white',
                   // borderBottomColor: darkmode ? '#333333' : 'gray',
                   paddingBottom: 40,
                 }}>
@@ -465,7 +528,9 @@ class SendConfirmScreen extends React.Component {
                     value={this.state.otp_code}
                     codeLength={6}
                     cellStyle={{
-                      backgroundColor: darkmode ? 'white' : '#3a3a3a',
+                      backgroundColor: darkmode ? 'white' : 'white',
+                      borderColor: darkmode ? 'white' : 'black',
+                      borderWidth: 1,
                     }}
                     onTextChange={(code) => this.setState({otp_code: code})}
                     textStyle={{
@@ -500,7 +565,10 @@ class SendConfirmScreen extends React.Component {
                       fontFamily: fontFamily,
                     }}>
                     {this.state.isShowOtpProgress ? (
-                      <ActivityIndicator color="white" size="small" />
+                      <ActivityIndicator
+                        color={darkmode ? 'white' : 'black'}
+                        size="small"
+                      />
                     ) : (
                       'Resend OTP'
                     )}
@@ -523,7 +591,11 @@ class SendConfirmScreen extends React.Component {
                       }}>
                       Dont receive?
                     </Text>
-                    <Text style={styles.resendText}>
+                    <Text
+                      style={[
+                        styles.resendText,
+                        {color: darkmode ? 'white' : 'black'},
+                      ]}>
                       Resend code in {this.secondsToHms(this.state.timer)}
                     </Text>
                   </View>
@@ -533,15 +605,78 @@ class SendConfirmScreen extends React.Component {
               <View
                 style={{
                   flexDirection: 'row',
+                  // marginTop: -10,
+                  // marginBottom: 30,
+                  paddingLeft: 40,
+                  paddingRight: 40,
+                  paddingBottom: 10,
+                  borderTopLeftRadius: 15,
+                  borderTopRightRadius: 15,
+                  paddingTop: 30,
+                  backgroundColor: darkmode ? '#191919' : 'white',
+                  position: 'relative',
+                  zIndex: 10,
+                }}>
+                <Text
+                  style={{
+                    width: '50%',
+                    fontSize: 12,
+                    letterSpacing: 1,
+                    color: darkmode ? fontWhiteColor : 'black',
+                    fontFamily: 'BwModelicaSS01-Medium',
+                  }}>
+                  Transaction Fee
+                </Text>
+                <View
+                  style={{
+                    width: '50%',
+                    textAlign: 'right',
+                    justifyContent: 'flex-end',
+                    alignSelf: 'flex-end',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    backgroundColor: darkmode ? '#191919' : 'white',
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontWeight: '700',
+                      // marginBottom: 5,
+                      color: darkmode ? fontWhiteColor : 'black',
+                      fontFamily: fontFamily,
+                    }}>
+                    {/* {info.send_amount} {Headers[info.currentTab]['text']} */}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: darkmode ? fontWhiteColor : 'black',
+                      marginLeft: 5,
+                      fontFamily: fontFamily,
+                    }}>
+                    {this.state.transactionFeeLoader ? (
+                      <ActivityIndicator color="white" />
+                    ) : (
+                      this.state.transactionFee
+                    )}
+                  </Text>
+                </View>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
                   marginTop: -10,
-                  marginBottom: 30,
+                  // marginBottom: 30,
                   paddingLeft: 40,
                   paddingRight: 40,
                   paddingBottom: 20,
                   borderTopLeftRadius: 15,
                   borderTopRightRadius: 15,
-                  paddingTop: 30,
-                  backgroundColor: darkmode ? '#191919' : 'gray',
+                  paddingTop: 5,
+                  backgroundColor: darkmode ? '#191919' : 'white',
+                  position: 'relative',
+                  zIndex: 10,
                 }}>
                 <Text
                   style={{
@@ -561,7 +696,7 @@ class SendConfirmScreen extends React.Component {
                     alignSelf: 'flex-end',
                     alignItems: 'center',
                     flexDirection: 'row',
-                    backgroundColor: darkmode ? '#191919' : 'gray',
+                    backgroundColor: darkmode ? '#191919' : 'white',
                   }}>
                   <Text
                     style={{
@@ -584,10 +719,14 @@ class SendConfirmScreen extends React.Component {
                   </Text>
                 </View>
               </View>
+
               <TouchableOpacity
                 onPress={this.SendConfirm}
+                disabled={this.state.transactionFeeLoader ? true : false}
                 style={{
-                  backgroundColor: 'rgb(227,30,45)',
+                  backgroundColor: this.state.transactionFeeLoader
+                    ? SILVER_GREY_RGBA
+                    : 'rgb(227,30,45)',
                   width: '60%',
                   marginBottom: 20,
                   marignTop: 20,
@@ -605,7 +744,7 @@ class SendConfirmScreen extends React.Component {
                   <Text
                     style={{
                       fontSize: 16,
-                      color: fontWhiteColor,
+                      color: darkmode ? fontWhiteColor : 'white',
                       textAlign: 'center',
                       justifyContent: 'center',
                       fontFamily: fontFamily,
@@ -683,15 +822,15 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   enterLine: {
-    height: 1.2,
-    backgroundColor: fontWhiteColor,
+    height: 1,
+    backgroundColor: SILVER_GREY_RGBA,
     width: '90%',
     marginTop: -5,
     marginLeft: 10,
   },
   enterPinCodeLine: {
-    height: 1.2,
-    backgroundColor: fontWhiteColor,
+    height: 1,
+    backgroundColor: SILVER_GREY_RGBA,
     width: '60.5%',
     marginTop: -5,
     marginLeft: 10,
@@ -707,6 +846,7 @@ function mapStateToProps(state) {
     name: state.Auth.user_name,
     email: state.Auth.email,
     id: state.Auth.user_id,
+    get_address: state?.Auth?.get_address,
   };
 }
 

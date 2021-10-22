@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import {getAPI, postAPI, getGraphAPI} from './base';
+import {getAPI, postAPI, getGraphAPI, getAPIWithBody} from './base';
 
 export async function currency_convert(currency, value) {
   return await postAPI('transaction/currency-convert', {
@@ -47,6 +47,10 @@ export async function sendAttari(data) {
 export async function sendOTP() {
   return await getAPI('transaction/sendOTPTransaction');
 }
+
+export async function sendTransactionFee(data) {
+  return await postAPI('transaction/transactionFee', data);
+}
 // export async function reset_pin() {
 //   return await getAPI('forgetPincode');
 // }
@@ -67,5 +71,5 @@ export async function exchange(currency, amount) {
 }
 
 export async function appConfig() {
-  return await getAPI('app_config');
+  return await getAPI('user/app_config');
 }

@@ -1,46 +1,154 @@
-import { StyleSheet } from 'react-native'
+import {StyleSheet} from 'react-native';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  SILVER_GREY_RGBA,
+} from '../../Utils/AppContants';
 
 export default StyleSheet.create({
-    container:{
-        marginTop:20
-    },
-    label:{
-        fontSize:14,
-        marginBottom:20
-    },
-    row:{
-        flexDirection:'row'
-    },
-    inputField:{
-        width:'38%',
-        height:50,
-        backgroundColor:'white',
-        borderWidth:1,
-        borderColor:'black'
-    },
-    textField:{
-        width:'38%',
-        height:50,
-        backgroundColor:'white',
-        borderWidth:1,
-        borderColor:'black',
-        padding:4,
-        paddingTop:15
-    },
-    iconContainer:{
-        width:'12%', 
-        backgroundColor:'white', 
-        alignSelf:'center', 
-        alignItems:'center', 
-        borderWidth:0.5, 
-        borderColor:'black',
-        height:50
-    },
-    centerIcon:{
-        width:30,
-        height:30,
-        alignItems:'center',
-        alignSelf:'center', 
-        marginTop:10
-    }
-})
+  container: {
+    marginTop: 10,
+  },
+  label: {
+    fontSize: 12,
+    marginBottom: 13,
+    fontFamily: FontFamilyMedium,
+    marginLeft: 7,
+    marginTop: 7,
+  },
+  row: {
+    flexDirection: 'row',
+    borderRadius: 100,
+  },
+  inputField: {
+    width: '36%',
+    height: 40,
+    // backgroundColor: 'white',
+    borderWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100,
+    paddingLeft: 13,
+    color: 'white',
+    fontFamily: FontFamilyMedium,
+    fontSize: 12,
+  },
+  inputFieldBlack: {
+    width: '36%',
+    height: 40,
+    // backgroundColor: 'white',
+    borderWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100,
+    paddingLeft: 13,
+    fontFamily: FontFamilyMedium,
+    fontSize: 12,
+    color: 'black',
+  },
+  textField: {
+    width: '36%',
+    height: 40,
+    borderWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    color: 'white',
+    textAlignVertical: 'center',
+    fontFamily: FontFamilyMedium,
+    paddingLeft: 15,
+    fontSize: 12,
+  },
+
+  textBuyNow: {
+    width: '36%',
+    height: 40,
+    borderWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    paddingLeft: 15,
+    textAlignVertical: 'center',
+    color: COLOR_GREY,
+    fontFamily: FontFamilyMedium,
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100,
+    fontSize: 12,
+  },
+  textBuyNowDark: {
+    width: '36%',
+    height: 40,
+    borderWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    paddingLeft: 15,
+    textAlignVertical: 'center',
+    color: 'black',
+    fontFamily: FontFamilyMedium,
+    borderTopLeftRadius: 100,
+    borderBottomLeftRadius: 100,
+    fontSize: 12,
+  },
+  textFieldBlack: {
+    width: '36%',
+    height: 40,
+    borderWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    paddingLeft: 15,
+    textAlignVertical: 'center',
+    color: 'black',
+    fontFamily: FontFamilyMedium,
+  },
+  iconContainer: {
+    width: '15%',
+    // backgroundColor: 'white',
+    alignSelf: 'center',
+    alignItems: 'center',
+    borderTopWidth: 0.8,
+    borderBottomWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    height: 40,
+  },
+
+  iconContainerBlack: {
+    width: '15%',
+    // backgroundColor: 'white',
+    alignSelf: 'center',
+    alignItems: 'center',
+    borderTopWidth: 0.8,
+    borderBottomWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    height: 40,
+  },
+  iconContainerLast: {
+    width: '15%',
+    // backgroundColor: 'white',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopWidth: 0.8,
+    borderBottomWidth: 0.8,
+    borderRightWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    height: 40,
+    borderTopRightRadius: 100,
+    borderBottomRightRadius: 100,
+  },
+
+  iconContainerLastBlack: {
+    width: '15%',
+    // backgroundColor: 'white',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderTopWidth: 0.8,
+    borderBottomWidth: 0.8,
+    borderRightWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    height: 40,
+    borderTopRightRadius: 100,
+    borderBottomRightRadius: 100,
+  },
+  centerIcon: {
+    width: 20,
+    height: 20,
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginTop: 10,
+  },
+});

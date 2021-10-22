@@ -4,7 +4,11 @@ import React from 'react';
 import {View, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './style';
-import {COLOR_GREY, FontFamilyMedium} from '../../Utils/AppContants';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  SILVER_GREY,
+} from '../../Utils/AppContants';
 
 class InputLogin extends React.Component {
   constructor(props) {
@@ -13,12 +17,25 @@ class InputLogin extends React.Component {
 
   render() {
     return (
-      <View style={this.props.mode ? styles.container2 : styles.container}>
+      <View
+        style={[
+          this.props.mode ? styles.container2 : styles.container,
+          this.props.darkmode
+            ? {borderColor: COLOR_GREY}
+            : {borderColor: SILVER_GREY},
+        ]}>
         <View style={{width: '10%'}} />
         <View style={{width: '90%'}}>
           <TextInput
             ref={this.props.inputReff}
-            style={[styles.input, {fontFamily: FontFamilyMedium}]}
+            style={[
+              styles.input,
+              {
+                fontFamily: FontFamilyMedium,
+                color: this.props.darkmode ? 'white' : 'black',
+              },
+            ]}
+            autoCapitalize={this.props.checkAutoCapital ? 'none' : 'words'}
             placeholderTextColor={COLOR_GREY}
             {...this.props}
           />

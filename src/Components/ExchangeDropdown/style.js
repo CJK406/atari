@@ -1,52 +1,102 @@
-import {StyleSheet} from 'react-native'
+import {StyleSheet} from 'react-native';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  FontFamilyRegular,
+  SILVER_GREY,
+  SILVER_GREY_RGBA,
+} from '../../Utils/AppContants';
 
 export default StyleSheet.create({
-    container:{
-        position:'relative'
-    },
-    label:{
-        fontSize:14, 
-        letterSpacing:2,  
-        marginBottom:20
-    },
-    selectBox:{
-        width:'100%',
-        paddingLeft:20,
-        paddingTop:15,
-        paddingBottom:15,
-        paddingRight:20,
-        borderWidth:1,
-        borderColor:'black',
-        backgroundColor:'white', 
-        flexDirection:'row'
-    },
-    activeIcon:{
-        width:20, 
-        height:20, 
-        marginTop:13,
-        marginRight:20
-    },
-    activeLabel:{
-        width:'65%', 
-        alignSelf:'center'
-    },
-    activeTitle:{
-        fontSize:15,
-        fontWeight:'600'
-    },
-    carretIcon:{
-        marginTop:13,
-        marginRight:15,
-        textAlign:'right'
-    },
-    dropdownLabelContainer:{
-        width:'80%', 
-        alignSelf:'center'
-    },
-    dropdownContainer:{
-        position:'absolute', 
-        width:'100%',
-        top:100, 
-        zIndex:999999
-    }
-})
+  container: {
+    position: 'relative',
+  },
+  label: {
+    fontSize: 12,
+    marginBottom: 13,
+    marginTop: 7,
+    color: COLOR_GREY,
+    fontFamily: FontFamilyMedium,
+    marginLeft: 7,
+  },
+  selectBox: {
+    width: '100%',
+    paddingLeft: 15,
+    paddingTop: 13,
+    paddingBottom: 13,
+    paddingRight: 20,
+    borderWidth: 0.8,
+    borderColor: SILVER_GREY_RGBA,
+    // backgroundColor: 'white',
+    flexDirection: 'row',
+    borderRadius: 18,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+
+  selectedBox: {
+    width: '100%',
+    paddingLeft: 15,
+    paddingTop: 13,
+    paddingBottom: 13,
+    paddingRight: 20,
+    borderWidth: 1,
+    borderColor: 'black',
+    backgroundColor: 'black',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  activeIcon: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
+  },
+  activeLabel: {
+    width: '65%',
+    // alignSelf: 'center',
+    color: 'white',
+    fontFamily: FontFamilyMedium,
+  },
+  activeTitle: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: 'white',
+    fontFamily: FontFamilyMedium,
+  },
+
+  activeTitleWhite: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: 'black',
+    fontFamily: FontFamilyMedium,
+  },
+
+  activeTitleOpen: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: 'white',
+    fontFamily: FontFamilyMedium,
+  },
+
+  activeTitleOpenWhite: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: 'white',
+    fontFamily: FontFamilyMedium,
+  },
+  carretIcon: {
+    marginTop: 13,
+    marginRight: 15,
+    textAlign: 'right',
+  },
+  dropdownLabelContainer: {
+    width: '80%',
+    alignSelf: 'center',
+  },
+  dropdownContainer: {
+    position: 'absolute',
+    width: '100%',
+    top: 100,
+    zIndex: 999999,
+  },
+});

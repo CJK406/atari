@@ -11,6 +11,11 @@ import {Images} from '../../Assets';
 
 import Receive from './Receive';
 import Send from './Send';
+import {
+  BwModelicaMedium,
+  BwModelicaRegular,
+  TRANSPARENT_COLOR,
+} from '../../Utils/AppContants';
 const TopContent = (props) => {
   const [cryptoBalance, setCryptoBalance] = useState(0);
   const [usdBalance, setUsdBalance] = useState(0);
@@ -117,6 +122,7 @@ const TopContent = (props) => {
             label={'Receive'}
             icon={'trending-down-outline'}
             position={'left'}
+            image={Images.revieveArrow}
             onPress={() => showModalComponent(0)}
           />
         )}
@@ -132,6 +138,7 @@ const TopContent = (props) => {
           <SideTrade
             label={'Send'}
             icon={'trending-up-outline'}
+            image={Images.sendArrow}
             position={'right'}
             onPress={() => showModalComponent(1)}
           />
@@ -139,12 +146,17 @@ const TopContent = (props) => {
       </View>
       <View style={styles.cryptoPriceContainer}>
         {/* <Text style={{color:cryptoColor,fontSize:19}}>{currency} ${chart_data.y[chart_data.y.length-1]}</Text> */}
-        <Text style={{color: cryptoColor, fontSize: 19}}>
+        <Text
+          style={{
+            color: cryptoColor,
+            fontSize: 12,
+            fontFamily: BwModelicaRegular,
+          }}>
           {currency} ${parseFloat(currPrice).toFixed(4)}
         </Text>
 
         <View style={{backgroundColor: cryptoColor, ...styles.badgeRadius}}>
-          <Text style={{fontWeight: '700'}}>
+          <Text style={{fontFamily: BwModelicaMedium}}>
             {chart_data?.percent?.toFixed(2)}%
           </Text>
         </View>

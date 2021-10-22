@@ -7,6 +7,8 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   View,
+  ImageBackground,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
@@ -15,7 +17,12 @@ import {CustomStyles} from '../Constant';
 import Toast from 'react-native-simple-toast';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {authSetPincode} from '../Redux/Actions';
-import {InputPin} from '../Components';
+import {InputPin, Header} from '../Components';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  TRANSPARENT_COLOR,
+} from '../Utils/AppContants';
 
 class SetPincodeScreen extends React.Component {
   state = {
@@ -51,97 +58,121 @@ class SetPincodeScreen extends React.Component {
     return (
       <SafeAreaView
         style={{...CustomStyles.container, backgroundColor: 'rgb(33,33,33)'}}>
-        <KeyboardAwareScrollView>
-          <View style={[CustomStyles.container]}>
+        <StatusBar
+          barStyle={this.props.darkmode ? 'light-content' : 'dark-content'}
+          backgroundColor={this.props.darkmode ? 'black' : 'white'}
+        />
+        {/* <KeyboardAwareScrollView> */}
+        <ImageBackground
+          style={{flex: 1}}
+          source={
+            this.props.darkmode
+              ? Images.login_background_new
+              : Images.forgotPBackGround
+          }>
+          {/* <View style={[CustomStyles.container]}> */}
+          <Header darkmode={this.props.darkmode} />
+          <View
+            style={{
+              backgroundColor: this.props.darkmode
+                ? TRANSPARENT_COLOR
+                : 'white',
+              marginTop: 30,
+              margin: 10,
+              paddingBottom: 15,
+            }}>
             <View>
-              <View>
-                <Image
-                  source={Images.reset_pin_animation}
-                  style={{width: '100%', height: 250}}></Image>
-                <Text
-                  style={{
-                    color: 'white',
-                    fontSize: 25,
-                    textAlign: 'center',
-                    marginTop: 30,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    alignSelf: 'center',
-                  }}>
-                  Set your pin code
-                </Text>
-                <Text
-                  style={{
-                    color: 'white',
-                    fontSize: 16,
-                    width: '90%',
-                    textAlign: 'center',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    alignSelf: 'center',
-                    marginTop: 10,
-                    marginBottom: 40,
-                  }}>
-                  Will be requested when making a transaction
-                </Text>
-              </View>
-              <View
+              <Text
                 style={{
-                  marginTop: 20,
-                  paddingBottom: 20,
+                  color: this.props.darkmode ? 'white' : 'black',
+                  fontSize: 18,
+                  textAlign: 'center',
+                  marginTop: 30,
                   justifyContent: 'center',
-                  flex: 1,
                   alignItems: 'center',
+                  alignSelf: 'center',
+                  fontFamily: FontFamilyMedium,
                 }}>
-                <InputPin
-                  value={this.state.codePin}
-                  codeLength={6}
-                  cellStyle={{
-                    backgroundColor: '#eee',
-                    borderColor: 'gray',
-                  }}
-                  cellStyleFocused={{
-                    borderColor: 'black',
-                    backgroundColor: 'white',
-                  }}
-                  onTextChange={(code) => this.setState({codePin: code})}
-                  textStyle={{fontSize: 24, color: 'black'}}
-                  // onFulfill={() => {
-                  //     Keyboard.dismiss();
-                  // }}
-                />
-              </View>
-              <TouchableOpacity
-                onPress={this.SetPin}
+                Set your pin code
+              </Text>
+              <Text
                 style={{
-                  backgroundColor: 'rgb(227,30,45)',
-                  width: '60%',
-                  marginBottom: 20,
+                  color: this.props.darkmode ? 'white' : 'black',
+                  fontSize: 12,
+                  width: '90%',
                   textAlign: 'center',
                   justifyContent: 'center',
-                  padding: 20,
-                  borderRadius: 10,
-                  alignSelf: 'center',
                   alignItems: 'center',
+                  alignSelf: 'center',
+                  marginTop: 10,
+                  marginBottom: 40,
+                  fontFamily: FontFamilyMedium,
                 }}>
-                {this.state.loading ? (
-                  <ActivityIndicator size="large" color="white" />
-                ) : (
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      color: 'white',
-                      textAlign: 'center',
-                      justifyContent: 'center',
-                      fontWeight: 'bold',
-                    }}>
-                    Verify
-                  </Text>
-                )}
-              </TouchableOpacity>
+                Will be requested when making a transaction
+              </Text>
             </View>
+            <View
+              style={{
+                marginTop: 20,
+                paddingBottom: 20,
+                justifyContent: 'center',
+                flex: 1,
+                alignItems: 'center',
+              }}>
+              <InputPin
+                value={this.state.codePin}
+                codeLength={6}
+                cellStyle={{
+                  backgroundColor: this.props.darkmode
+                    ? COLOR_GREY
+                    : COLOR_GREY,
+                  borderColor: 'gray',
+                }}
+                cellStyleFocused={{
+                  borderColor: 'black',
+                  backgroundColor: COLOR_GREY,
+                }}
+                onTextChange={(code) => this.setState({codePin: code})}
+                textStyle={{fontSize: 24, color: 'black'}}
+                // onFulfill={() => {
+                //     Keyboard.dismiss();
+                // }}
+              />
+            </View>
+            <TouchableOpacity
+              onPress={this.SetPin}
+              style={{
+                backgroundColor: 'rgb(227,30,45)',
+                width: '60%',
+                marginBottom: 20,
+                textAlign: 'center',
+                justifyContent: 'center',
+                padding: 20,
+                borderRadius: 10,
+                alignSelf: 'center',
+                alignItems: 'center',
+                marginTop: 80,
+              }}>
+              {this.state.loading ? (
+                <ActivityIndicator size="large" color="white" />
+              ) : (
+                <Text
+                  style={{
+                    fontSize: 16,
+                    color: 'white',
+                    textAlign: 'center',
+                    justifyContent: 'center',
+                    fontFamily: FontFamilyMedium,
+                    textTransform: 'uppercase',
+                  }}>
+                  Verify
+                </Text>
+              )}
+            </TouchableOpacity>
           </View>
-        </KeyboardAwareScrollView>
+          {/* </View> */}
+        </ImageBackground>
+        {/* </KeyboardAwareScrollView> */}
       </SafeAreaView>
     );
   }
@@ -159,6 +190,7 @@ function mapStateToProps(state) {
   return {
     pincode: state.Auth.pincode,
     user_id: state.Auth.user_id,
+    darkmode: state.Auth.darkmode,
   };
 }
 export default connect(mapStateToProps, {authSetPincode})(

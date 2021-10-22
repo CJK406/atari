@@ -1,39 +1,260 @@
 {
-  "portalInfo": {
-    "_id": "613665bb275deb067fcca20b",
-    "balAtt": 0,
-    "balBNB": 0,
-    "balBtc": 0,
-    "balEth": 0,
-    "balLtc": 0,
-    "balUsdt": 0,
-    "publicAddress": "0x48259f6a0e232f38c2a94467726bd827590da291",
-    "publicAddressBTC": "1KT7z6bKW841EMnStfcTSVaXYs8GgkLnjX",
-    "publicAddressLTC": "LhRBZH4Wd72RWs9kVv2oETQ1tZZaJDvz44",
-    "userId": "613665bb275deb067fcca206"
-  },
-  "pricePerToken": {
-    "atariPrice": "0.067477378262075",
-    "bnbPrice": "419.18119695231",
-    "btcPrice": "46078.883565529",
-    "ethPrice": "3425.9952941706",
-    "ltcPrice": "184.38577566503",
-    "usdtPrice": "1.0015970895779"
-  },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTM2NjViYjI3NWRlYjA2N2ZjY2EyMDYiLCJpYXQiOjE2MzE0NjUxOTh9.uDvfdUMjuch4EsMBgIcMFSiTFQzDqCQhT6HCowt3TDg",
-  "user": {
-    "_id": "613665bb275deb067fcca206",
-    "balAtt": 0,
-    "balBNB": 0,
-    "balBtc": 0,
-    "balEth": 0,
-    "balLtc": 0,
-    "balUsdt": 0,
-    "email": "m.azhar.ali@outlook.com",
-    "name": "Azhar Ali",
-    "publicAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
-    "publicAddressBTC": "19no4sTNK6JfhCLTncQhdezTNKUMUAnbGg",
-    "publicAddressLTC": "LMmh7nSKXvpC2a7xoSGggfAAN51e3hHZcV",
-    "role": "user"
+  "code": 200,
+  "message": "GetTransactionHistory 613665bb275deb067fcca206",
+  "body": {
+    "obj": {
+      "ATARI": [
+        {
+          "_id": "613e3f62dbc2351ba0b2929c",
+          "rawContract": {
+            "rawValue": "",
+            "address": "",
+            "decimals": 0
+          },
+          "app": "CUB",
+          "network": "Mainnet",
+          "webhookType": "NONE",
+          "fromAddress": "0x4ad28c844f9dd073056c982880fd5c8adf33e4e5",
+          "toAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
+          "users": [
+            "61376ff24906a14f91d1164f",
+            "613665bb275deb067fcca206"
+          ],
+          "blockNum": "",
+          "hash": "",
+          "category": "offchain",
+          "value": 1,
+          "e_value": 0,
+          "e_from": 0,
+          "erc721TokenId": "",
+          "asset": "ATARI",
+          "lockedType": "None",
+          "transactionType": "",
+          "status": "Success",
+          "createdAt": "2021-09-12T17:56:50.038Z",
+          "updatedAt": "2021-09-12T17:56:50.038Z",
+          "__v": 0
+        },
+        {
+          "_id": "613e3ecedbc2351ba0b29221",
+          "rawContract": {
+            "rawValue": "",
+            "address": "",
+            "decimals": 0
+          },
+          "app": "CUB",
+          "network": "Mainnet",
+          "webhookType": "NONE",
+          "fromAddress": "0x4ad28c844f9dd073056c982880fd5c8adf33e4e5",
+          "toAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
+          "users": [
+            "61376ff24906a14f91d1164f",
+            "613665bb275deb067fcca206"
+          ],
+          "blockNum": "",
+          "hash": "",
+          "category": "offchain",
+          "value": 1,
+          "e_value": 0,
+          "e_from": 0,
+          "erc721TokenId": "",
+          "asset": "ATARI",
+          "lockedType": "None",
+          "transactionType": "",
+          "status": "Success",
+          "createdAt": "2021-09-12T17:54:22.761Z",
+          "updatedAt": "2021-09-12T17:54:22.761Z",
+          "__v": 0
+        },
+        {
+          "_id": "613e3e79dbc2351ba0b291be",
+          "rawContract": {
+            "rawValue": "",
+            "address": "",
+            "decimals": 0
+          },
+          "app": "CUB",
+          "network": "Mainnet",
+          "webhookType": "NONE",
+          "fromAddress": "0x4ad28c844f9dd073056c982880fd5c8adf33e4e5",
+          "toAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
+          "users": [
+            "61376ff24906a14f91d1164f",
+            "613665bb275deb067fcca206"
+          ],
+          "blockNum": "",
+          "hash": "",
+          "category": "offchain",
+          "value": 1,
+          "e_value": 0,
+          "e_from": 0,
+          "erc721TokenId": "",
+          "asset": "ATARI",
+          "lockedType": "None",
+          "transactionType": "",
+          "status": "Success",
+          "createdAt": "2021-09-12T17:52:57.415Z",
+          "updatedAt": "2021-09-12T17:52:57.415Z",
+          "__v": 0
+        },
+        {
+          "_id": "613e3c7bdbc2351ba0b2915f",
+          "rawContract": {
+            "rawValue": "",
+            "address": "",
+            "decimals": 0
+          },
+          "app": "CUB",
+          "network": "Mainnet",
+          "webhookType": "NONE",
+          "fromAddress": "0x4ad28c844f9dd073056c982880fd5c8adf33e4e5",
+          "toAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
+          "users": [
+            "61376ff24906a14f91d1164f",
+            "613665bb275deb067fcca206"
+          ],
+          "blockNum": "",
+          "hash": "",
+          "category": "offchain",
+          "value": 1,
+          "e_value": 0,
+          "e_from": 0,
+          "erc721TokenId": "",
+          "asset": "ATARI",
+          "lockedType": "None",
+          "transactionType": "",
+          "status": "Success",
+          "createdAt": "2021-09-12T17:44:27.517Z",
+          "updatedAt": "2021-09-12T17:44:27.517Z",
+          "__v": 0
+        }
+      ]
+    },
+    "arr": [
+      {
+        "rawContract": {
+          "rawValue": "",
+          "address": "",
+          "decimals": 0
+        },
+        "app": "CUB",
+        "network": "Mainnet",
+        "webhookType": "NONE",
+        "fromAddress": "0x4ad28c844f9dd073056c982880fd5c8adf33e4e5",
+        "toAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
+        "users": [
+          "61376ff24906a14f91d1164f",
+          "613665bb275deb067fcca206"
+        ],
+        "blockNum": "",
+        "hash": "",
+        "category": "offchain",
+        "value": 1,
+        "e_value": 0,
+        "e_from": 0,
+        "erc721TokenId": "",
+        "asset": "ATARI",
+        "lockedType": "None",
+        "transactionType": "",
+        "status": "Success",
+        "_id": "613e3f62dbc2351ba0b2929c",
+        "createdAt": "2021-09-12T17:56:50.038Z",
+        "updatedAt": "2021-09-12T17:56:50.038Z",
+        "__v": 0
+      },
+      {
+        "rawContract": {
+          "rawValue": "",
+          "address": "",
+          "decimals": 0
+        },
+        "app": "CUB",
+        "network": "Mainnet",
+        "webhookType": "NONE",
+        "fromAddress": "0x4ad28c844f9dd073056c982880fd5c8adf33e4e5",
+        "toAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
+        "users": [
+          "61376ff24906a14f91d1164f",
+          "613665bb275deb067fcca206"
+        ],
+        "blockNum": "",
+        "hash": "",
+        "category": "offchain",
+        "value": 1,
+        "e_value": 0,
+        "e_from": 0,
+        "erc721TokenId": "",
+        "asset": "ATARI",
+        "lockedType": "None",
+        "transactionType": "",
+        "status": "Success",
+        "_id": "613e3ecedbc2351ba0b29221",
+        "createdAt": "2021-09-12T17:54:22.761Z",
+        "updatedAt": "2021-09-12T17:54:22.761Z",
+        "__v": 0
+      },
+      {
+        "rawContract": {
+          "rawValue": "",
+          "address": "",
+          "decimals": 0
+        },
+        "app": "CUB",
+        "network": "Mainnet",
+        "webhookType": "NONE",
+        "fromAddress": "0x4ad28c844f9dd073056c982880fd5c8adf33e4e5",
+        "toAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
+        "users": [
+          "61376ff24906a14f91d1164f",
+          "613665bb275deb067fcca206"
+        ],
+        "blockNum": "",
+        "hash": "",
+        "category": "offchain",
+        "value": 1,
+        "e_value": 0,
+        "e_from": 0,
+        "erc721TokenId": "",
+        "asset": "ATARI",
+        "lockedType": "None",
+        "transactionType": "",
+        "status": "Success",
+        "_id": "613e3e79dbc2351ba0b291be",
+        "createdAt": "2021-09-12T17:52:57.415Z",
+        "updatedAt": "2021-09-12T17:52:57.415Z",
+        "__v": 0
+      },
+      {
+        "rawContract": {
+          "rawValue": "",
+          "address": "",
+          "decimals": 0
+        },
+        "app": "CUB",
+        "network": "Mainnet",
+        "webhookType": "NONE",
+        "fromAddress": "0x4ad28c844f9dd073056c982880fd5c8adf33e4e5",
+        "toAddress": "0x4bffed99345915d6ebf9a34ebc984204856d5b5e",
+        "users": [
+          "61376ff24906a14f91d1164f",
+          "613665bb275deb067fcca206"
+        ],
+        "blockNum": "",
+        "hash": "",
+        "category": "offchain",
+        "value": 1,
+        "e_value": 0,
+        "e_from": 0,
+        "erc721TokenId": "",
+        "asset": "ATARI",
+        "lockedType": "None",
+        "transactionType": "",
+        "status": "Success",
+        "_id": "613e3c7bdbc2351ba0b2915f",
+        "createdAt": "2021-09-12T17:44:27.517Z",
+        "updatedAt": "2021-09-12T17:44:27.517Z",
+        "__v": 0
+      }
+    ]
   }
 }

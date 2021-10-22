@@ -2,13 +2,13 @@
 
 import {StyleSheet} from 'react-native';
 import {Images} from './Assets';
-import {COLOR_GREY} from './Utils/AppContants';
 export const CustomStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
   },
   innerContainer: {
+    flex: 1,
     justifyContent: 'center',
     padding: 15,
     position: 'relative',
@@ -46,7 +46,6 @@ export const CustomStyles = StyleSheet.create({
   forgetPasswordInputContainer: {
     borderWidth: 1,
     // borderColor: '#7070701f',
-    borderColor: COLOR_GREY,
     width: '80%',
     borderRadius: 500,
     padding: 0,
@@ -73,9 +72,15 @@ export const CustomStyles = StyleSheet.create({
   },
   d_text: {
     color: 'white',
+    fontSize: 12,
   },
   w_text: {
     color: 'black',
+  },
+  exchangeImageHeader: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

@@ -38,6 +38,7 @@ import {
 
 import DeviceInfo from 'react-native-device-info';
 import atariLogs from '../../Utils/AtariLogs';
+import userRecord from '../../Utils/userprofile.json';
 
 let ip_address = '';
 

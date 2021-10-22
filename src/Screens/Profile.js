@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import * as React from 'react';
 import {
   SafeAreaView,
@@ -9,12 +11,21 @@ import {
   FlatList,
   Linking,
   Switch,
+  ImageBackground,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
 import {CustomStyles} from '../Constant';
 import {Header, SettingMenu} from '../Components';
 import {settingTheme, authLogout, settingNotification} from '../Redux/Actions';
+import {Images} from '../Assets';
+import {
+  COLOR_GREY,
+  FontFamilyMedium,
+  FontFamilyRegular,
+  SILVER_GREY,
+  TRANSPARENT_COLOR,
+} from '../Utils/AppContants';
 
 const Menus = [
   {
@@ -100,7 +111,11 @@ class ProfileScreen extends React.Component {
     const themeBG = themeToggle ? 'rgb(33,33,33)' : 'white';
     const txtColor = themeToggle ? 'white' : 'black';
     const renderItem = ({item}) => (
-      <View style={{padding: 20}}>
+      <View
+        style={{
+          padding: 25,
+          paddingTop: 45,
+        }}>
         {/* <Text style={{fontSize:15,marginBottom:14, color:txtColor}}>General</Text> */}
 
         {/* <SettingMenu icon={Menus[1].icon} title={Menus[1].name}
@@ -112,13 +127,13 @@ class ProfileScreen extends React.Component {
 						/> */}
 
         {/* <Text style={{fontSize:15,marginBottom:14,color:txtColor}}>Advanced</Text> */}
-        <SettingMenu
+        {/* <SettingMenu
           icon={Menus[7].icon}
           title={Menus[7].name}
           themeToggle={this.state.themeToggle}
-        />
+        /> */}
         <SettingMenu
-          icon={Menus[3].icon}
+          icon={themeToggle ? Images.themeIcon : Images.settingThemeIcon}
           title={Menus[3].name}
           subTitle={Menus[3].description}
           withAction
@@ -127,36 +142,72 @@ class ProfileScreen extends React.Component {
           themeToggle={this.state.themeToggle}
         />
         <SettingMenu
-          icon={Menus[4].icon}
+          icon={themeToggle ? Images.supporticon : Images.supportBlackIcon}
           title={Menus[4].name}
           onPress={() => Linking.openURL('mailto:token@atari.com')}
           themeToggle={this.state.themeToggle}
         />
         <SettingMenu
-          icon={Menus[5].icon}
+          icon={themeToggle ? Images.refresh : Images.resetThemeBlackIcon}
           title={Menus[5].name}
           onPress={() => this.goToDetail('ResetPin')}
           themeToggle={this.state.themeToggle}
         />
         <SettingMenu
-          icon={Menus[6].icon}
+          icon={themeToggle ? Images.logouticon : Images.logoutThemeBlack}
           title={Menus[6].name}
           onPress={this.logout}
           themeToggle={this.state.themeToggle}
         />
+        <Text
+          style={{
+            color: themeToggle ? SILVER_GREY : 'black',
+            fontFamily: FontFamilyRegular,
+            marginLeft: 15,
+            marginTop: 5,
+            fontSize: 14,
+          }}>
+          Version 2.07.02
+        </Text>
       </View>
     );
     return (
       <SafeAreaView
-        style={{backgroundColor: themeBG, ...CustomStyles.container}}>
-        <View style={[CustomStyles.container, styles.innerContainer]}>
-          <Header darkmode={themeToggle} />
-          <FlatList
-            data={[{id: 1}]}
-            renderItem={renderItem}
-            keyExtractor={(item) => item?.id}
-          />
-        </View>
+        style={{
+          ...CustomStyles.container,
+        }}>
+        <ImageBackground
+          style={{flex: 1}}
+          source={
+            themeToggle ? Images.login_background_new : Images.forgotPBackGround
+          }>
+          {/* <ImageBackground style={{flex: 1}} source={Images.loginShadow}> */}
+          <View style={[CustomStyles.container, styles.innerContainer]}>
+            <Header darkmode={themeToggle} />
+            <View
+              style={{
+                backgroundColor: themeToggle ? TRANSPARENT_COLOR : 'white',
+                margin: 25,
+                // justifyContent: 'center',
+                // alignItems: 'center',
+                // flex: 1,
+                height: '70%',
+                borderRadius: 7,
+              }}>
+              <FlatList
+                data={[{id: 1}]}
+                renderItem={renderItem}
+                contentContainerStyle={{
+                  // justifyContent: 'center',
+                  // alignItems: 'center',
+                  height: '90%',
+                }}
+                keyExtractor={(item) => item?.id}
+              />
+            </View>
+          </View>
+        </ImageBackground>
+        {/* </ImageBackground> */}
       </SafeAreaView>
     );
   }
