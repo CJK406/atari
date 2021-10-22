@@ -459,7 +459,6 @@ class DashboardScreen extends React.Component {
             </View>
           </View>
         </View>
-        {console.log('hostoru', history.body.arr)}
         <History
           label={'History'}
           data={history?.body?.arr}
@@ -470,6 +469,7 @@ class DashboardScreen extends React.Component {
     );
     return (
       <View style={{flex: 1, backgroundColor: themeBG}}>
+        {console.log('pincode', this.props.pincode)}
         {isInternetConnected() && !this.isErrorMessage() ? (
           <View style={{flex: 1}}>
             {this.state.isLoading ? (
@@ -590,6 +590,7 @@ class DashboardScreen extends React.Component {
                   ? this.getErrorMessage()
                   : 'Please check your internet connection'}{' '}
               </Text>
+
               <LinearGradient
                 colors={['#fff', '#000']}
                 start={{x: 0, y: 0}}

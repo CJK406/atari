@@ -9,6 +9,7 @@ import {
   FontFamilyMedium,
   FontFamilyRegular,
 } from '../../Utils/AppContants';
+import {formatMoney} from '../../Utils/functions';
 import DropdownItem from './items';
 import styles from './style';
 
@@ -89,7 +90,9 @@ const ExchangeDropdown = (props) => {
                 fontFamily: FontFamilyRegular,
                 marginTop: 3,
               }}>
-              {items[activeKey]['value']} {items[activeKey]['f_text']} | $
+              {formatMoney(items[activeKey]['value'])}
+              {items[activeKey]['f_text']} | $
+              {/* { items[activeKey]['value']} {items[activeKey]['f_text']} | $ */}
               {items[activeKey]['u_v']}
             </Text>
           </View>

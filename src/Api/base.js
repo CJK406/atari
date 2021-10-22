@@ -21,7 +21,7 @@ const ACTION1_API_URL = 'http://3.17.146.124/api/index.php';
 function getHeader() {
   let state = store.getState();
   const {token} = state.Auth;
-  console.log('token', token);
+  console.log('auth-token', token);
   return {
     headers: {
       'Content-Type': 'application/json',
@@ -40,6 +40,21 @@ export async function getAPI(url) {
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
 
+    return result;
+  } catch (error) {
+    if (error.response) {
+      return error.response.data;
+    }
+    throw error;
+  }
+}
+
+export async function getAPIWithBody(url, data) {
+  try {
+    let result = await axios.get(`${API_URL}/${url}`, data, getHeader());
+    result = result && result.data;
+    result = EncryptionUtils.getInstance().decrypt(result);
+    console.log('resulr', result);
     return result;
   } catch (error) {
     if (error.response) {
@@ -72,7 +87,6 @@ export async function postAPI(url, data) {
   } catch (error) {
     if (error.response) {
       const result = EncryptionUtils.getInstance().decrypt(error);
-      console.log('result', result);
       return result.response.data;
     }
     throw error;

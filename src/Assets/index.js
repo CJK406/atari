@@ -58,4 +58,7 @@ export const Images = {
   tradeicon: require('./tradeicon.png'),
   email_notification: require('./email_notification.png'),
   lightAtariBack: require('./lightAtariBack.png'),
+  qr_code_Scanner: require('./qr_code_Scanner.png'),
+  emailalert: require('./emailalert.png'),
+  blacklock: require('./blacklock.png'),
 };

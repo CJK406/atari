@@ -35,7 +35,6 @@ export default class EncryptionUtils {
     let result = CryptoJS.enc.Utf8.stringify(cipher).toString();
 
     result = JSON.parse(result);
-    atariLogs.debugLog('result', result);
     return result;
   };
 }

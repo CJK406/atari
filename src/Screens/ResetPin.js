@@ -21,6 +21,7 @@ import Toast from 'react-native-simple-toast';
 import {
   COLOR_GREY,
   FontFamilyMedium,
+  SILVER_GREY_RGBA,
   TRANSPARENT_COLOR,
 } from '../Utils/AppContants';
 
@@ -55,7 +56,9 @@ class ResetPinScreen extends React.Component {
           ...CustomStyles.container,
           backgroundColor: darkmode ? 'rgb(33,33,33)' : 'white',
         }}>
-        <ImageBackground style={{flex: 1}} source={Images.lightAtariBack}>
+        <ImageBackground
+          style={{flex: 1}}
+          source={darkmode ? Images.lightAtariBack : Images.forgotPBackGround}>
           <Header darkmode={darkmode} />
           <View style={[CustomStyles.container]}>
             {/* <View
@@ -81,7 +84,7 @@ class ResetPinScreen extends React.Component {
           </View> */}
             <View
               style={{
-                backgroundColor: TRANSPARENT_COLOR,
+                backgroundColor: darkmode ? TRANSPARENT_COLOR : 'white',
                 position: 'absolute',
                 width: '100%',
                 bottom: 0,
@@ -93,7 +96,9 @@ class ResetPinScreen extends React.Component {
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Image
                     resizeMode="contain"
-                    source={Images.email_notification}
+                    source={
+                      darkmode ? Images.email_notification : Images.emailalert
+                    }
                     style={{
                       width: 200,
                       height: 200,
@@ -141,6 +146,22 @@ class ResetPinScreen extends React.Component {
                     RESET
                   </Text>
                 )}
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.goBack()}
+                style={{alignSelf: 'center', marginTop: 30}}>
+                <Text
+                  style={{
+                    fontFamily: FontFamilyMedium,
+                    fontSize: 12,
+                    color: SILVER_GREY_RGBA,
+                    textTransform: 'uppercase',
+                    textDecorationLine: 'underline',
+                    textDecorationStyle: 'solid',
+                    textDecorationColor: 'black',
+                  }}>
+                  Back to profile
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

@@ -19,6 +19,13 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 import {useNavigation} from '@react-navigation/native';
 import {AwesomeAlert} from '../../Components';
+import {
+  BwModelicaRegular,
+  COLOR_GREY,
+  FontFamilyMedium,
+  FontFamilyRegular,
+  RED_BTN_COLOR,
+} from '../../Utils/AppContants';
 
 const Send = (props) => {
   const navigation = useNavigation();
@@ -29,7 +36,7 @@ const Send = (props) => {
   const {darkmode, tabData, cryptoBalance, usdBalance, price} = props;
   const currency = tabData.text;
   const curr_key = currency.toLowerCase();
-  const themeBG = darkmode ? 'rgb(33,33,33)' : 'white';
+  const themeBG = darkmode ? 'black' : 'white';
   const txtColor = darkmode ? 'white' : 'black';
 
   const onChangeValue = (e) => {
@@ -109,10 +116,26 @@ const Send = (props) => {
       BackHandler.removeEventListener('hardwareBackPress', backAction);
   }, []);
   return (
-    <View style={{...styles.modalContainer, backgroundColor: themeBG}}>
+    <View
+      style={{
+        ...styles.modalContainer,
+        backgroundColor: themeBG,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 20,
+      }}>
       <AwesomeAlert ref={(ref) => (this.awesomeAlert = ref)} />
-      <Image source={tabData.Image} style={styles.icSend}></Image>
-      <Text style={{color: txtColor, ...styles.modalTitle}}>Send amount</Text>
+      {/* <Image source={tabData.Image} style={styles.icSend}></Image> */}
+      <Text
+        style={{
+          color: txtColor,
+          ...styles.modalTitle,
+          fontSize: 18,
+          fontFamily: FontFamilyMedium,
+          textTransform: 'uppercase',
+          marginTop: 20,
+        }}>
+        Send amount
+      </Text>
       <View
         style={{
           flexDirection: 'row',
@@ -122,7 +145,7 @@ const Send = (props) => {
         }}>
         <View
           style={{
-            width: '45%',
+            width: '30%',
             textAlign: 'center',
             alignItems: 'center',
             alignSelf: 'center',
@@ -136,9 +159,17 @@ const Send = (props) => {
             style={{
               color: txtColor,
               backgroundColor: 'transparent',
-              fontSize: 24,
+              fontSize: 18,
+              fontFamily: BwModelicaRegular,
             }}></TextInput>
-          <Text style={{color: txtColor, fontSize: 24}}>{currency}</Text>
+          <Text
+            style={{
+              color: txtColor,
+              fontSize: 20,
+              fontFamily: FontFamilyMedium,
+            }}>
+            {currency}
+          </Text>
         </View>
         <View style={{width: '10%'}}>
           <Ionicons
@@ -154,7 +185,7 @@ const Send = (props) => {
         </View>
         <View
           style={{
-            width: '45%',
+            width: '30%',
             textAlign: 'center',
             alignItems: 'center',
             alignSelf: 'center',
@@ -168,9 +199,17 @@ const Send = (props) => {
             style={{
               color: txtColor,
               backgroundColor: 'transparent',
-              fontSize: 26,
+              fontSize: 18,
+              fontFamily: BwModelicaRegular,
             }}></TextInput>
-          <Text style={{color: txtColor, fontSize: 24}}>USD</Text>
+          <Text
+            style={{
+              color: txtColor,
+              fontSize: 20,
+              fontFamily: FontFamilyMedium,
+            }}>
+            USD
+          </Text>
         </View>
       </View>
       <View
@@ -179,12 +218,14 @@ const Send = (props) => {
           textAlign: 'center',
           alignItems: 'center',
           alignSelf: 'center',
+          marginTop: 20,
         }}>
         <Text
           style={{
-            color: darkmode ? 'white' : 'black',
-            fontSize: 20,
+            color: darkmode ? 'white' : COLOR_GREY,
+            fontSize: 14,
             marginTop: 20,
+            fontFamily: FontFamilyMedium,
           }}>
           *Available: {cryptoBalance} {currency}
         </Text>
@@ -216,6 +257,8 @@ const Send = (props) => {
           justifyContent: 'center',
           marginBottom: 30,
           marginTop: 40,
+          width: '70%',
+          alignSelf: 'center',
         }}>
         <TextInput
           placeholder="Tap to paste address"
@@ -229,6 +272,7 @@ const Send = (props) => {
             height: 50,
             borderBottomWidth: 1,
             borderBottomColor: txtColor,
+            fontFamily: FontFamilyMedium,
           }}>
           {destination}
         </TextInput>
@@ -250,16 +294,23 @@ const Send = (props) => {
       <TouchableOpacity
         onPress={sendConfirm}
         style={{
-          backgroundColor: 'rgb(227,30,45)',
-          width: '60%',
-          marginBottom: 200,
-          textAlign: 'center',
+          backgroundColor: RED_BTN_COLOR,
           justifyContent: 'center',
-          marginLeft: '18%',
-          padding: 20,
-          borderRadius: 10,
-          textAlign: 'center',
-          justifyContent: 'center',
+          width: '50%',
+          marginTop: 20,
+          shadowColor: 'red',
+          shadowOffset: {
+            width: 0,
+            height: 8,
+          },
+          shadowOpacity: 0.46,
+          shadowRadius: 11.14,
+
+          elevation: darkmode ? 7 : 0,
+          marginBottom: 150,
+          alignSelf: 'center',
+          borderRadius: 100,
+          padding: 7,
         }}>
         <Text
           style={{
@@ -267,7 +318,8 @@ const Send = (props) => {
             color: 'white',
             textAlign: 'center',
             justifyContent: 'center',
-            fontWeight: 'bold',
+            textTransform: 'uppercase',
+            fontFamily: FontFamilyMedium,
           }}>
           Continue
         </Text>

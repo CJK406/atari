@@ -54,15 +54,23 @@ class VerifyCodeScreen extends React.Component {
     return (
       <SafeAreaView
         style={{...CustomStyles.container, backgroundColor: TRANSPARENT_COLOR}}>
-        <ImageBackground style={{flex: 1}} source={Images.dashBoardBackImage}>
+        <ImageBackground
+          style={{flex: 1}}
+          source={
+            this.props.darkmode
+              ? Images.dashBoardBackImage
+              : Images.forgotPBackGround
+          }>
           <Header darkmode={this.props.darkmode} />
           <View
             style={{
               justifyContent: 'center',
-              backgroundColor: TRANSPARENT_COLOR,
+              backgroundColor: this.props.darkmode
+                ? TRANSPARENT_COLOR
+                : 'white',
               margin: 15,
-              paddingTop: 20,
-              height: '70%',
+              paddingTop: 30,
+              height: '78%',
               marginTop: 20,
               borderRadius: 7,
             }}>
@@ -70,7 +78,9 @@ class VerifyCodeScreen extends React.Component {
               <Image
                 style={{height: 100, width: 100}}
                 resizeMode="contain"
-                source={Images.white_lock}
+                source={
+                  this.props.darkmode ? Images.white_lock : Images.blacklock
+                }
               />
             </View>
             <Text
@@ -78,15 +88,19 @@ class VerifyCodeScreen extends React.Component {
                 fontSize: 22,
                 lineHeight: 55,
                 textAlign: 'center',
-                color: 'white',
-                marginBottom: 35,
+                color: this.props.darkmode ? 'white' : 'black',
+                marginBottom: 25,
                 fontFamily: FontFamilyMedium,
                 textTransform: 'uppercase',
               }}>
               Verify Code
             </Text>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={{...styles.customWriting}}>
+              <Text
+                style={{
+                  ...styles.customWriting,
+                  color: this.props.darkmode ? 'white' : 'black',
+                }}>
                 Please enter the verification code sent to your email.
               </Text>
             </View>
@@ -96,13 +110,15 @@ class VerifyCodeScreen extends React.Component {
                 style={{
                   ...styles.textInput,
                   marginBottom: 20,
-                  color: 'white',
+                  color: this.props.darkmode ? 'white' : 'black',
                 }}
                 onChangeText={(text) =>
                   this.setState({insert_verify_code: text})
                 }
                 placeholder="Verify Code"
-                placeholderTextColor={SILVER_GREY_RGBA}
+                placeholderTextColor={
+                  this.props.darkmode ? SILVER_GREY_RGBA : COLOR_GREY
+                }
               />
               <TouchableOpacity
                 onPress={this.goNext}

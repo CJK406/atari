@@ -9,6 +9,7 @@ import {
   FontFamilyMedium,
   SILVER_GREY_RGBA,
 } from '../../Utils/AppContants';
+import {formatMoney} from '../../Utils/functions';
 
 const BalanceList = (props) => {
   return (
@@ -56,7 +57,7 @@ const BalanceList = (props) => {
       ) : (
         <Image
           source={props.icon}
-          style={{width: 20, height: 20, marginRight: 10, marginLeft: 10}}
+          style={{width: 15, height: 15, marginRight: 7, marginLeft: 7}}
         />
       )}
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -79,15 +80,15 @@ const BalanceList = (props) => {
         <Text
           style={[
             props.darkmode
-              ? [CustomStyles.d_text, {fontSize: 12}]
-              : [CustomStyles.w_text, {fontSize: 12}],
+              ? [CustomStyles.d_text, {fontSize: 11}]
+              : [CustomStyles.w_text, {fontSize: 11}],
             {
               justifyContent: 'center',
               marginRight: 5,
               fontFamily: FontFamilyMedium,
             },
           ]}>
-          {props.balance}
+          {formatMoney(props.balance)}
         </Text>
         <Text style={{color: props.iconColor, fontFamily: FontFamilyMedium}}>
           {props.label}

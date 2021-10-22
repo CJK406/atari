@@ -35,7 +35,7 @@ class InputLogin extends React.Component {
                 color: this.props.darkmode ? 'white' : 'black',
               },
             ]}
-            autoCapitalize={this.props.checkAutoCapital ? 'none' : 'characters'}
+            autoCapitalize={this.props.checkAutoCapital ? 'none' : 'words'}
             placeholderTextColor={COLOR_GREY}
             {...this.props}
           />

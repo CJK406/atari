@@ -47,12 +47,20 @@ class ResetPasswordScreen extends React.Component {
     return (
       <SafeAreaView
         style={{...CustomStyles.container, backgroundColor: 'rgb(33,33,33)'}}>
-        <ImageBackground source={Images.dashBoardBackImage} style={{flex: 1}}>
+        <ImageBackground
+          source={
+            this.props.darkmode
+              ? Images.dashBoardBackImage
+              : Images.forgotPBackGround
+          }
+          style={{flex: 1}}>
           <Header darkmode={this.props.darkmode} />
           <View
             style={{
               justifyContent: 'center',
-              backgroundColor: TRANSPARENT_COLOR,
+              backgroundColor: this.props.darkmode
+                ? TRANSPARENT_COLOR
+                : 'white',
               margin: 15,
               paddingTop: 20,
               height: '75%',
@@ -63,7 +71,9 @@ class ResetPasswordScreen extends React.Component {
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Image
                   resizeMode="contain"
-                  source={Images.white_lock}
+                  source={
+                    this.props.darkmode ? Images.white_lock : Images.blacklock
+                  }
                   style={{height: 100, width: 100}}
                 />
               </View>
@@ -72,7 +82,7 @@ class ResetPasswordScreen extends React.Component {
                   fontSize: 18,
                   lineHeight: 55,
                   textAlign: 'center',
-                  color: 'white',
+                  color: this.props.darkmode ? 'white' : 'black',
                   marginBottom: 25,
                   fontFamily: FontFamilyMedium,
                   textTransform: 'uppercase',
@@ -90,12 +100,15 @@ class ResetPasswordScreen extends React.Component {
                   style={{
                     ...styles.textInput,
                     marginBottom: 20,
-                    color: 'white',
+                    color: this.props.darkmode ? 'white' : 'black',
+                    borderColor: this.props.darkmode ? COLOR_GREY : 'black',
                   }}
                   onChangeText={(text) => this.setState({password: text})}
-                  secureTextEntry={password === '' ? false : true}
+                  secureTextEntry={true}
                   placeholder="Type your password"
-                  placeholderTextColor="rgba(255,255,255,0.3)"
+                  placeholderTextColor={
+                    this.props.darkmode ? 'rgba(255,255,255,0.3)' : COLOR_GREY
+                  }
                 />
 
                 <TextInput
@@ -103,13 +116,16 @@ class ResetPasswordScreen extends React.Component {
                   style={{
                     ...styles.textInput,
                     marginBottom: 20,
-                    color: 'white',
+                    color: this.props.darkmode ? 'white' : 'black',
+                    borderColor: this.props.darkmode ? COLOR_GREY : 'black',
                     // fontFamily: c_password === "" ? FontFamilyMedium
                   }}
                   onChangeText={(text) => this.setState({c_password: text})}
                   secureTextEntry={c_password === '' ? false : true}
                   placeholder="Retype your password"
-                  placeholderTextColor="rgba(255,255,255,0.3)"
+                  placeholderTextColor={
+                    this.props.darkmode ? 'rgba(255,255,255,0.3)' : COLOR_GREY
+                  }
                 />
                 <TouchableOpacity
                   onPress={this.goNext}
@@ -218,7 +234,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '',
     paddingLeft: 30,
     color: '#7882A2',
-    fontSize: 12,
+    fontSize: 14,
     fontFamily: FontFamilyMedium,
   },
 });
