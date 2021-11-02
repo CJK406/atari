@@ -298,7 +298,6 @@ class SendConfirmScreen extends React.Component {
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         style={{backgroundColor: darkmode ? 'rgb(33,33,33)' : 'white'}}>
-        {console.log('salman saleem', this.state.pincode)}
         <SafeAreaView
           style={{
             ...CustomStyles.container,

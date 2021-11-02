@@ -1,5 +1,6 @@
 /* eslint-disable */
 import axios from 'axios';
+import ApiDebugger from '../Utils/ApiDebugger';
 import atariLogs from '../Utils/AtariLogs';
 import EncryptionUtils from '../Utils/EncryptionUtils';
 
@@ -18,14 +19,14 @@ const ACTION_API_URL = 'https://panel.atarichain.com/api';
 
 const ACTION1_API_URL = 'http://3.17.146.124/api/index.php';
 
-function getHeader() {
+function getHeader(tempId) {
   let state = store.getState();
   const {token} = state.Auth;
-  console.log('auth-token', token);
   return {
     headers: {
       'Content-Type': 'application/json',
       'auth-token': `${token}`,
+      tempId: tempId ? tempId : '',
     },
   };
 }
@@ -36,10 +37,14 @@ export function setStore(appStore) {
 
 export async function getAPI(url) {
   try {
-    let result = await axios.get(`${API_URL}/${url}`, getHeader());
+    let tempId = ApiDebugger.getInstance().getRandomNumber();
+    let headers = getHeader(tempId);
+    addRequest(tempId, `${API_URL}/${url}`, headers);
+    let result = await axios.get(`${API_URL}/${url}`, headers);
+    let actualResult = result;
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
-
+    ApiDebugger.getInstance().updateApiRecord(result, actualResult);
     return result;
   } catch (error) {
     if (error.response) {
@@ -47,6 +52,18 @@ export async function getAPI(url) {
     }
     throw error;
   }
+}
+
+function addRequest(tempId, url, headers) {
+  if (!__DEV__) return;
+  let request = {
+    tempId: tempId,
+    url: url,
+    headers: headers,
+    response: null,
+    statusCode: 0,
+  };
+  ApiDebugger.getInstance().addApiRecord(request);
 }
 
 export async function getAPIWithBody(url, data) {
