@@ -192,8 +192,8 @@ export default (state = INITIAL, action) => {
       return {...state, notification_Flag: notification_Flag};
     }
     case AUTO_UPDATE_VERIFY_TOKEN: {
-      const {verify_token, verify_code} = action.data;
-      return {...state, verify_token, verify_code};
+      const {verify_token, verify_code, verify_email} = action.data;
+      return {...state, verify_token, verify_code, verify_email};
     }
 
     case AUTH_UPDATE_MENUSTATUS: {

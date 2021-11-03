@@ -210,7 +210,12 @@ class ForgotPasswordScreen extends React.Component {
       if (response.code === 200) {
         const verify_code = response.body.verify_code;
         const verify_token = response.body.token;
-        const data = {verify_code: verify_code, verify_token: verify_token};
+        const verify_email = email;
+        const data = {
+          verify_code: verify_code,
+          verify_token: verify_token,
+          verify_email: verify_email,
+        };
         Toast.show(
           'Email has been sent at ' +
             email +

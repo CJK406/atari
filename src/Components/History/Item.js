@@ -13,6 +13,7 @@ import {
   SILVER_GREY_RGBA,
 } from '../../Utils/AppContants';
 import {Images} from '../../Assets';
+
 class HistoryItem extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +49,6 @@ class HistoryItem extends React.Component {
   render() {
     const {darkmode, item} = this.props;
 
-    console.log('item', item);
     let date = this.convert(item?.createdAt);
     let value = parseFloat(item?.value).toFixed(
       CryptoStyle[

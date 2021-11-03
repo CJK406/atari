@@ -52,7 +52,7 @@ class ExchangeScreen extends React.Component {
     drop2_open_flag: false,
     price: {},
     buyInputValue: 0,
-    receiveInputValue: 0,
+    receiveInputValue: '',
     usdInputValue: 0,
     loading: false,
     selectedImageIndex: 0,
@@ -162,9 +162,14 @@ class ExchangeScreen extends React.Component {
         this.awesomeAlert.showAlert(
           'success',
           'Congratulations',
-          'Your exchange was successful!',
+          'You successfully exchanged ATARI!',
         );
         this.props.updateBallance();
+        this.setState({
+          receiveInputValue: '',
+          buyInputValue: 0,
+          usdInputValue: 0,
+        });
       } else
         this.awesomeAlert.showAlert('error', 'Failed!', 'Exchange failed.');
 
@@ -346,7 +351,7 @@ class ExchangeScreen extends React.Component {
             usd_price={exchage_from_data[drop2_key]['price']}
             centerIcon={exchage_from_data1[0]['image']}
             darkmode={darkmode}
-            // inputValue={`${receiveInputValue}`}
+            inputValue={`${receiveInputValue}`}
             usdInputValue={`${usdInputValue}`}
             Type={true}
           />

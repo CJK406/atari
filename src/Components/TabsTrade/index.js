@@ -7,8 +7,6 @@ import History from '../History';
 import TopContent from './TopContent';
 import Charts from './Charts';
 import {TRANSPARENT_COLOR} from '../../Utils/AppContants';
-import {Images} from '../../Assets';
-import {SideTrade} from '../../Components';
 
 const TabsTrade = (props) => {
   const {darkmode, tabData, balance, currentTab, history, history_finish} =
@@ -29,6 +27,17 @@ const TabsTrade = (props) => {
       resetLayoutData();
     });
   }, []);
+
+  const getHistory = () => {
+    let asset = tabData.history_t;
+    let array = history.body.obj[asset];
+    if (asset === 'ATARI') {
+      if (array === null || array == undefined) {
+        array = history.body.obj['ATRI'];
+      }
+    }
+    return array;
+  };
 
   return (
     <View>
@@ -53,11 +62,11 @@ const TabsTrade = (props) => {
           trigger={props.trigger}
         />
       </View>
-
       {history.body && history.body.length === 0 ? null : (
         <History
           label={'Activity'}
-          data={history.body.obj[tabData.history_t]}
+          // data={history.body.obj[tabData.history_t]}
+          data={getHistory()}
           darkmode={darkmode}
           isLoad={!history_finish}
         />

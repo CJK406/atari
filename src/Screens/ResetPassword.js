@@ -34,11 +34,15 @@ class ResetPasswordScreen extends React.Component {
     c_password: '',
     button_loading: false,
     verify_token: '',
+    verify_email: '',
+    verify_code: '',
   };
 
   static getDerivedStateFromProps(props, state) {
     return {
       verify_token: props.verify_token,
+      verify_email: props.verify_email,
+      verify_code: props.verify_code,
     };
   }
   render() {
@@ -188,18 +192,22 @@ class ResetPasswordScreen extends React.Component {
     );
   }
   goNext = async () => {
-    const {c_password, password, verify_token} = this.state;
+    const {c_password, password, verify_email, verify_code} = this.state;
     if (
       c_password.length === 0 ||
       password.length === 0 ||
-      c_password !== password
+      c_password != password
     ) {
       Toast.show('Confirm password is not match. Please check again');
       return;
     }
 
     try {
-      let data = {newPass: password, token: verify_token};
+      let data = {
+        newPass: password,
+        otpCode: verify_code,
+        email: verify_email,
+      };
       this.setState({button_loading: true});
       const response = await resetPassword(data);
       if (response.code === 200) {
@@ -241,6 +249,8 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     verify_token: state.Auth.verify_token,
+    verify_email: state.Auth.verify_email,
+    verify_code: state.Auth.verify_code,
     darkmode: state?.Auth?.darkmode,
   };
 }

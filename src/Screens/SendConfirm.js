@@ -159,12 +159,6 @@ class SendConfirmScreen extends React.Component {
           'Please enter otp code',
         );
         return;
-      } else if (input_pincode !== 999999) {
-        this.awesomeAlert.showAlert(
-          'error',
-          'Failed!',
-          'Pincode is not correct',
-        );
       } else {
         this.setState({
           isLoading: true,
@@ -180,14 +174,12 @@ class SendConfirmScreen extends React.Component {
         };
         let result = sendAttari(data);
         result.then((resp) => {
-          console.log('resp', resp);
           this.setState({
             isLoading: false,
           });
           if (resp.code == 200) {
             this.goBack();
           } else {
-            console.log('rep', resp);
             if (resp.message !== undefined) {
               this.awesomeAlert.showAlert('error', 'Failed!', resp.message);
             } else {
@@ -235,8 +227,6 @@ class SendConfirmScreen extends React.Component {
             transactionFeeLoader: false,
           });
         }
-
-        console.log('resp', resp);
       })
       .catch((err) => {
         console.log('err', err);
@@ -298,7 +288,6 @@ class SendConfirmScreen extends React.Component {
       <KeyboardAwareScrollView
         showsVerticalScrollIndicator={false}
         style={{backgroundColor: darkmode ? 'rgb(33,33,33)' : 'white'}}>
-        {console.log('salman saleem', this.state.pincode)}
         <SafeAreaView
           style={{
             ...CustomStyles.container,

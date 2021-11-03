@@ -181,11 +181,12 @@ class VerifyCodeScreen extends React.Component {
   }
   goNext = async () => {
     const {verify_code, insert_verify_code, verify_token} = this.state;
+
     if (insert_verify_code.length === 0) {
       Toast.show('Please fill in fields.');
       return;
     }
-    if (verify_code !== insert_verify_code) {
+    if (verify_code != insert_verify_code) {
       Toast.show('The verify code is not correct. Please check again');
       return;
     }
