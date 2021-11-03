@@ -98,7 +98,7 @@ class MainApp extends React.Component {
           this.awesomeAlert.showAlert(
             'success',
             'Congratulations',
-            'Transaction successfully sent',
+            'Transaction sent successfully',
           );
           this.props.updateBallance();
           this.props.setAllHistory();

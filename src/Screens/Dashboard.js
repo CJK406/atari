@@ -469,7 +469,6 @@ class DashboardScreen extends React.Component {
     );
     return (
       <View style={{flex: 1, backgroundColor: themeBG}}>
-        {console.log('pincode', this.props.pincode)}
         {isInternetConnected() && !this.isErrorMessage() ? (
           <View style={{flex: 1}}>
             {this.state.isLoading ? (
