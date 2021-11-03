@@ -87,7 +87,6 @@ export async function postAPI(url, data) {
     let result = await axios.post(`${API_URL}/${url}`, data, getHeader());
     result = result && result.data;
     result = EncryptionUtils.getInstance().decrypt(result);
-    // console.log('SETpIN CODE', result);
     return result;
   } catch (error) {
     if (error.response) {

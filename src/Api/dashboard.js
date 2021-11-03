@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+import atariLogs from '../Utils/AtariLogs';
 import {getAPI, postAPI, getGraphAPI, getAPIWithBody} from './base';
 
 export async function currency_convert(currency, value) {
@@ -41,6 +42,7 @@ export async function get_receive_address() {
 }
 
 export async function sendAttari(data) {
+  atariLogs.debugLog('data send atari', data);
   return await postAPI('transaction/transferToken', data);
 }
 

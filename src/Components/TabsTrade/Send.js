@@ -75,7 +75,6 @@ const Send = (props) => {
       message = 'The address is empty. Please check again';
       status = false;
     }
-    console.log('amounr ustd', amountUsd);
     if (amount === '0' || amount === '' || amountUsd === '0.00') {
       status = false;
       message = 'The amount could not zero';

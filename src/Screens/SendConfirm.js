@@ -72,11 +72,10 @@ class SendConfirmScreen extends React.Component {
   }
 
   componentDidMount() {
-    if (!__DEV__) {
-      this.sendOTPCode();
-    }
+    // if (!__DEV__) {
     this.sendOTPCode();
     this.sendTransFee();
+    // }
   }
 
   componentDidUpdate() {
@@ -169,7 +168,7 @@ class SendConfirmScreen extends React.Component {
           token: currency,
           amount: parseFloat(info.send_amount),
           to: info.address,
-          code: input_pincode,
+          pinCode: input_pincode,
           otpCode: user_otpcode,
         };
         let result = sendAttari(data);

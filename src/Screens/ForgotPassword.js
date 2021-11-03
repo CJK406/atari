@@ -196,6 +196,7 @@ class ForgotPasswordScreen extends React.Component {
     if (
       !email
         .toLowerCase()
+        .trim()
         .match(
           /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
         )
@@ -204,17 +205,17 @@ class ForgotPasswordScreen extends React.Component {
       return;
     }
     try {
-      let data = {email: email};
+      let data = {email: email.trim()};
       this.setState({button_loading: true});
       const response = await forgetPassword(data);
       if (response.code === 200) {
         const verify_code = response.body.verify_code;
         const verify_token = response.body.token;
-        const verify_email = email;
+        const verify_email = email.trim();
         const data = {
           verify_code: verify_code,
           verify_token: verify_token,
-          verify_email: verify_email,
+          verify_email: verify_email.trim(),
         };
         Toast.show(
           'Email has been sent at ' +
