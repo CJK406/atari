@@ -75,12 +75,16 @@ class DashboardScreen extends React.Component {
       this.state?.history != nextState.history ||
       this.state?.darkmode != nextState.darkmode ||
       this.state?.history_finish != nextState.history_finish ||
-      this.state.modalVisible != nextState.modalVisible
+      this.state.modalVisible != nextState.modalVisible ||
+      this.state.isLoading != nextState.isLoading
     );
   }
 
   setView() {
-    this.state.isLoading = true;
+    // this.state.isLoading = true;
+    this.setState({
+      isLoading: true,
+    });
     InteractionManager.runAfterInteractions(() => {
       this.props.updateMenuStatus(true);
       if (this.props.pincode === null) {
@@ -98,7 +102,10 @@ class DashboardScreen extends React.Component {
         } else {
           setTimeout(() => {
             if (this.state !== null) {
-              this.state.isLoading = false;
+              // this.state.isLoading = false;
+              this.setState({
+                isLoading: false,
+              });
             }
           }, 2000);
           this.setState({history_finish: true});
@@ -126,9 +133,9 @@ class DashboardScreen extends React.Component {
         isLoading: false,
       });
       this.setView();
-      this.forceUpdate();
+      // this.forceUpdate();
     } else {
-      this.forceUpdate();
+      // this.forceUpdate();
     }
   }
 

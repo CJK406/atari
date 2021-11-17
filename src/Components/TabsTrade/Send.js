@@ -25,11 +25,12 @@ import {
   FontFamilyMedium,
   FontFamilyRegular,
   RED_BTN_COLOR,
+  SILVER_GREY,
 } from '../../Utils/AppContants';
 
 const Send = (props) => {
   const navigation = useNavigation();
-  const [amount, setAmount] = useState('0');
+  const [amount, setAmount] = useState('');
   const [amountUsd, setAmountUsd] = useState('0.00');
   const [destination, setDestination] = useState('');
   const [showQR, setShowQR] = useState(false);
@@ -40,9 +41,14 @@ const Send = (props) => {
   const txtColor = darkmode ? 'white' : 'black';
 
   const onChangeValue = (e) => {
+    if (e.includes('-')) {
+      return e[e.length - 1];
+    }
     if (
       currency !== 'ATRI' ||
-      (e[e.length - 1] !== '.' && e[e.length - 1] !== ',')
+      (e[e.length - 1] !== '.' &&
+        e[e.length - 1] !== ',' &&
+        e[e.length - 1] !== '-')
     ) {
       const usd = e !== '' ? parseFloat(e) * parseFloat(price) : 0;
       setAmount(e);
@@ -61,7 +67,8 @@ const Send = (props) => {
   };
   const setFullBalance = () => {
     const {decimal} = CryptoStyle[curr_key];
-    setAmount((parseFloat(cryptoBalance) * 0.95).toFixed(decimal));
+    setAmount(parseFloat(cryptoBalance).toFixed(decimal));
+    // setAmount((parseFloat(cryptoBalance) * 0.95).toFixed(decimal));
     setAmountUsd(parseFloat(usdBalance).toFixed(2));
   };
   const focusSendInput = async () => {
@@ -71,6 +78,7 @@ const Send = (props) => {
   const sendConfirm = () => {
     let status = true;
     let message = '';
+
     if (destination === '') {
       message = 'The address is empty. Please check again';
       status = false;
@@ -80,8 +88,8 @@ const Send = (props) => {
       message = 'The amount could not zero';
     }
     if (parseFloat(amount) > parseFloat(cryptoBalance)) {
-      message = 'The send amount should be less than balance';
       status = false;
+      message = 'The send amount should be less than balance';
     }
 
     if (status) {
@@ -95,6 +103,7 @@ const Send = (props) => {
       };
       navigation.navigate('SendConfirm', {info: info});
     } else if (!status) {
+      console.log('MESSAGE', message);
       this.awesomeAlert.showAlert('error', 'Failed!', message);
     }
   };
@@ -123,7 +132,8 @@ const Send = (props) => {
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
       }}>
-      <AwesomeAlert ref={(ref) => (this.awesomeAlert = ref)} />
+      {/* {TODO} */}
+      {/* <AwesomeAlert ref={(ref) => (this.awesomeAlert = ref)} /> */}
       {/* <Image source={tabData.Image} style={styles.icSend}></Image> */}
       <Text
         style={{
@@ -152,9 +162,9 @@ const Send = (props) => {
           }}>
           <TextInput
             onChangeText={(key) => onChangeValue(key)}
-            value={amount.toString()}
+            value={amount.toString() === 0 ? '' : amount.toString()}
             placeholder="0"
-            placeholderTextColor="white"
+            placeholderTextColor={SILVER_GREY}
             keyboardType={'numeric'}
             style={{
               color: txtColor,

@@ -101,14 +101,17 @@ class ExchangeScreen extends React.Component {
     });
   };
 
-  receiveInputChange = (e1, exchage_from_data) => {
+  receiveInputChange = (e, exchage_from_data) => {
     const {drop1_key, price} = this.state;
+    // if (e.includes('-') || e.includes(',')) {
+    //   return e[e.length - 1];
+    // }
     // e = e==="" ? "0" : e;
     // e = parseFloat(e.replace(/,/g,""));
     // let buyInputValue1 = this.commafy(parseFloat((e*price.atri/exchage_from_data[drop1_key]['price']).toFixed(exchage_from_data[drop1_key]['decimal'])))
     // let usd_price = this.commafy(parseFloat(e*price.atri).toFixed(2));
     // if(e[e.length-1]!=="." && e[e.length-1]!=="," && e[e.length-1]!==" " && e[e.length-1]!=="-"){
-    let e = e1.replace(/[^0-9]/g, '');
+    // let e = e1.replace(/[^0-9]/g, '');
     let buyInputValue1 = (
       (e * price.atri) /
       exchage_from_data[drop1_key]['price']
@@ -162,7 +165,7 @@ class ExchangeScreen extends React.Component {
         this.awesomeAlert.showAlert(
           'success',
           'Congratulations',
-          'You successfully exchanged ATARI!',
+          'You successfully exchanged ATRI!',
         );
         this.props.updateBallance();
         this.setState({

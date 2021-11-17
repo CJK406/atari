@@ -133,8 +133,8 @@ android {
         applicationId "com.atari"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 32
-        versionName '2.07.02'
+        versionCode 35
+        versionName '2.08.02'
         multiDexEnabled true
         missingDimensionStrategy 'react-native-camera', 'general'
     }

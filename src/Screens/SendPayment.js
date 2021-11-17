@@ -218,7 +218,7 @@ class SendPaymentScreen extends React.Component {
                 marginTop: 10,
                 marginBottom: 20,
               }}>
-              Send amount
+              Send amou
             </Text>
             <View
               style={{

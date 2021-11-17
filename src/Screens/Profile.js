@@ -61,7 +61,7 @@ const Menus = [
   },
   {name: 'Logout', page: '', icon: 'log-out-outline', description: ''},
   {
-    name: 'Version 2.07.02',
+    name: 'Version 2.08.02',
     page: '',
     icon: 'information-circle-outline',
     description: '',
@@ -167,7 +167,7 @@ class ProfileScreen extends React.Component {
             marginTop: 5,
             fontSize: 14,
           }}>
-          Version 2.07.02
+          Version 2.08.01
         </Text>
       </View>
     );
