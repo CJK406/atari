@@ -132,8 +132,7 @@ const Send = (props) => {
         borderTopRightRadius: 20,
         borderTopLeftRadius: 20,
       }}>
-      {/* {TODO} */}
-      {/* <AwesomeAlert ref={(ref) => (this.awesomeAlert = ref)} /> */}
+      <AwesomeAlert ref={(ref) => (this.awesomeAlert = ref)} />
       {/* <Image source={tabData.Image} style={styles.icSend}></Image> */}
       <Text
         style={{
