@@ -23,6 +23,8 @@ export default StyleSheet.create({
     height: 50,
     color: 'white',
     fontFamily: FontFamilyMedium,
+    paddingLeft: 25,
+    paddingRight: 25,
   },
 
   container2: {

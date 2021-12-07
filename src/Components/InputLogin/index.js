@@ -17,30 +17,47 @@ class InputLogin extends React.Component {
 
   render() {
     return (
-      <View
+      // <View
+      //   style={[
+      //     this.props.mode ? styles.container2 : styles.container,
+      //     this.props.darkmode
+      //       ? {borderColor: COLOR_GREY}
+      //       : {borderColor: SILVER_GREY},
+      //   ]}>
+      //   <View style={{width: '10%'}} />
+      //   <View style={{width: '90%'}}>
+      //     <TextInput
+      //       ref={this.props.inputReff}
+      //       style={[
+      //         styles.input,
+      //         {
+      //           fontFamily: FontFamilyMedium,
+      //           color: this.props.darkmode ? 'white' : 'black',
+      //         },
+      //       ]}
+      //       autoCapitalize={this.props.checkAutoCapital ? 'none' : 'words'}
+      //       placeholderTextColor={COLOR_GREY}
+      //       {...this.props}
+      //     />
+      //   </View>
+      // </View>
+      <TextInput
+        ref={this.props.inputReff}
         style={[
+          styles.input,
           this.props.mode ? styles.container2 : styles.container,
+          {
+            fontFamily: FontFamilyMedium,
+            color: this.props.darkmode ? 'white' : 'black',
+          },
           this.props.darkmode
             ? {borderColor: COLOR_GREY}
             : {borderColor: SILVER_GREY},
-        ]}>
-        <View style={{width: '10%'}} />
-        <View style={{width: '90%'}}>
-          <TextInput
-            ref={this.props.inputReff}
-            style={[
-              styles.input,
-              {
-                fontFamily: FontFamilyMedium,
-                color: this.props.darkmode ? 'white' : 'black',
-              },
-            ]}
-            autoCapitalize={this.props.checkAutoCapital ? 'none' : 'words'}
-            placeholderTextColor={COLOR_GREY}
-            {...this.props}
-          />
-        </View>
-      </View>
+        ]}
+        autoCapitalize={this.props.checkAutoCapital ? 'none' : 'words'}
+        placeholderTextColor={COLOR_GREY}
+        {...this.props}
+      />
     );
   }
 }

@@ -208,26 +208,27 @@ class ForgotPasswordScreen extends React.Component {
       let data = {email: email.trim()};
       this.setState({button_loading: true});
       const response = await forgetPassword(data);
-      if (response.code === 200) {
-        const verify_code = response.body.verify_code;
-        const verify_token = response.body.token;
-        const verify_email = email.trim();
-        const data = {
-          verify_code: verify_code,
-          verify_token: verify_token,
-          verify_email: verify_email.trim(),
-        };
-        Toast.show(
-          'Email has been sent at ' +
-            email +
-            ', kindly follow the instruction ',
-        );
+      console.log('response ', response);
+      // if (response.code === 200) {
+      //   const verify_code = response.body.verify_code;
+      //   const verify_token = response.body.token;
+      //   const verify_email = email.trim();
+      //   const data = {
+      //     verify_code: verify_code,
+      //     verify_token: verify_token,
+      //     verify_email: verify_email.trim(),
+      //   };
+      //   Toast.show(
+      //     'Email has been sent at ' +
+      //       email +
+      //       ', kindly follow the instruction ',
+      //   );
 
-        this.props.update_verifyToken(data);
-        this.props.navigation.navigate('VerifyCode');
-      } else {
-        Toast.show(response.message);
-      }
+      //   this.props.update_verifyToken(data);
+      //   this.props.navigation.navigate('VerifyCode');
+      // } else {
+      //   Toast.show(response.message);
+      // }
       this.setState({button_loading: false});
     } catch (err) {}
   };
@@ -238,6 +239,8 @@ class ForgotPasswordScreen extends React.Component {
 const styles = StyleSheet.create({
   customWriting: {
     fontSize: 13,
+    lineHeight: 22,
+    letterSpacing: 2,
     color: SILVER_GREY,
     textAlign: 'center',
     marginBottom: 40,

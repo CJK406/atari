@@ -9,8 +9,8 @@ let store;
 
 // const API_URL="https://atari-backend.herokuapp.com/api/users";
 // const API_URL = 'https://www.vub.gla.mybluehost.me/api/users';
-// const API_URL = 'https://acstgapi.atarichain.com/api';
-const API_URL = 'https://atariwalletapi.atariplaychain.com/api';
+const API_URL = 'https://acstgapi.atarichain.com/api';
+// const API_URL = 'https://atariwalletapi.atariplaychain.com/api';
 // const API_URL = 'http://3.16.252.212:5000/users';
 // const API_URL="http://151.106.108.46/api/users";
 const ACTION_API_URL = 'https://panel.atarichain.com/api';

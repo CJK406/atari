@@ -103,9 +103,9 @@ class ExchangeScreen extends React.Component {
 
   receiveInputChange = (e, exchage_from_data) => {
     const {drop1_key, price} = this.state;
-    // if (e.includes('-') || e.includes(',')) {
-    //   return e[e.length - 1];
-    // }
+    if (e.includes('-') || e.includes(',') || e.includes('.')) {
+      return e[e.length - 1];
+    }
     // e = e==="" ? "0" : e;
     // e = parseFloat(e.replace(/,/g,""));
     // let buyInputValue1 = this.commafy(parseFloat((e*price.atri/exchage_from_data[drop1_key]['price']).toFixed(exchage_from_data[drop1_key]['decimal'])))
