@@ -86,7 +86,7 @@ class ForgotPasswordScreen extends React.Component {
                 marginBottom: 35,
                 fontFamily: FontFamilyMedium,
               }}>
-              FORGOT PASSWORD
+              FORGOT PASSWOR{' '}
             </Text>
             <View style={styles.descContainer}>
               <Text
@@ -208,27 +208,26 @@ class ForgotPasswordScreen extends React.Component {
       let data = {email: email.trim()};
       this.setState({button_loading: true});
       const response = await forgetPassword(data);
-      console.log('response ', response);
-      // if (response.code === 200) {
-      //   const verify_code = response.body.verify_code;
-      //   const verify_token = response.body.token;
-      //   const verify_email = email.trim();
-      //   const data = {
-      //     verify_code: verify_code,
-      //     verify_token: verify_token,
-      //     verify_email: verify_email.trim(),
-      //   };
-      //   Toast.show(
-      //     'Email has been sent at ' +
-      //       email +
-      //       ', kindly follow the instruction ',
-      //   );
+      if (response.code === 200) {
+        const verify_code = response.body.verify_code;
+        const verify_token = response.body.token;
+        const verify_email = email.trim();
+        const data = {
+          verify_code: verify_code,
+          verify_token: verify_token,
+          verify_email: verify_email.trim(),
+        };
+        Toast.show(
+          'Email has been sent at ' +
+            email +
+            ', kindly follow the instruction ',
+        );
 
-      //   this.props.update_verifyToken(data);
-      //   this.props.navigation.navigate('VerifyCode');
-      // } else {
-      //   Toast.show(response.message);
-      // }
+        this.props.update_verifyToken(data);
+        this.props.navigation.navigate('VerifyCode');
+      } else {
+        Toast.show(response.message);
+      }
       this.setState({button_loading: false});
     } catch (err) {}
   };

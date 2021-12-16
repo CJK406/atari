@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import {View, Text, ActivityIndicator, Image} from 'react-native';
 import PropTypes from 'prop-types';
@@ -143,7 +145,17 @@ class HistoryItem extends React.Component {
                 </Text>
                 <Image
                   resizeMode="contain"
-                  style={{marginLeft: 5, height: 7, width: 7, marginTop: 5}}
+                  style={{
+                    marginLeft: 5,
+                    height: 7,
+                    width: 7,
+                    marginTop: 5,
+                    transform: [
+                      item.transactionType === 'receive'
+                        ? {rotate: '80deg'}
+                        : {rotate: '0deg'},
+                    ],
+                  }}
                   source={transIcon}
                 />
               </View>

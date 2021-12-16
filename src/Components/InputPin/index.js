@@ -224,12 +224,26 @@ class InputPin extends Component {
                   <Text
                     style={
                       ([textStyle, cellFocused ? textStyleFocused : {}],
-                      [{fontFamily: 'BwModelicaSS01-Bold', fontSize: 18}])
+                      [
+                        {
+                          fontFamily: 'BwModelicaSS01-Bold',
+                          fontSize: 18,
+                          marginTop: cellText ? 8 : 0,
+                        },
+                      ])
                     }>
-                    {cellText ? cellText : '-'}
+                    {cellText ? (
+                      <Text
+                        style={{
+                          fontSize: 35,
+                        }}>
+                        *
+                      </Text>
+                    ) : (
+                      '-'
+                    )}
                   </Text>
                 )}
-
                 {!isCellText && !maskComponent && placeholderComponent}
                 {isCellText && maskComponent}
               </Animatable.View>
@@ -250,6 +264,7 @@ class InputPin extends Component {
           numberOfLines={1}
           placeholder="-"
           caretHidden
+          // secureTextEntry={true}
           maxLength={codeLength}
           selection={{
             start: value.length,

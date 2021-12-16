@@ -43,7 +43,7 @@ class ResetPinScreen extends React.Component {
       loading: true,
     });
     const result = await reset_pin();
-    Toast.show('Your pin code has been successfully set to you email');
+    Toast.show('Your pin code has been successfully sent to your email');
     this.setState({
       loading: false,
     });

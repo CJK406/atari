@@ -42,7 +42,6 @@ class VerifyCodeScreen extends React.Component {
     );
   }
   static getDerivedStateFromProps(props, state) {
-    console.log('props', props.verify_code);
     return {
       verify_code: props.verify_code,
       verify_token: props.verify_token,
@@ -182,7 +181,6 @@ class VerifyCodeScreen extends React.Component {
   }
   goNext = async () => {
     const {verify_code, insert_verify_code, verify_token} = this.state;
-    console.log('verify_code', verify_code);
 
     if (insert_verify_code.length === 0) {
       Toast.show('Please fill in fields.');

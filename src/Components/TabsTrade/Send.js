@@ -103,7 +103,6 @@ const Send = (props) => {
       };
       navigation.navigate('SendConfirm', {info: info});
     } else if (!status) {
-      console.log('MESSAGE', message);
       this.awesomeAlert.showAlert('error', 'Failed!', message);
     }
   };

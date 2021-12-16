@@ -61,8 +61,6 @@ class MainApp extends React.Component {
     let pusher = new Pusher(PusherConfig.key, PusherConfig);
     let chatChannel = pusher.subscribe('transaction');
     chatChannel.bind('receive_token-' + user_id, (data) => {
-      // (4)
-      // console.log("receive_pusher-------=--==--=-",data);
       this.props.updateBallance();
       this.props.setAllHistory();
       const formData = new FormData();
@@ -87,9 +85,6 @@ class MainApp extends React.Component {
       );
     });
     chatChannel.bind('send_token-' + user_id, (data) => {
-      // (4)
-      // console.log("send_token-------=--==--=-",data);
-
       let status = '';
       let message = '';
       let send_status = data.data.status;

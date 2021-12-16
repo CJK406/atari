@@ -187,7 +187,7 @@ const TopContent = (props) => {
               marginTop: 10,
               marginBottom: 10,
             }}>
-            Comming Soon
+            Coming Soon
           </Text>
           {/* <Text style={{textAlign:'center',padding:20,fontSize:20}}>This feature will be available soon.</Text> */}
           <TouchableOpacity

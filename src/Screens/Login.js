@@ -571,10 +571,6 @@ class LoginScreen extends React.Component {
       Toast.show('The password must contain at least 1 numeric character');
       return;
     }
-    if (!signup_password.match('(?=.*[!@#$%^&*])')) {
-      Toast.show('The password must contain at least one special character');
-      return;
-    }
 
     if (!signup_password.match('(?=.{8,})')) {
       Toast.show('The string must be eight characters or longer');

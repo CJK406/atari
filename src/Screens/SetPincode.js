@@ -136,6 +136,7 @@ class SetPincodeScreen extends React.Component {
                 }}
                 onTextChange={(code) => this.setState({codePin: code})}
                 textStyle={{fontSize: 24, color: 'black'}}
+              
                 // onFulfill={() => {
                 //     Keyboard.dismiss();
                 // }}

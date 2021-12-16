@@ -28,6 +28,7 @@ import {
   updateStartScreenState,
   updateMenuStatus,
   getAppConfig,
+  authLogout,
 } from '../Redux/Actions';
 import PTRView from 'react-native-pull-to-refresh';
 // import PTRView from '../Components/PullToRefreshCustom';
@@ -81,7 +82,6 @@ class DashboardScreen extends React.Component {
   }
 
   setView() {
-    // this.state.isLoading = true;
     this.setState({
       isLoading: true,
     });
@@ -716,4 +716,5 @@ export default connect(mapStateToProps, {
   updateStartScreenState,
   updateMenuStatus,
   getAppConfig,
+  authLogout,
 })(withTheme(DashboardScreen));
