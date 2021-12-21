@@ -17,6 +17,7 @@ import {
   ImageBackground,
   StatusBar,
 } from 'react-native';
+import ReactNativeBiometrics from 'react-native-biometrics';
 import {connect} from 'react-redux';
 import {withTheme} from 'react-native-material-ui';
 import {Images} from '../Assets';
@@ -59,6 +60,8 @@ const HEADER_MAX_HEIGHT = windowHeight * 0.6;
 const HEADER_MIN_HEIGHT = windowHeight * 0.06;
 
 let backPressed = 0;
+let epochTimeSeconds = Math.round(new Date().getTime() / 1000).toString();
+let payload = epochTimeSeconds + 'some message';
 class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -68,8 +71,8 @@ class LoginScreen extends React.Component {
     scrollY: new Animated.Value(0),
     // login_email: 'm.k.cj406@gmail.com',
     // login_password:'Test1234!',
-    login_email: 'nasir4@yopmail.com',
-    login_password: '123456789',
+    login_email: 'm.azhar.ali@outlook.com',
+    login_password: 'Aaa12345678',
     signup_email: '',
     signup_password: '',
     signup_name: '',
@@ -87,6 +90,22 @@ class LoginScreen extends React.Component {
       this.state.signup_loading != nextState.signup_loading
     );
   }
+
+  checkBiometric = () => {
+    ReactNativeBiometrics.simplePrompt({promptMessage: 'Confirm fingerprint'})
+      .then((resultObject) => {
+        const {success} = resultObject;
+
+        if (success) {
+          this.doLogin();
+        } else {
+          console.log('user cancelled biometric prompt');
+        }
+      })
+      .catch(() => {
+        console.log('biometrics failed');
+      });
+  };
   componentDidMount() {
     this.getAppConfigData();
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
@@ -291,6 +310,50 @@ class LoginScreen extends React.Component {
                       LOGIN
                     </Text>
                   )}
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  style={[
+                    styles.inputContainer,
+                    {
+                      backgroundColor: RED_BTN_COLOR,
+                      justifyContent: 'center',
+                      width: '50%',
+                      marginTop: 20,
+                      shadowColor: 'red',
+                      shadowOffset: {
+                        width: 0,
+                        height: 8,
+                      },
+                      shadowOpacity: 0.46,
+                      shadowRadius: 11.14,
+
+                      elevation: this.props.darkmode ? 17 : 0,
+                    },
+                  ]}
+                  onPress={this.checkBiometric}>
+                  {/* {this.state.login_loading ? (
+                    <ActivityIndicator size="large" color="white" />
+                  ) : (
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        color: this.props.darkmode ? COLOR_GREY : 'white',
+                        fontFamily: FontFamilyMedium,
+                      }}>
+                      LOGIN
+                    </Text>
+                  )} */}
+
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      color: this.props.darkmode ? COLOR_GREY : 'white',
+                      fontFamily: FontFamilyMedium,
+                    }}>
+                    Biometric
+                  </Text>
                 </TouchableOpacity>
                 {/* </LinearGradient> */}
 
